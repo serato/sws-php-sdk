@@ -1,0 +1,21 @@
+language: php
+php:
+- 7.1
+- 7.2
+cache:
+  directories:
+  - "$HOME/.composer/cache"
+branches:
+  only:
+  - master
+  - "/^v\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
+before_install:
+- phpenv config-rm xdebug.ini
+install:
+- composer install
+script:
+- php vendor/bin/phpunit
+- "./vendor/bin/phpcs"
+after_success:
+- php sami.phar update phpdoc.php
+# TODO: copy docs to doc server
