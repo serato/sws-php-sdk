@@ -1,0 +1,24 @@
+{
+	"name": "serato/sws-php-sdk",
+	"homepage": "https://github.com/serato/sws-php-sdk",
+	"description": "PHP SDK for Serato Web Services",
+	"type": "library",
+	"require": {
+		"php" : "^7.1",
+		"guzzlehttp/guzzle": "^6.0.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~6.0",
+		"squizlabs/php_codesniffer": "~2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Serato\\SwsSdk\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Serato\\SwsSdk\\Test\\": "tests/"
+		}
+	}
+}

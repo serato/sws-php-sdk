@@ -1,0 +1,15 @@
+<phpunit bootstrap="vendor/autoload.php">
+	<testsuites>
+		<testsuite name="common">
+			<directory>tests</directory>
+			<directory>lib/sws_php_sdk/tests</directory>
+			<directory>lib/sws_web_auth/tests</directory>
+			<exclude>tests/AppConfig/AppConfigTest.php</exclude>
+		</testsuite>
+	</testsuites>
+	<groups>
+		<exclude>
+			<group>braintree-sandbox-integration</group>
+		</exclude>
+	</groups>
+</phpunit>
