@@ -65,16 +65,16 @@ class Sdk
      *
      * @link http://guzzle.readthedocs.io/en/latest/quickstart.html Guzzle documentation
      *
+     * @param array     $args           Client configuration arguments
      * @param string    $appId          Client application ID
      * @param string    $appPassword    Client application password
-     * @param array     $args           Client configuration arguments
      *
      * @return void
      *
      * @throws InvalidArgumentException If any required options are missing or
      *                                   an invalid value is provided.
      */
-    public function __construct(string $appId, string $appPassword, array $args)
+    public function __construct(array $args, string $appId = '', string $appPassword = '')
     {
         $this->appId = $appId;
         $this->appPassword = $appPassword;
@@ -202,6 +202,50 @@ class Sdk
     public function getConfig(): array
     {
         return $this->config;
+    }
+
+    /**
+     * Returns the client application ID
+     *
+     * @return string
+     */
+    public function getAppId(): string
+    {
+        return $this->appId;
+    }
+
+    /**
+     * Sets the client application ID
+     *
+     * @param string $id Application ID
+     * @return self
+     */
+    public function setAppId(string $id): self
+    {
+        return $this->appId = $id;
+        return $this;
+    }
+
+    /**
+     * Returns the client application password
+     *
+     * @return string
+     */
+    public function getAppPassword(): string
+    {
+        return $this->appPassword;
+    }
+
+    /**
+     * Sets the client application password
+     *
+     * @param string $id Application ID
+     * @return self
+     */
+    public function setAppPassword(string $pwd): self
+    {
+        return $this->appPassword = $pwd;
+        return $this;
     }
 
     private function setBaseUriConfig(string $idServiceBaseUri, string $licenseServiceBaseUri): void

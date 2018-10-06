@@ -13,7 +13,7 @@ class SdkTest extends AbstractTestCase
     public function testInvalidConstructorOptions(array $args, $exceptionCode, $assertText)
     {
         try {
-            $sdk = new Sdk('app_id', 'app_password', $args);
+            $sdk = new Sdk($args, 'app_id', 'app_password');
         } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getCode(), $exceptionCode, $assertText);
         }
@@ -57,7 +57,7 @@ class SdkTest extends AbstractTestCase
         $handler,
         $assertText
     ) {
-        $sdk = new Sdk('app_id', 'app_password', $args);
+        $sdk = new Sdk($args, 'app_id', 'app_password');
         $config = $sdk->getConfig();
 
         $this->assertTrue(
