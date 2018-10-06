@@ -2,11 +2,6 @@
 <!-- See https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml for all options -->
 <ruleset name="SWS-JWT">
     <rule ref="PSR2"/>
-    <file>lib</file>
+    <file>src</file>
     <file>tests</file>
-    <file>auth.serato.com/controller/CheckoutController.php</file>
-    <exclude-pattern>lib/serato_checkout/src/Model/Base/*</exclude-pattern>
-    <exclude-pattern>lib/serato_checkout/src/Model/Map/*</exclude-pattern>
-    <exclude-pattern>lib/serato_checkout/docs/*</exclude-pattern>
-    <exclude-pattern>lib/sws_php_sdk/docs/*</exclude-pattern>
 </ruleset>
