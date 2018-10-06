@@ -83,7 +83,7 @@ $args = [
 	'env' => Sdk::ENV_PRODUCTION,
 	'timeout' => 2.5
 ];
-$sdk = new Sdk('my_app_id', 'my_app_secrety_pass', $args);
+$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 
 /* Configure the SDK to use custom SWS endpoints */
 $args = [
@@ -92,7 +92,7 @@ $args = [
 		Sdk::BASE_URI_LICENSE => 'https://license.server.com',
 	]
 ];
-$sdk = new Sdk('my_app_id', 'my_app_secrety_pass', $args);
+$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 
 /* Configure the SDK to use the staging SWS endpoints and a Guzzle MockHandler */
 use GuzzleHttp\Handler\MockHandler;
@@ -108,7 +108,7 @@ $args = [
 	'env' => Sdk::ENV_STAGING,
 	'handler' => $handler
 ];
-$sdk = new Sdk('my_app_id', 'my_app_secrety_pass', $args);
+$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 ```
 
 ### Creating clients
@@ -128,7 +128,7 @@ use Serato\SwsSdk\Sdk;
 
 /* Create clients from an Sdk instance */
 $args = ['env' => Sdk::ENV_PRODUCTION];
-$sdk = new Sdk('my_app_id', 'my_app_secrety_pass', $args);
+$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 
 $identityClient = $sdk->createIdentityClient();
 $licenseClient = $sdk->createLicenseClient();
@@ -152,7 +152,7 @@ use Serato\SwsSdk\Sdk;
 use Serato\SwsSdk\License\Command\ProductGet;
 
 $args = ['env' => Sdk::ENV_PRODUCTION];
-$sdk = new Sdk('my_app_id', 'my_app_secrety_pass', $args);
+$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 $identityClient = $sdk->createIdentityClient(); 
 $licenseClient = $sdk->createLicenseClient();
 
@@ -194,7 +194,7 @@ use Serato\SwsSdk\Sdk;
 use Serato\SwsSdk\License\Command\ProductGet;
 
 $args = ['env' => Sdk::ENV_PRODUCTION];
-$sdk = new Sdk('my_app_id', 'my_app_secrety_pass', $args);
+$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 $licenseClient = $sdk->createLicenseClient();
 $commandArgs = ['product_id' => 'SDJ-1234-1234'];
 
@@ -259,7 +259,7 @@ $args = [
 	'env' => Sdk::ENV_STAGING,
 	'handler' => $handler
 ];
-$sdk = new Sdk('my_app_id', 'my_app_secrety_pass', $args);
+$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 
 // Client is created with the `handler` option as specified in the `Sdk` constructor
 $licenseClient = $sdk->createLicenseClient();
