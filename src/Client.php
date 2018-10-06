@@ -199,7 +199,10 @@ abstract class Client extends GuzzleClient
         );
     }
 
-    public function __call($name, array $args)
+    /**
+     * {@inheritDoc}
+     */
+    public function __call($name, $args)
     {
         # Magic method that allows Commands to be executed on a Client by using
         # a method name that matches the Command name, albeit with a lower case

@@ -12,7 +12,7 @@ abstract class CommandBearerTokenAuth extends Command
     /**
      * {@inheritdoc}
      */
-    public function getRequest($bearerToken)
+    public function getRequest($bearerToken = '')
     {
         $this->setBearerAuthHeader($bearerToken);
         return parent::getRequest();

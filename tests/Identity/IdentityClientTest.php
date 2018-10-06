@@ -12,14 +12,14 @@ class IdentityClientTest extends AbstractTestCase
     public function testGetBaseUri()
     {
         $client = new IdentityClient(
-            'my_app',
-            'my_pass',
             [
                 Sdk::BASE_URI => [
                     Sdk::BASE_URI_ID        => self::ID_SERVER_BASE_URI,
                     Sdk::BASE_URI_LICENSE   => 'http://license.server.com'
                 ]
-            ]
+            ],
+            'my_app',
+            'my_pass'
         );
 
         $this->assertEquals(self::ID_SERVER_BASE_URI, $client->getBaseUri());

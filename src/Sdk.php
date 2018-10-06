@@ -188,7 +188,7 @@ class Sdk
 
     private function createClient($className)
     {
-        return new $className($this->appId, $this->appPassword, $this->config);
+        return new $className($this->config, $this->appId, $this->appPassword);
     }
 
     /**

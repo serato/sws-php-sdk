@@ -12,14 +12,14 @@ class LicenseClientTest extends AbstractTestCase
     public function testGetBaseUri()
     {
         $client = new LicenseClient(
-            'my_app',
-            'my_pass',
             [
                 Sdk::BASE_URI => [
                     Sdk::BASE_URI_ID        => 'https://id.server.com',
                     Sdk::BASE_URI_LICENSE   => self::LICENSE_SERVER_BASE_URI,
                 ]
-            ]
+                ],
+            'my_app',
+            'my_pass'
         );
 
         $this->assertEquals(self::LICENSE_SERVER_BASE_URI, $client->getBaseUri());
