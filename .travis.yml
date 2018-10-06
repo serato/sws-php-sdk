@@ -16,3 +16,6 @@ install:
 script:
 - php vendor/bin/phpunit
 - "./vendor/bin/phpcs"
+after_success:
+- php sami.phar update phpdoc.php
+# TODO: copy docs to doc server

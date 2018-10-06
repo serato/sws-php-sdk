@@ -10,7 +10,7 @@ $iterator = Finder::create()
     ->in(__DIR__ . '/src')
 ;
 return new Sami($iterator, array(
-    'title'     => 'Serato Web Services PHP SDK',
-    'build_dir' => __DIR__ . '/../../docs/php/sws_php_sdk',
-    'cache_dir' => __DIR__ . '/../../docs/cache/sws_php_sdk'
+    'title'     => 'Serato SWS PHP SDK',
+    'build_dir' => __DIR__ . '/docs/php',
+    'cache_dir' => __DIR__ . '/docs/cache'
 ));
