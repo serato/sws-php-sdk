@@ -12,7 +12,7 @@ abstract class CommandBasicAuth extends Command
     /**
      * {@inheritdoc}
      */
-    public function __construct($appId, $appPassword, $baseUri, array $args)
+    public function __construct(string $appId, string $appPassword, string $baseUri, array $args)
     {
         parent::__construct($appId, $appPassword, $baseUri, $args);
         $this->setBasicAuthHeader();
@@ -23,7 +23,7 @@ abstract class CommandBasicAuth extends Command
      *
      * @return void
      */
-    protected function setBasicAuthHeader()
+    protected function setBasicAuthHeader(): void
     {
         $this->setRequestHeader(
             'Authorization',

@@ -27,7 +27,7 @@ class TokenRefresh extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return 'POST';
     }
@@ -35,7 +35,7 @@ class TokenRefresh extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriPath()
+    public function getUriPath(): string
     {
         return '/api/v1/tokens/refresh';
     }
@@ -43,7 +43,7 @@ class TokenRefresh extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function setCommandRequestHeaders()
+    protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -51,7 +51,7 @@ class TokenRefresh extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function getArgsDefinition()
+    protected function getArgsDefinition(): array
     {
         return [
             'refresh_token' => ['type' => self::ARG_TYPE_STRING, 'required' => true]

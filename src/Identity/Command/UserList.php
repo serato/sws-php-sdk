@@ -22,7 +22,7 @@ class UserList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return 'GET';
     }
@@ -30,7 +30,7 @@ class UserList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriPath()
+    public function getUriPath(): string
     {
         return '/api/v1/users';
     }
@@ -38,7 +38,7 @@ class UserList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriQuery()
+    public function getUriQuery(): string
     {
         return http_build_query($this->commandArgs);
     }
@@ -46,7 +46,7 @@ class UserList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function getArgsDefinition()
+    protected function getArgsDefinition(): array
     {
         return [
             'email_address' => ['type' => self::ARG_TYPE_STRING],

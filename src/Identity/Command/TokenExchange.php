@@ -29,7 +29,7 @@ class TokenExchange extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return 'POST';
     }
@@ -37,7 +37,7 @@ class TokenExchange extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriPath()
+    public function getUriPath(): string
     {
         return '/api/v1/tokens/exchange';
     }
@@ -45,7 +45,7 @@ class TokenExchange extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function setCommandRequestHeaders()
+    protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -53,7 +53,7 @@ class TokenExchange extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function getArgsDefinition()
+    protected function getArgsDefinition(): array
     {
         return [
             'grant_type'    => ['type' => self::ARG_TYPE_STRING, 'required' => true],

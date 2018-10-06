@@ -2,6 +2,7 @@
 
 namespace Serato\SwsSdk;
 
+use Serato\SwsSdk\Client;
 use Serato\SwsSdk\Identity\IdentityClient;
 use Serato\SwsSdk\License\LicenseClient;
 use InvalidArgumentException;
@@ -68,10 +69,12 @@ class Sdk
      * @param string    $appPassword    Client application password
      * @param array     $args           Client configuration arguments
      *
+     * @return void
+     *
      * @throws InvalidArgumentException If any required options are missing or
      *                                   an invalid value is provided.
      */
-    public function __construct($appId, $appPassword, array $args)
+    public function __construct(string $appId, string $appPassword, array $args)
     {
         $this->appId = $appId;
         $this->appPassword = $appPassword;
@@ -171,7 +174,7 @@ class Sdk
      *
      * @return IdentityClient
      */
-    public function createIdentityClient()
+    public function createIdentityClient(): IdentityClient
     {
         return $this->createClient('Serato\\SwsSdk\\Identity\\IdentityClient');
     }
@@ -181,12 +184,12 @@ class Sdk
      *
      * @return LicenseClient
      */
-    public function createLicenseClient()
+    public function createLicenseClient(): LicenseClient
     {
         return $this->createClient('Serato\\SwsSdk\\License\\LicenseClient');
     }
 
-    private function createClient($className)
+    private function createClient(string $className): Client
     {
         return new $className($this->config, $this->appId, $this->appPassword);
     }
@@ -196,12 +199,12 @@ class Sdk
      *
      * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return $this->config;
     }
 
-    private function setBaseUriConfig($idServiceBaseUri, $licenseServiceBaseUri)
+    private function setBaseUriConfig(string $idServiceBaseUri, string $licenseServiceBaseUri): void
     {
         $this->config[self::BASE_URI] = [
             self::BASE_URI_ID        => $idServiceBaseUri,

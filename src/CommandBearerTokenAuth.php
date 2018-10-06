@@ -3,6 +3,7 @@
 namespace Serato\SwsSdk;
 
 use Serato\SwsSdk\Command;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * Adds Bearer token based Authentication to a command.
@@ -12,7 +13,7 @@ abstract class CommandBearerTokenAuth extends Command
     /**
      * {@inheritdoc}
      */
-    public function getRequest($bearerToken = '')
+    public function getRequest(string $bearerToken = ''): RequestInterface
     {
         $this->setBearerAuthHeader($bearerToken);
         return parent::getRequest();
@@ -21,9 +22,10 @@ abstract class CommandBearerTokenAuth extends Command
     /**
      * Set the `Authorization` header for bearer token authentication
      *
+     * @param string $bearerToken Bearer token
      * @return void
      */
-    protected function setBearerAuthHeader($bearerToken)
+    protected function setBearerAuthHeader(string $bearerToken): void
     {
         $this->setRequestHeader('Authorization', 'Bearer ' . $bearerToken);
     }

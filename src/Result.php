@@ -34,7 +34,7 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
      *
      * @return ResponseInterface|null
      */
-    public function getResponse()
+    public function getResponse(): ?ResponseInterface
     {
         return $this->response;
     }

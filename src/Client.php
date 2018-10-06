@@ -17,7 +17,7 @@ use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ClientException as GuzzleClientException;
 use GuzzleHttp\Exception\ServerException as GuzzleServerException;
-use Promise\PromiseInterface;
+use GuzzleHttp\Promise\Promise;
 use InvalidArgumentException;
 
 abstract class Client extends GuzzleClient
@@ -74,7 +74,7 @@ abstract class Client extends GuzzleClient
      *
      * @return Command
      */
-    public function getCommand($name, array $args = [])
+    public function getCommand($name, array $args = []): Command
     {
         if (!isset($this->getCommandMap()[$name])) {
             throw new InvalidArgumentException(
@@ -100,8 +100,12 @@ abstract class Client extends GuzzleClient
      *
      * @return Result
      */
-    public function execute($name, array $args = [], $bearerToken = '', array $options = [])
-    {
+    public function execute(
+        string $name,
+        array $args = [],
+        string $bearerToken = '',
+        array $options = []
+    ): Result {
         return $this->executeCommand($this->getCommand($name, $args), $bearerToken, $options);
     }
 
@@ -122,8 +126,11 @@ abstract class Client extends GuzzleClient
      * @throws ServiceUnavailableException
      * @throws RequestException
      */
-    public function executeCommand(Command $command, $bearerToken = '', array $options = [])
-    {
+    public function executeCommand(
+        Command $command,
+        string $bearerToken = '',
+        array $options = []
+    ): Result {
         if (is_a($command, 'Serato\SwsSdk\CommandBearerTokenAuth')) {
             $request = $command->getRequest($bearerToken);
         } else {
@@ -183,10 +190,14 @@ abstract class Client extends GuzzleClient
      * @param string    $bearerToken    Bearer token (required for using that use JWT-based auth)
      * @param array     $options        Options to send with Command's Request
      *
-     * @return PromiseInterface
+     * @return Promise
      */
-    public function executeAsync($name, array $args, $bearerToken = '', array $options = [])
-    {
+    public function executeAsync(
+        string $name,
+        array $args,
+        string $bearerToken = '',
+        array $options = []
+    ): Promise {
         $command = $this->getCommand($name, $args);
         if (!is_a($value, '\Serato\SwsSdk\Command\CommandBearerTokenAuth')) {
             $request = $command->getRequest($bearerToken);
@@ -245,7 +256,7 @@ abstract class Client extends GuzzleClient
      *
      * @return string
      */
-    abstract public function getBaseUri();
+    abstract public function getBaseUri(): string;
 
     /**
      * Get an array of all valid commands for the Client.
@@ -254,5 +265,5 @@ abstract class Client extends GuzzleClient
      *
      * @return array
      */
-    abstract public function getCommandMap();
+    abstract public function getCommandMap(): array;
 }

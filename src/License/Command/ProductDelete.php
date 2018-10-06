@@ -19,7 +19,7 @@ class ProductDelete extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return 'DELETE';
     }
@@ -27,7 +27,7 @@ class ProductDelete extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriPath()
+    public function getUriPath(): string
     {
         return '/api/v1/products/products/' . $this->commandArgs['product_id'];
     }
@@ -35,7 +35,7 @@ class ProductDelete extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function getArgsDefinition()
+    protected function getArgsDefinition(): array
     {
         return [
             'product_id' => ['type' => self::ARG_TYPE_STRING, 'required' => true]

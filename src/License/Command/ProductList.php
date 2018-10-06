@@ -21,7 +21,7 @@ class ProductList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return 'GET';
     }
@@ -29,7 +29,7 @@ class ProductList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriPath()
+    public function getUriPath(): string
     {
         return '/api/v1/products/products';
     }
@@ -37,7 +37,7 @@ class ProductList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriQuery()
+    public function getUriQuery(): string
     {
         return http_build_query($this->commandArgs);
     }
@@ -45,7 +45,7 @@ class ProductList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function getArgsDefinition()
+    protected function getArgsDefinition(): array
     {
         return [
             'checkout_order_id' => ['type' => self::ARG_TYPE_INTEGER],

@@ -18,7 +18,7 @@ class IdentityClient extends Client
      *
      * @return string
      */
-    public function getBaseUri()
+    public function getBaseUri(): string
     {
         return $this->config[Sdk::BASE_URI][Sdk::BASE_URI_ID];
     }
@@ -30,7 +30,7 @@ class IdentityClient extends Client
      *
      * @return array
      */
-    public function getCommandMap()
+    public function getCommandMap(): array
     {
         return [
             'GetUser'           => '\\Serato\\SwsSdk\\Identity\\Command\\UserGet',

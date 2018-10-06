@@ -45,7 +45,7 @@ class ProductCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return 'POST';
     }
@@ -53,7 +53,7 @@ class ProductCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriPath()
+    public function getUriPath(): string
     {
         return '/api/v1/products/products';
     }
@@ -61,7 +61,7 @@ class ProductCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function setCommandRequestHeaders()
+    protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -69,7 +69,7 @@ class ProductCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    protected function getArgsDefinition()
+    protected function getArgsDefinition(): array
     {
         return [
             'product_type_id'           => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],

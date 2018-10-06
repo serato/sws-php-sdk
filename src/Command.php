@@ -60,8 +60,12 @@ abstract class Command
      * @param string    $baseUri        Base request URI
      * @param array     $args           Command arguments
      */
-    public function __construct($appId, $appPassword, $baseUri, array $args = [])
-    {
+    public function __construct(
+        string $appId,
+        string $appPassword,
+        string $baseUri,
+        array $args = []
+    ) {
         $this->appId        = $appId;
         $this->appPassword  = $appPassword;
         $this->baseUri      = rtrim($baseUri, '/');
@@ -73,7 +77,7 @@ abstract class Command
      *
      * @return RequestInterface
      */
-    public function getRequest()
+    public function getRequest(): RequestInterface
     {
         $this->validateCommandArgs();
         $this->setCommandRequestHeaders();
@@ -88,7 +92,10 @@ abstract class Command
         );
     }
 
-    private function validateCommandArgs()
+    /**
+     * @throws InvalidArgumentException
+     */
+    private function validateCommandArgs(): void
     {
         $def = $this->getArgsDefinition();
         foreach ($this->commandArgs as $name => $value) {
@@ -132,7 +139,7 @@ abstract class Command
      *
      * @return string
      */
-    protected function arrayToFormUrlEncodedBody(array $args)
+    protected function arrayToFormUrlEncodedBody(array $args): string
     {
         $def = $this->getArgsDefinition();
         $stringArgs = [];
@@ -160,9 +167,9 @@ abstract class Command
      *
      * @return self
      */
-    protected function setRequestHeader($name, $value)
+    protected function setRequestHeader(string $name, string $value): self
     {
-        $this->requestHeaders[$name] = $value;
+        $this->requestHeaders[$name] = (string)$value;
         return $this;
     }
 
@@ -171,7 +178,7 @@ abstract class Command
      *
      * @return void
      */
-    protected function setCommandRequestHeaders()
+    protected function setCommandRequestHeaders(): void
     {
         // Override in child classes
     }
@@ -181,7 +188,7 @@ abstract class Command
      *
      * @return string
      */
-    public function getHttpVersion()
+    public function getHttpVersion(): string
     {
         return '1.1';
     }
@@ -203,7 +210,7 @@ abstract class Command
      *
      * @return string
      */
-    public function getUriQuery()
+    public function getUriQuery(): string
     {
         return '';
     }
@@ -213,7 +220,7 @@ abstract class Command
      *
      * @return string
      */
-    abstract public function getHttpMethod();
+    abstract public function getHttpMethod(): string;
 
     /**
      * Get the path component of the URI. ie. Everything after the base URI.
@@ -222,7 +229,7 @@ abstract class Command
      *
      * @return string
      */
-    abstract public function getUriPath();
+    abstract public function getUriPath(): string;
 
     /**
      * Defines the requirements of the `$args` array passed to the Commands
@@ -236,5 +243,5 @@ abstract class Command
      *
      * @return array
      */
-    abstract protected function getArgsDefinition();
+    abstract protected function getArgsDefinition(): array;
 }
