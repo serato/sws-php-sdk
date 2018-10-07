@@ -222,7 +222,7 @@ class Sdk
      */
     public function setAppId(string $id): self
     {
-        return $this->appId = $id;
+        $this->appId = $id;
         return $this;
     }
 
@@ -244,7 +244,7 @@ class Sdk
      */
     public function setAppPassword(string $pwd): self
     {
-        return $this->appPassword = $pwd;
+        $this->appPassword = $pwd;
         return $this;
     }
 
