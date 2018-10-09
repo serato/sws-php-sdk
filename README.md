@@ -278,3 +278,37 @@ echo $result['id'];
 // Will echo the raw response body '{"id":"SDJ-2222-22222"}'
 echo $result->getResponse()->getBody();
 ```
+
+The mock handler stack can also include exceptions:
+
+```php
+use Serato\SwsSdk\Sdk;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use Exception;
+
+// Create a mock handler and queue two responses.
+$mock = new MockHandler([
+    new Response(200, [/* Headers */], '{"id":"SDJ-1111-11111"}'),
+    new Exception
+]);
+
+$handler = HandlerStack::create($mock);
+$args = [
+	'env' => Sdk::ENV_STAGING,
+	'handler' => $handler
+];
+$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
+
+// Client is created with the `handler` option as specified in the `Sdk` constructor
+$licenseClient = $sdk->createLicenseClient();
+
+// Execute the first command. The mock handler returns the first response from the stack.
+$result = $licenseClient->getProduct(['product_id' => 'SDJ-1234-1234']);
+// Will echo 'SDJ-1111-11111'
+echo $result['id'];
+
+// Throws Exception
+$result = $licenseClient->getProduct(['product_id' => 'SDJ-5678-4321']);
+```
