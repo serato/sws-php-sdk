@@ -5,6 +5,8 @@ php:
 cache:
   directories:
   - "$HOME/.composer/cache"
+env:
+  secure: "lCF6zmSMN6M43jDlVq8hd1i4Unj73UWNwmfoOeO6M0OeomiC/HKauer3owtBOh1hbXl2qFSz2S8xhycO0MirAy+k6crYFq62Oj1u8l6h+/+qYRoOy2yBjWIxE6QOLh4256pSFRAz+Usf8bm6T3R1xPmiz7bF2WwzLWdOolzIqFy/XgF80NrYSjhaN6+eVMtWK9G9Lvdp3DESEzUGDEeRyHkpwoJEMF+D+NBlAjTcTwaAcWCn/xWqU00tKkugiw21AcuaakxZPaup5GHk4fWYF3jAh2195Kd983nYhfBWzt59xbx0F6jJZ2g5YjbE4jQJ70YsLbtF8cKirzT1dwvkS/h19XUjn6PIZ9F2E50CdDwOb8bYG94sl11IO88MFccw3hUG/ZfkW5ma7pEcc8OSD8KFZ/aGmCg1Lg7Cbwm1OdnCpYGG13XK9F3NaOqvdO2Fh2Ypgeg3bIqOK7eb3L3J371Zh41NVx9MquqqPKR5WI4DpxSIpIeQzhzDYWEEOwh511qqPvy/DWIn7hvHLD9+/5slmCh96bXtYLoV+0xM9htJDbna0uUnXxqwQ0yPPcbwcL8WwKoU+MG6WxbHn1T01opAw2P4NBp08rDVwQqIT3BoNLExN/geRTjcOZx4526d3MyHV5R8MVS+PORrvKC6hj+ZnP+arBjSQMf3to5dLR0="
 branches:
   only:
   - master
@@ -17,5 +19,16 @@ script:
 - php vendor/bin/phpunit
 - "./vendor/bin/phpcs"
 after_success:
-- php sami.phar update phpdoc.php
-# TODO: copy docs to doc server
+- vendor/bin/sami.php update phpdoc.php
+addons:
+  artifacts:
+    s3_region: us-east-1
+    target_paths: "$TRAVIS_REPO_SLUG/$TRAVIS_BRANCH"
+    paths:
+    - "./docs/php"
+notifications:
+  slack:
+    rooms:
+      secure: "PqQuiQdAALYReftX9I8oVYvHlwKtCeFjWqC5HR2qZFe0B/Pyh7eHoIlyrrxjTNGfZZ9ZpKQqQ6ympd7smFvvkEhedLeQ5lIdK3L8Dr6eEqHyYt+FPViW46yhENHw0vOapn7/NePWDi+6FCCXQlerj9adA2dOjNGc2wpxOqR/1MfPKg5dGeU+QPNi8rPXy7NCjOHSWdR81WfDx/ffOI75ajRwDsuom35Aeh6WMrPwQRY3EL7TeJ+7TLnCEpgbcEi2qMRZEBmnAGxyAkBK2pWy98SV9crQnoesRypIVaQ/vCz6roXDHe5vCYusVUcBoI44mZ/IbcOg8+LPA7qIVg1Atvh+X61/F94V5QYDxhYYjzooISKc5OpeKSiCs95clb8j3mPZnmtcDFptYaAfwDAAX92c77hNehOg2GDsTYzOYc4nX+0XEKeBQyTFcmVxWwehq47xfbQUNlRc0rC/3rRViwI0Y4w6HivNCAiSnu8rMC1s1mclU2IuCSW/8l6gasmbnMd2uPrYl8KA9sdZ4ZuaHQWjDuphpxciL93uaxmpAXUWoHJnfHQ7+48xyTAlRzLYGoWTJ9fpIMKxILRirmX9F5ac44KYwqyPG9bc+jUCeF2HYo0sjqk0wGsAIntW/rc95/j9b9udhv+wVwbsgdl2vxSV3lGxDuX6kfOjrEhTyXs="
+  on_success: change
+  on_failure: always
