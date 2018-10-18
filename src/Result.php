@@ -26,7 +26,7 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
-        $this->data = $this->parseResponseBody($response);
+        $this->data = $this->parseResponseBody($response) ?? [];
     }
 
     /**
