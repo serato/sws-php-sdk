@@ -111,14 +111,14 @@ class Sdk
                     $this->setBaseUriConfig(
                         self::BASE_URI_STAGING_ID,
                         self::BASE_URI_STAGING_LICENSE,
-                        self::BASE_URI_PROFILE
+                        self::BASE_URI_STAGING_PROFILE
                     );
                 }
                 if ($args['env'] == self::ENV_PRODUCTION) {
                     $this->setBaseUriConfig(
                         self::BASE_URI_PRODUCTION_ID,
                         self::BASE_URI_PRODUCTION_LICENSE,
-                        self::BASE_URI_PROFILE
+                        self::BASE_URI_PRODUCTION_PROFILE
                     );
                 }
             } else {

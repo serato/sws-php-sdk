@@ -26,18 +26,34 @@ class SdkTest extends AbstractTestCase
             [['timeout' => 2], 1000, 'Non-float value for `timeout`'],
             [['timeout' => 2.0, 'env' => 'invalid'], 1001, 'Invalid `env` value'],
             [['base_uri' => ''], 1002, 'Non-array `base_uri` value'],
-            [['base_uri' => ['id' => 'value']], 1002, 'Missing `base_uri` `license` value'],
-            [['base_uri' => ['license' => 'value']], 1002, 'Missing `base_uri` `id` value'],
+            [['base_uri' => ['id' => 'value']], 1002, 'Missing `base_uri` `license` and `profile` values'],
+            [['base_uri' => ['license' => 'value']], 1002, 'Missing `base_uri` `id` and `profile` values'],
+            [['base_uri' => ['profile' => 'value']], 1002, 'Missing `base_uri` `id` and `license` values'],
             [
-                ['base_uri' => ['id' => 'invald value', 'license' => 'http://my.server']],
+                ['base_uri' => [
+                        'id' => 'invalid value',
+                        'license' => 'http://my.server',
+                        'profile' => 'http://my.server'
+                    ]
+                ],
                 1003,
                 'Invalid `base_uri` `id` value'
             ],
             [
-                ['base_uri' => ['id' => 'http://my.server', 'license' => 'invald value']],
+                ['base_uri' => [
+                        'id' => 'http://my.server',
+                        'license' => 'invalid value',
+                        'profile' => 'http://my.server'
+                    ]
+                ],
                 1004,
                 'Invalid `base_uri` `license` value'
             ],
+//            [
+//                ['base_uri' => ['license' => 'http://my.server', 'profile' => 'invalid value']],
+//                1007,
+//                'Invalid `base_uri` `profile` value'
+//            ],
             [
                 ['env' => Sdk::ENV_PRODUCTION, 'handler' => 'not a callable'],
                 1006,
@@ -53,6 +69,7 @@ class SdkTest extends AbstractTestCase
         array $args,
         $idServiceUri,
         $licenseServiceUri,
+        $profileServiceUri,
         $timeout,
         $handler,
         $assertText
@@ -86,6 +103,11 @@ class SdkTest extends AbstractTestCase
             $assertText . ' - `base_uri` `license` is correct'
         );
         $this->assertEquals(
+            $profileServiceUri,
+            $config['base_uri']['profile'],
+            $assertText . ' - `base_uri` `profile` is correct'
+        );
+        $this->assertEquals(
             $handler,
             $config['handler'],
             $assertText . ' - `handler` is correct'
@@ -96,6 +118,7 @@ class SdkTest extends AbstractTestCase
     {
         $idServiceUri       = 'http://id.server.com';
         $licenseServiceUri  = 'https://license.server.io';
+        $profileServiceUri  = 'https://profile.server.com';
         $handler            = function () {
         };
 
@@ -104,6 +127,7 @@ class SdkTest extends AbstractTestCase
                 ['env' => Sdk::ENV_PRODUCTION],
                 Sdk::BASE_URI_PRODUCTION_ID,
                 Sdk::BASE_URI_PRODUCTION_LICENSE,
+                Sdk::BASE_URI_PRODUCTION_PROFILE,
                 null,
                 null,
                 'Set `env` to ENV_PRODUCTION'
@@ -112,6 +136,7 @@ class SdkTest extends AbstractTestCase
                 ['env' => Sdk::ENV_STAGING],
                 Sdk::BASE_URI_STAGING_ID,
                 Sdk::BASE_URI_STAGING_LICENSE,
+                Sdk::BASE_URI_STAGING_PROFILE,
                 null,
                 null,
                 'Set `env` to ENV_STAGING'
@@ -120,6 +145,7 @@ class SdkTest extends AbstractTestCase
                 ['env' => Sdk::ENV_PRODUCTION, 'timeout' => 1.222],
                 Sdk::BASE_URI_PRODUCTION_ID,
                 Sdk::BASE_URI_PRODUCTION_LICENSE,
+                Sdk::BASE_URI_PRODUCTION_PROFILE,
                 1.222,
                 null,
                 'Set `env` to ENV_PRODUCTION and `timeout`'
@@ -128,17 +154,23 @@ class SdkTest extends AbstractTestCase
                 ['env' => Sdk::ENV_STAGING, 'timeout' => 0.7622],
                 Sdk::BASE_URI_STAGING_ID,
                 Sdk::BASE_URI_STAGING_LICENSE,
+                Sdk::BASE_URI_STAGING_PROFILE,
                 0.7622,
                 null,
                 'Set `env` to ENV_STAGING and `timeout`'
             ],
             [
                 [
-                    'base_uri' => ['id' => $idServiceUri, 'license' => $licenseServiceUri],
+                    'base_uri' => [
+                        'id' => $idServiceUri,
+                        'license' => $licenseServiceUri,
+                        'profile' => $profileServiceUri
+                    ],
                     'timeout' => 3.2
                 ],
                 $idServiceUri,
                 $licenseServiceUri,
+                $profileServiceUri,
                 3.2,
                 null,
                 'Custom `base_uri` and `timeout`'
@@ -147,6 +179,7 @@ class SdkTest extends AbstractTestCase
                 ['env' => Sdk::ENV_PRODUCTION, 'handler' => $handler],
                 Sdk::BASE_URI_PRODUCTION_ID,
                 Sdk::BASE_URI_PRODUCTION_LICENSE,
+                Sdk::BASE_URI_PRODUCTION_PROFILE,
                 null,
                 $handler,
                 'Set `env` to ENV_PRODUCTION, custom `handler`'
