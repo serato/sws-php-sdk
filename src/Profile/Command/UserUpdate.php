@@ -2,7 +2,7 @@
 
 namespace Serato\SwsSdk\Profile\Command;
 
-use Serato\SwsSdk\CommandBearerTokenAuth;
+use Serato\SwsSdk\CommandBasicAuth;
 
 /**
  * Updates a User in the SWS Profile service.
@@ -25,7 +25,7 @@ use Serato\SwsSdk\CommandBearerTokenAuth;
  * This command can be excuted on a `Serato\SwsSdk\Profile\ProfileClient` instance
  * using the `ProfileClient::updateUser` magic method.
  */
-class UserUpdate extends CommandBearerTokenAuth
+class UserUpdate extends CommandBasicAuth
 {
     /**
      * {@inheritdoc}

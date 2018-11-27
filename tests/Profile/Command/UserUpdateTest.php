@@ -36,7 +36,7 @@ class UserUpdateTest extends AbstractTestCase
         $request = $command->getRequest();
 
         $this->assertEquals('PUT', $request->getMethod());
-        $this->assertRegExp('/Bearer/', $request->getHeaderLine('Authorization'));
+        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
         $this->assertRegExp('/application\/x\-www\-form\-urlencoded/', $request->getHeaderLine('Content-Type'));
         $this->assertRegExp('/' . $userId . '/', $request->getUri()->getPath());
     }

@@ -2,12 +2,11 @@
 
 namespace Serato\SwsSdk\Profile\Command;
 
-use Serato\SwsSdk\CommandBearerTokenAuth;
+use Serato\SwsSdk\CommandBasicAuth;
 
 /**
  * Gets user information for an authenticated user.
  *
- * Requires a bearer token to identify the authenticated user.
  * Valid keys for the `$args` array provided to the constructor are:
  *
  * - `user_id`: (integer) Required. User ID.
@@ -15,7 +14,7 @@ use Serato\SwsSdk\CommandBearerTokenAuth;
  * This command can be executed on a `Serato\SwsSdk\Profile\ProfileClient` instance
  * using the `ProfileClient::getUser` magic method.
  */
-class UserGet extends CommandBearerTokenAuth
+class UserGet extends CommandBasicAuth
 {
     /**
      * {@inheritdoc}
