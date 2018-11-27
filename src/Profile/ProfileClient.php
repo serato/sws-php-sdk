@@ -8,8 +8,6 @@ use Serato\SwsSdk\Client;
 /**
  * Client used to interact with SWS Profile service.
  *
- * @method \Psr\Http\Message\RequestInterface getMe(array $args)
- * @method \Psr\Http\Message\RequestInterface updateMe(array $args)
  * @method \Psr\Http\Message\RequestInterface getUser(array $args)
  * @method \Psr\Http\Message\RequestInterface updateUser(array $args)
  */
@@ -35,10 +33,8 @@ class ProfileClient extends Client
     public function getCommandMap(): array
     {
         return [
-            'GetMe'    => '\\Serato\\SwsSdk\\Profile\\Command\\MeGet',
-            'UpdateMe'    => '\\Serato\\SwsSdk\\Profile\\Command\\MeUpdate',
             'GetUser'    => '\\Serato\\SwsSdk\\Profile\\Command\\UserGet',
-            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate',
+            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate'
         ];
     }
 }
