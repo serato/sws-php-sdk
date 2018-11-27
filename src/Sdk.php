@@ -166,7 +166,7 @@ class Sdk
                     throw new InvalidArgumentException(
                         'The `base_uri` `profile` config option value must including a ' .
                         'valid network protocol (ie. http or https)',
-                        1003
+                        1007
                     );
                 }
                 $this->setBaseUriConfig(

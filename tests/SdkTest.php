@@ -49,11 +49,16 @@ class SdkTest extends AbstractTestCase
                 1004,
                 'Invalid `base_uri` `license` value'
             ],
-//            [
-//                ['base_uri' => ['license' => 'http://my.server', 'profile' => 'invalid value']],
-//                1007,
-//                'Invalid `base_uri` `profile` value'
-//            ],
+            [
+                ['base_uri' => [
+                        'id' => 'http://my.server',
+                        'license' => 'http://my.server',
+                        'profile' => 'invalid value'
+                    ]
+                ],
+                1007,
+                'Invalid `base_uri` `profile` value'
+            ],
             [
                 ['env' => Sdk::ENV_PRODUCTION, 'handler' => 'not a callable'],
                 1006,
