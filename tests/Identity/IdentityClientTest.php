@@ -16,7 +16,8 @@ class IdentityClientTest extends AbstractTestCase
                 Sdk::BASE_URI => [
                     Sdk::BASE_URI_ID        => self::ID_SERVER_BASE_URI,
                     Sdk::BASE_URI_LICENSE   => 'http://license.server.com',
-                    Sdk::BASE_URI_PROFILE   => 'https://profile.server.com'
+                    Sdk::BASE_URI_PROFILE   => 'https://profile.server.com',
+                    Sdk::BASE_URI_ECOM      => 'http://ecom.server.com'
                 ]
             ],
             'my_app',

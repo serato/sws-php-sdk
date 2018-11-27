@@ -16,7 +16,8 @@ class LicenseClientTest extends AbstractTestCase
                 Sdk::BASE_URI => [
                     Sdk::BASE_URI_ID        => 'https://id.server.com',
                     Sdk::BASE_URI_LICENSE   => self::LICENSE_SERVER_BASE_URI,
-                    Sdk::BASE_URI_PROFILE   => 'https://profile.server.com'
+                    Sdk::BASE_URI_PROFILE   => 'https://profile.server.com',
+                    Sdk::BASE_URI_ECOM      => 'http://ecom.server.com'
                 ]
             ],
             'my_app',

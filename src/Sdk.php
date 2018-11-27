@@ -17,6 +17,7 @@ class Sdk
     const BASE_URI_ID                    = 'id';
     const BASE_URI_LICENSE               = 'license';
     const BASE_URI_PROFILE               = 'profile';
+    const BASE_URI_ECOM                  = 'ecom';
 
     const ENV_PRODUCTION                = 'production';
     const ENV_STAGING                   = 'staging';
@@ -24,9 +25,12 @@ class Sdk
     const BASE_URI_STAGING_ID           = 'https://staging-id.serato.net';
     const BASE_URI_STAGING_LICENSE      = 'https://staging-license.serato.net';
     const BASE_URI_STAGING_PROFILE      = 'https://staging-profile.serato.net';
+    const BASE_URI_STAGING_ECOM         = 'https://staging-ecom.serato.net';
+
     const BASE_URI_PRODUCTION_ID        = 'https://id.serato.io';
     const BASE_URI_PRODUCTION_LICENSE   = 'https://license.serato.io';
     const BASE_URI_PRODUCTION_PROFILE   = 'https://profile.serato.com';
+    const BASE_URI_PRODUCTION_ECOM      = 'https://ecom.serato.com';
 
     /**
      * Client application ID
@@ -111,14 +115,16 @@ class Sdk
                     $this->setBaseUriConfig(
                         self::BASE_URI_STAGING_ID,
                         self::BASE_URI_STAGING_LICENSE,
-                        self::BASE_URI_STAGING_PROFILE
+                        self::BASE_URI_STAGING_PROFILE,
+                        self::BASE_URI_STAGING_ECOM
                     );
                 }
                 if ($args['env'] == self::ENV_PRODUCTION) {
                     $this->setBaseUriConfig(
                         self::BASE_URI_PRODUCTION_ID,
                         self::BASE_URI_PRODUCTION_LICENSE,
-                        self::BASE_URI_PRODUCTION_PROFILE
+                        self::BASE_URI_PRODUCTION_PROFILE,
+                        self::BASE_URI_PRODUCTION_ECOM
                     );
                 }
             } else {
@@ -134,7 +140,8 @@ class Sdk
             if (!is_array($args[self::BASE_URI]) ||
                 !isset($args[self::BASE_URI][self::BASE_URI_ID]) ||
                 !isset($args[self::BASE_URI][self::BASE_URI_LICENSE]) ||
-                !isset($args[self::BASE_URI][self::BASE_URI_PROFILE])
+                !isset($args[self::BASE_URI][self::BASE_URI_PROFILE]) ||
+                !isset($args[self::BASE_URI][self::BASE_URI_ECOM])
             ) {
                 throw new InvalidArgumentException(
                     'The `base_uri` config option value must be an array containing '.
@@ -169,10 +176,20 @@ class Sdk
                         1007
                     );
                 }
+                if (strpos($args[self::BASE_URI][self::BASE_URI_ECOM], 'http://') !== 0 &&
+                    strpos($args[self::BASE_URI][self::BASE_URI_ECOM], 'https://') !== 0
+                ) {
+                    throw new InvalidArgumentException(
+                        'The `base_uri` `ecom` config option value must including a ' .
+                        'valid network protocol (ie. http or https)',
+                        1008
+                    );
+                }
                 $this->setBaseUriConfig(
                     $args[self::BASE_URI][self::BASE_URI_ID],
                     $args[self::BASE_URI][self::BASE_URI_LICENSE],
-                    $args[self::BASE_URI][self::BASE_URI_PROFILE]
+                    $args[self::BASE_URI][self::BASE_URI_PROFILE],
+                    $args[self::BASE_URI][self::BASE_URI_ECOM]
                 );
             }
         }
@@ -278,12 +295,14 @@ class Sdk
     private function setBaseUriConfig(
         string $idServiceBaseUri,
         string $licenseServiceBaseUri,
-        string $profileServiceBaseUri
+        string $profileServiceBaseUri,
+        string $ecomServiceBaseUri
     ): void {
         $this->config[self::BASE_URI] = [
             self::BASE_URI_ID        => $idServiceBaseUri,
             self::BASE_URI_LICENSE   => $licenseServiceBaseUri,
-            self::BASE_URI_PROFILE   => $profileServiceBaseUri
+            self::BASE_URI_PROFILE   => $profileServiceBaseUri,
+            self::BASE_URI_ECOM      => $ecomServiceBaseUri
         ];
     }
 }
