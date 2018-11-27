@@ -1,5 +1,5 @@
 <?php
-namespace Serato\SwsSdk\Test\License\Command;
+namespace Serato\SwsSdk\Test\Profile\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Profile\Command\UserUpdate;
