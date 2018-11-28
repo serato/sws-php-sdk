@@ -3,9 +3,10 @@
 namespace Serato\SwsSdk;
 
 use Serato\SwsSdk\Client;
-use Serato\SwsSdk\Identity\IdentityClient;
+use Serato\SwsSdk\Ecom\EcomClient;
 use Serato\SwsSdk\License\LicenseClient;
 use Serato\SwsSdk\Profile\ProfileClient;
+use Serato\SwsSdk\Identity\IdentityClient;
 use InvalidArgumentException;
 
 /**
@@ -231,6 +232,16 @@ class Sdk
     public function createProfileClient(): ProfileClient
     {
         return $this->createClient('Serato\\SwsSdk\\Profile\\ProfileClient');
+    }
+
+    /**
+     * Create a EcomClient
+     *
+     * @return EcomClient
+     */
+    public function createEcomClient(): EcomClient
+    {
+        return $this->createClient('Serato\\SwsSdk\\Ecom\\EcomClient');
     }
 
     private function createClient(string $className): Client

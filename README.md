@@ -125,6 +125,8 @@ There are currently two clients available:
 
 * `Serato\SwsSdk\Identity\IdentityClient` - A client for interacting with SWS Identity Service.
 * `Serato\SwsSdk\License\LicenseClient` - A client for interacting with SWS License Service.
+* `Serato\SwsSdk\Profile\ProfileClient` - A client for interacting with SWS Profile Service.
+* `Serato\SwsSdk\Ecom\EcomClient` - A client for interacting with SWS Ecom Service.
 
 ```php
 use Serato\SwsSdk\Sdk;
@@ -135,6 +137,8 @@ $sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 
 $identityClient = $sdk->createIdentityClient();
 $licenseClient = $sdk->createLicenseClient();
+$profileClient = $sdk->createProfileClient();
+$ecomClient = $sdk->createEcomClient();
 ```
 
 ### Executing commands
