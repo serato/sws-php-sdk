@@ -64,7 +64,8 @@ The endpoints of the various SWS web services can be specified by setting the `$
 or `Sdk::ENV_STAGING` (ie. *staging*).
 
 Alternatively, custom endpoints can be specified by setting the `$args` `Sdk::BASE_URI` key with an array whose keys are
-`Sdk::BASE_URI_ID` (ie *id*) and `Sdk::BASE_URI_LICENSE` (ie. *license*), with values corresponding to the full base URIs
+`Sdk::BASE_URI_ID` (ie *id*), `Sdk::BASE_URI_LICENSE` (ie. *license*), `Sdk::BASE_URI_PROFILE` (ie. *profile*) and
+`Sdk::BASE_URI_ECOM` (ie. *ecom*), with values corresponding to the full base URIs
 (including protocol) for the respective SWS web services.
 
 One of `'env'` or `Sdk::BASE_URI` must be specified.
@@ -90,6 +91,8 @@ $args = [
 	Sdk::BASE_URI => [
 		Sdk::BASE_URI_ID => 'http://id.server.com',
 		Sdk::BASE_URI_LICENSE => 'https://license.server.com',
+		Sdk::BASE_URI_PROFILE => 'https://profile.server.com',
+		Sdk::BASE_URI_ECOM    => 'https://ecom.server.com'
 	]
 ];
 $sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');

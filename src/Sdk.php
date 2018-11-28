@@ -63,7 +63,7 @@ class Sdk
      *   values are `production` and `staging`. One of `env` or `base_uri` must
      *   be specified.
      * - `base_uri`: (array) An array of base URIs for each SWS service. The array
-     *   must contains key named `id`, `license` and `profile` and provide a complete base URI
+     *   must contains key named `id`, `license`, `profile` and `ecom` and provide a complete base URI
      *   including protocol (http or https) for each. One of `env` or `base_uri`
      *   must be specified.
      * - `timeout`: (float) The default request timeout, in seconds.
