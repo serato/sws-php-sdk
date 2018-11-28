@@ -3,8 +3,10 @@
 namespace Serato\SwsSdk;
 
 use Serato\SwsSdk\Client;
-use Serato\SwsSdk\Identity\IdentityClient;
+use Serato\SwsSdk\Ecom\EcomClient;
 use Serato\SwsSdk\License\LicenseClient;
+use Serato\SwsSdk\Profile\ProfileClient;
+use Serato\SwsSdk\Identity\IdentityClient;
 use InvalidArgumentException;
 
 /**
@@ -15,14 +17,21 @@ class Sdk
     const BASE_URI                       = 'base_uri';
     const BASE_URI_ID                    = 'id';
     const BASE_URI_LICENSE               = 'license';
+    const BASE_URI_PROFILE               = 'profile';
+    const BASE_URI_ECOM                  = 'ecom';
 
     const ENV_PRODUCTION                = 'production';
     const ENV_STAGING                   = 'staging';
 
     const BASE_URI_STAGING_ID           = 'https://staging-id.serato.net';
     const BASE_URI_STAGING_LICENSE      = 'https://staging-license.serato.net';
+    const BASE_URI_STAGING_PROFILE      = 'https://staging-profile.serato.net';
+    const BASE_URI_STAGING_ECOM         = 'https://staging-ecom.serato.net';
+
     const BASE_URI_PRODUCTION_ID        = 'https://id.serato.io';
     const BASE_URI_PRODUCTION_LICENSE   = 'https://license.serato.io';
+    const BASE_URI_PRODUCTION_PROFILE   = 'https://profile.serato.com';
+    const BASE_URI_PRODUCTION_ECOM      = 'https://ecom.serato.com';
 
     /**
      * Client application ID
@@ -55,7 +64,7 @@ class Sdk
      *   values are `production` and `staging`. One of `env` or `base_uri` must
      *   be specified.
      * - `base_uri`: (array) An array of base URIs for each SWS service. The array
-     *   must contains key named `id` and `license` and provide a complete base URI
+     *   must contains key named `id`, `license`, `profile` and `ecom` and provide a complete base URI
      *   including protocol (http or https) for each. One of `env` or `base_uri`
      *   must be specified.
      * - `timeout`: (float) The default request timeout, in seconds.
@@ -106,13 +115,17 @@ class Sdk
                 if ($args['env'] == self::ENV_STAGING) {
                     $this->setBaseUriConfig(
                         self::BASE_URI_STAGING_ID,
-                        self::BASE_URI_STAGING_LICENSE
+                        self::BASE_URI_STAGING_LICENSE,
+                        self::BASE_URI_STAGING_PROFILE,
+                        self::BASE_URI_STAGING_ECOM
                     );
                 }
                 if ($args['env'] == self::ENV_PRODUCTION) {
                     $this->setBaseUriConfig(
                         self::BASE_URI_PRODUCTION_ID,
-                        self::BASE_URI_PRODUCTION_LICENSE
+                        self::BASE_URI_PRODUCTION_LICENSE,
+                        self::BASE_URI_PRODUCTION_PROFILE,
+                        self::BASE_URI_PRODUCTION_ECOM
                     );
                 }
             } else {
@@ -127,11 +140,13 @@ class Sdk
         if (isset($args[self::BASE_URI])) {
             if (!is_array($args[self::BASE_URI]) ||
                 !isset($args[self::BASE_URI][self::BASE_URI_ID]) ||
-                !isset($args[self::BASE_URI][self::BASE_URI_LICENSE])
+                !isset($args[self::BASE_URI][self::BASE_URI_LICENSE]) ||
+                !isset($args[self::BASE_URI][self::BASE_URI_PROFILE]) ||
+                !isset($args[self::BASE_URI][self::BASE_URI_ECOM])
             ) {
                 throw new InvalidArgumentException(
                     'The `base_uri` config option value must be an array containing '.
-                    '`id` and `license` keys.',
+                    '`id`, `license`, `profile` and `ecom` keys.',
                     1002
                 );
             } else {
@@ -153,9 +168,29 @@ class Sdk
                         1004
                     );
                 }
+                if (strpos($args[self::BASE_URI][self::BASE_URI_PROFILE], 'http://') !== 0 &&
+                    strpos($args[self::BASE_URI][self::BASE_URI_PROFILE], 'https://') !== 0
+                ) {
+                    throw new InvalidArgumentException(
+                        'The `base_uri` `profile` config option value must including a ' .
+                        'valid network protocol (ie. http or https)',
+                        1007
+                    );
+                }
+                if (strpos($args[self::BASE_URI][self::BASE_URI_ECOM], 'http://') !== 0 &&
+                    strpos($args[self::BASE_URI][self::BASE_URI_ECOM], 'https://') !== 0
+                ) {
+                    throw new InvalidArgumentException(
+                        'The `base_uri` `ecom` config option value must including a ' .
+                        'valid network protocol (ie. http or https)',
+                        1008
+                    );
+                }
                 $this->setBaseUriConfig(
                     $args[self::BASE_URI][self::BASE_URI_ID],
-                    $args[self::BASE_URI][self::BASE_URI_LICENSE]
+                    $args[self::BASE_URI][self::BASE_URI_LICENSE],
+                    $args[self::BASE_URI][self::BASE_URI_PROFILE],
+                    $args[self::BASE_URI][self::BASE_URI_ECOM]
                 );
             }
         }
@@ -187,6 +222,26 @@ class Sdk
     public function createLicenseClient(): LicenseClient
     {
         return $this->createClient('Serato\\SwsSdk\\License\\LicenseClient');
+    }
+
+    /**
+     * Create a ProfileClient
+     *
+     * @return ProfileClient
+     */
+    public function createProfileClient(): ProfileClient
+    {
+        return $this->createClient('Serato\\SwsSdk\\Profile\\ProfileClient');
+    }
+
+    /**
+     * Create a EcomClient
+     *
+     * @return EcomClient
+     */
+    public function createEcomClient(): EcomClient
+    {
+        return $this->createClient('Serato\\SwsSdk\\Ecom\\EcomClient');
     }
 
     private function createClient(string $className): Client
@@ -248,11 +303,17 @@ class Sdk
         return $this;
     }
 
-    private function setBaseUriConfig(string $idServiceBaseUri, string $licenseServiceBaseUri): void
-    {
+    private function setBaseUriConfig(
+        string $idServiceBaseUri,
+        string $licenseServiceBaseUri,
+        string $profileServiceBaseUri,
+        string $ecomServiceBaseUri
+    ): void {
         $this->config[self::BASE_URI] = [
             self::BASE_URI_ID        => $idServiceBaseUri,
-            self::BASE_URI_LICENSE   => $licenseServiceBaseUri
+            self::BASE_URI_LICENSE   => $licenseServiceBaseUri,
+            self::BASE_URI_PROFILE   => $profileServiceBaseUri,
+            self::BASE_URI_ECOM      => $ecomServiceBaseUri
         ];
     }
 }
