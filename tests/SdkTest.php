@@ -27,9 +27,9 @@ class SdkTest extends AbstractTestCase
             [['timeout' => 2.0, 'env' => 'invalid'], 1001, 'Invalid `env` value'],
             [['base_uri' => ''], 1002, 'Non-array `base_uri` value'],
             [['base_uri' => ['id' => 'value']], 1002, 'Missing `base_uri` `license`, `profile` and `ecom` values'],
-            [['base_uri' => ['license' => 'value']], 1002, 'Missing `base_uri` `id`, `profile` and `ecom`  values'],
-            [['base_uri' => ['profile' => 'value']], 1002, 'Missing `base_uri` `id`, `license` and `ecom`  values'],
-            [['base_uri' => ['ecom' => 'value']], 1002, 'Missing `base_uri` `id`, `license` and `profile`  values'],
+            [['base_uri' => ['license' => 'value']], 1002, 'Missing `base_uri` `id`, `profile` and `ecom` values'],
+            [['base_uri' => ['profile' => 'value']], 1002, 'Missing `base_uri` `id`, `license` and `ecom` values'],
+            [['base_uri' => ['ecom' => 'value']], 1002, 'Missing `base_uri` `id`, `license` and `profile` values'],
             [
                 ['base_uri' => [
                         'id' => 'invalid value',

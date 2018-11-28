@@ -146,7 +146,7 @@ class Sdk
             ) {
                 throw new InvalidArgumentException(
                     'The `base_uri` config option value must be an array containing '.
-                    '`id`, `license` and `profile` keys.',
+                    '`id`, `license`, `profile` and `ecom` keys.',
                     1002
                 );
             } else {
