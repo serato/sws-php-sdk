@@ -39,7 +39,7 @@ class UserGet extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/user/' . $this->commandArgs['user_id'];
+        return '/api/v1/users/' . $this->commandArgs['user_id'];
     }
 
     /**
