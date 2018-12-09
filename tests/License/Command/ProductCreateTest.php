@@ -12,7 +12,8 @@ class ProductCreateTest extends AbstractTestCase
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['product_type_id' => 1]
+            ['product_type_id' => 1],
+            ['subscription_status' => 'Canceled']
         );
 
         $request = $command->getRequest();
