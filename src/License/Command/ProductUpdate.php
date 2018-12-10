@@ -74,6 +74,7 @@ class ProductUpdate extends CommandBasicAuth
             'checkout_order_item_id'    => ['type' => self::ARG_TYPE_INTEGER],
             'magento_order_id'          => ['type' => self::ARG_TYPE_INTEGER],
             'magento_order_item_id'     => ['type' => self::ARG_TYPE_INTEGER],
+            'subscription_status'       => ['type' => self::ARG_TYPE_STRING]
         ];
     }
 }
