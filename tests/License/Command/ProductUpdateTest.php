@@ -17,7 +17,7 @@ class ProductUpdateTest extends AbstractTestCase
             'app_password',
             'http://my.server.com',
             [
-                'product_id' => $productId, 
+                'product_id' => $productId,
                 'valid_to' => $dateTime,
                 'subscription_status' => 'Past Due'
             ]
