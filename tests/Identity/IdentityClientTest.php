@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Serato\SwsSdk\Test\Identity;
 
 use Serato\SwsSdk\Test\AbstractTestCase;

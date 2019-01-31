@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Serato\SwsSdk\Test\Profile\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
