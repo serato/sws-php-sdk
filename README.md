@@ -14,6 +14,14 @@ Use [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer/wiki) to vali
 
 	$ ./vendor/bin/phpcs
 
+## PHPStan
+
+Use PHPStan for static code analysis:
+
+```bash
+$ vendor/bin/phpstan analyse
+```
+
 ## Unit tests
 
 Configuration for PHPUnit is defined within [phpunit.xml](../../phpunit.xml).
@@ -21,19 +29,6 @@ Configuration for PHPUnit is defined within [phpunit.xml](../../phpunit.xml).
 To run tests:
 
 	$ php vendor/bin/phpunit
-
-## Generate PHP documentation
-
-The [Sami PHP API documentation generator](https://github.com/FriendsOfPHP/sami)
-can be used to generate PHP API documentation.
-
-To generate documentation:
-
-	$ vendor/bin/sami.php update lib/sws_php_sdk/phpdoc.php
-
-Documentation is generated into the `docs\php` directory (which is not under source control).
-
-Configuration for Sami is contained within [phpdoc.php](phpdoc.php).
 
 ## Usage
 

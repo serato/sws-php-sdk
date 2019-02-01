@@ -1,0 +1,5 @@
+parameters:
+    visibility_levels: [public, protected]
+    annotation_groups: [todo, deprecated]
+    title: "PHP SWS SDK"
+    overwrite: true
