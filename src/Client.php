@@ -18,8 +18,9 @@ use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ClientException as GuzzleClientException;
 use GuzzleHttp\Exception\ServerException as GuzzleServerException;
-use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Promise\PromiseInterface;
 use InvalidArgumentException;
+use Exception;
 
 abstract class Client extends GuzzleClient
 {
@@ -152,31 +153,43 @@ abstract class Client extends GuzzleClient
             // $promise->wait() returns a Response object
             return new Result($promise->wait());
         } catch (GuzzleClientException $e) {
-            switch ($e->getResponse()->getStatusCode()) {
-                case 400:
-                    throw new BadRequestException($e);
-                    break;
-                case 401:
-                    throw new UnauthorizedException($e);
-                    break;
-                case 403:
-                    throw new AccessDeniedException($e);
-                case 404:
-                    throw new ResourceNotFoundException($e);
-                default:
-                    // Re-throw the original error
-                    throw $e;
+            $response = $e->getResponse();
+            if ($response === null) {
+                // Should never happen
+                throw new Exception('Unhandled `GuzzleClientException` exception contains no `response` object');
+            } else {
+                switch ($response->getStatusCode()) {
+                    case 400:
+                        throw new BadRequestException($e);
+                        break;
+                    case 401:
+                        throw new UnauthorizedException($e);
+                        break;
+                    case 403:
+                        throw new AccessDeniedException($e);
+                    case 404:
+                        throw new ResourceNotFoundException($e);
+                    default:
+                        // Re-throw the original error
+                        throw $e;
+                }
             }
         } catch (GuzzleServerException $e) {
-            switch ($e->getResponse()->getStatusCode()) {
-                case 500:
-                    throw new ServerApplicationErrorException($e);
-                    break;
-                case 503:
-                    throw new ServiceUnavailableException($e);
-                default:
-                    // Re-throw the original error
-                    throw $e;
+            $response = $e->getResponse();
+            if ($response === null) {
+                // Should never happen
+                throw new Exception('Unhandled `GuzzleServerException` exception contains no `response` object');
+            } else {
+                switch ($response->getStatusCode()) {
+                    case 500:
+                        throw new ServerApplicationErrorException($e);
+                        break;
+                    case 503:
+                        throw new ServiceUnavailableException($e);
+                    default:
+                        // Re-throw the original error
+                        throw $e;
+                }
             }
         }
         // Re-throw the original error
@@ -191,16 +204,16 @@ abstract class Client extends GuzzleClient
      * @param string    $bearerToken    Bearer token (required for using that use JWT-based auth)
      * @param array     $options        Options to send with Command's Request
      *
-     * @return Promise
+     * @return PromiseInterface
      */
     public function executeAsync(
         string $name,
         array $args,
         string $bearerToken = '',
         array $options = []
-    ): Promise {
+    ): PromiseInterface {
         $command = $this->getCommand($name, $args);
-        if (!is_a($value, '\Serato\SwsSdk\Command\CommandBearerTokenAuth')) {
+        if (is_a($command, '\Serato\SwsSdk\CommandBearerTokenAuth')) {
             $request = $command->getRequest($bearerToken);
         } else {
             $request = $command->getRequest();

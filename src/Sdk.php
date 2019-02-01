@@ -245,7 +245,7 @@ class Sdk
         return $this->createClient('Serato\\SwsSdk\\Ecom\\EcomClient');
     }
 
-    private function createClient(string $className): Client
+    private function createClient(string $className)
     {
         return new $className($this->config, $this->appId, $this->appPassword);
     }
@@ -295,7 +295,7 @@ class Sdk
     /**
      * Sets the client application password
      *
-     * @param string $id Application ID
+     * @param string $pwd Password
      * @return self
      */
     public function setAppPassword(string $pwd): self

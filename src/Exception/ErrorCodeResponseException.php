@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Serato\SwsSdk\Exception;
 
@@ -11,13 +12,13 @@ use Serato\SwsSdk\Exception\ResponseException;
  */
 abstract class ErrorCodeResponseException extends ResponseException
 {
-    protected function getResultMessage()
+    protected function getResultMessage(): string
     {
         return "Code: " . $this->getResult()['code'] .
                 "\nError: " . $this->getResult()['error'] . "\n";
     }
 
-    protected function getResultCode()
+    protected function getResultCode(): int
     {
         return (int)$this->getResult()['code'];
     }

@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Serato\SwsSdk\Exception;
 
 use Serato\SwsSdk\Result;
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Psr7\Response;
 use RuntimeException;
 
 /**
@@ -20,7 +22,14 @@ abstract class ResponseException extends RuntimeException
 
     public function __construct(BadResponseException $e)
     {
-        $this->result = new Result($e->getResponse());
+        $response = $e->getResponse();
+
+        # Should never happen
+        if ($response === null) {
+            $response = new Response;
+        }
+
+        $this->result = new Result($response);
 
         $msg = "`" . $this->getHttpResponseName() . "` returned from `" .
                 $e->getRequest()->getUri() . "`\n\n" .
@@ -29,18 +38,18 @@ abstract class ResponseException extends RuntimeException
         parent::__construct(trim($msg), $this->getResultCode());
     }
 
-    abstract protected function getHttpResponseName();
+    abstract protected function getHttpResponseName(): string;
 
-    abstract protected function getResultMessage();
+    abstract protected function getResultMessage(): string;
 
-    abstract protected function getResultCode();
+    abstract protected function getResultCode(): int;
 
     /**
      * Return the Result object created from the error response.
      *
      * @return Result
      */
-    public function getResult()
+    public function getResult(): Result
     {
         return $this->result;
     }

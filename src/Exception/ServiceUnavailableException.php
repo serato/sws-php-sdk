@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Serato\SwsSdk\Exception;
 
@@ -10,7 +11,7 @@ use Serato\SwsSdk\Exception\ErrorMessageResponseException;
  */
 class ServiceUnavailableException extends ErrorMessageResponseException
 {
-    protected function getHttpResponseName()
+    protected function getHttpResponseName(): string
     {
         return '503 Service Unavailable';
     }

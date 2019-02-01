@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Serato\SwsSdk;
 
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamInterface;
 use GuzzleHttp\Psr7\Request;
 use InvalidArgumentException;
 use DateTime;
