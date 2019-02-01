@@ -6,6 +6,7 @@ namespace Serato\SwsSdk\Test;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Result;
 use GuzzleHttp\Psr7\Response;
+use Exception;
 
 class ResultTest extends AbstractTestCase
 {
@@ -14,10 +15,14 @@ class ResultTest extends AbstractTestCase
      */
     public function testValidJsonResultConstructor($httpStatusCode, $body)
     {
+        $jsonBody = json_encode($body);
+        if ($jsonBody === false) {
+            throw new Exception('Invalid `body` argument. Could not be JSON-encoded.');
+        }
         $response = new Response(
             200,
             ['Content-Type' => 'application/json'],
-            json_encode($body)
+            $jsonBody
         );
 
         $result = new Result($response);

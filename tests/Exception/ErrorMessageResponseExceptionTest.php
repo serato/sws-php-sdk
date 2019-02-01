@@ -6,9 +6,13 @@ use Serato\SwsSdk\Exception\ErrorMessageResponseException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException;
+use Exception;
 
 class ErrorMessageResponseExceptionTest extends AbstractTestCase
 {
+    /* @var ErrorMessageResponseException */
+    private $mockException;
+
     public function testConstructor()
     {
         $httpResponseCode = 500;
@@ -20,17 +24,29 @@ class ErrorMessageResponseExceptionTest extends AbstractTestCase
             []
         );
 
+        $jsonBody = json_encode(['message' => $message]);
+
+        if ($jsonBody === false) {
+            throw new Exception('Cannot JSON-encode response body');
+        }
+
         $response = new Response(
             $httpResponseCode,
             ['Content-Type' => 'application/json'],
-            json_encode(['message' => $message])
+            $jsonBody
         );
 
-        $e = new ClientException('Exception message', $request, $response);
+        $this->createMockException(new ClientException('Exception message', $request, $response));
 
-        $clientException = $this->getMockForAbstractClass(ErrorMessageResponseException::class, [$e]);
+        $this->assertRegExp("/$message/", $this->mockException->getMessage());
+        $this->assertEquals($this->mockException->getCode(), $httpResponseCode);
+    }
 
-        $this->assertRegExp("/$message/", $clientException->getMessage());
-        $this->assertEquals($clientException->getCode(), $httpResponseCode);
+    /**
+     * @return ErrorMessageResponseException
+     */
+    private function createMockException($e)
+    {
+        $this->mockException = $this->getMockForAbstractClass(ErrorMessageResponseException::class, [$e]);
     }
 }

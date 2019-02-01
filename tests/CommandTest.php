@@ -10,32 +10,27 @@ use DateTime;
 
 class CommandTest extends AbstractTestCase
 {
+    /* @var Command */
+    private $commandMock;
+
     /**
      * @dataProvider commandConstructRequestProvider
      */
     public function testCommandConstructRequest($httpMethod, $httpScheme, $httpHost, $uriPath)
     {
-        $commandMock = $this->getMockForAbstractClass(
-            Command::class,
-            [
-                'my_app',
-                'my_pass',
-                $httpScheme . '://' . $httpHost,
-                []
-            ]
-        );
+        $this->createCommandMock($httpScheme, $httpHost);
 
-        $commandMock->expects($this->any())
+        $this->commandMock->expects($this->any())
             ->method('getHttpMethod')
             ->willReturn($httpMethod);
-        $commandMock->expects($this->any())
+        $this->commandMock->expects($this->any())
             ->method('getUriPath')
             ->willReturn($uriPath);
-        $commandMock->expects($this->any())
+        $this->commandMock->expects($this->any())
             ->method('getArgsDefinition')
             ->willReturn([]);
 
-        $request = $commandMock->getRequest();
+        $request = $this->commandMock->getRequest();
 
         $this->assertEquals($httpMethod, $request->getMethod());
         $this->assertEquals($httpScheme, $request->getUri()->getScheme());
@@ -63,32 +58,20 @@ class CommandTest extends AbstractTestCase
         array $exceptionTexts,
         $assertText
     ) {
-        $commandMock = $this->getMockForAbstractClass(
-            Command::class,
-            [
-                'my_app',
-                'my_pass',
-                $httpScheme . '://' . $httpHost,
-                $commandArgs
-            ]
-        );
+        $this->createCommandMock('http', 'myhost', $commandArgs);
 
         $errorMessage = '';
 
         try {
-            $commandMock->expects($this->any())
+            $this->commandMock->expects($this->any())
                 ->method('getArgsDefinition')->willReturn($commandArgDef);
-            $commandMock->getRequest();
+            $this->commandMock->getRequest();
         } catch (InvalidArgumentException $e) {
             $errorMessage = $e->getMessage();
         }
 
-        if ($exceptionText === '') {
-            $this->assertEquals(0, count($exceptionText), $assertText);
-        } else {
-            foreach ($exceptionTexts as $exceptionText) {
-                $this->assertRegExp('/' . $exceptionText . '/', $errorMessage, $assertText);
-            }
+        foreach ($exceptionTexts as $exceptionText) {
+            $this->assertRegExp('/' . $exceptionText . '/', $errorMessage, $assertText);
         }
     }
 
@@ -177,5 +160,21 @@ class CommandTest extends AbstractTestCase
                 'Invalid argument `invalidArgument`'
             ]
         ];
+    }
+
+    /**
+     * @return Command
+     */
+    private function createCommandMock($httpScheme, $httpHost, $commandArgs = [])
+    {
+        $this->commandMock = $this->getMockForAbstractClass(
+            Command::class,
+            [
+                'my_app',
+                'my_pass',
+                $httpScheme . '://' . $httpHost,
+                $commandArgs
+            ]
+        );
     }
 }

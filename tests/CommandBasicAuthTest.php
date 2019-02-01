@@ -8,9 +8,34 @@ use Serato\SwsSdk\CommandBasicAuth;
 
 class CommandBasicAuthTest extends AbstractTestCase
 {
+    /* @var CommandBasicAuth */
+    private $commandMock;
+
     public function testCommandHeaders()
     {
-        $commandMock = $this->getMockForAbstractClass(
+        $this->createCommandBasicAuthMock();
+
+        $this->commandMock->expects($this->any())
+            ->method('getHttpMethod')
+            ->willReturn('GET');
+        $this->commandMock->expects($this->any())
+            ->method('getUriPath')
+            ->willReturn('/some/path');
+        $this->commandMock->expects($this->any())
+            ->method('getArgsDefinition')
+            ->willReturn([]);
+
+        $request = $this->commandMock->getRequest();
+
+        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
+    }
+
+    /**
+     * @return CommandBasicAuth
+     */
+    private function createCommandBasicAuthMock()
+    {
+        $this->commandMock = $this->getMockForAbstractClass(
             CommandBasicAuth::class,
             [
                 'my_app',
@@ -19,19 +44,5 @@ class CommandBasicAuthTest extends AbstractTestCase
                 []
             ]
         );
-
-        $commandMock->expects($this->any())
-            ->method('getHttpMethod')
-            ->willReturn('GET');
-        $commandMock->expects($this->any())
-            ->method('getUriPath')
-            ->willReturn('/some/path');
-        $commandMock->expects($this->any())
-            ->method('getArgsDefinition')
-            ->willReturn([]);
-
-        $request = $commandMock->getRequest();
-
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
     }
 }
