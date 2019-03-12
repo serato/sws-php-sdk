@@ -36,7 +36,10 @@ class LicenseClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
         $result = $client->getProducts();
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testGetProduct()
@@ -44,7 +47,10 @@ class LicenseClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
         $result = $client->getProduct(['product_id' => '123']);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testCreateProduct()
@@ -52,7 +58,10 @@ class LicenseClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
         $result = $client->createProduct(['product_type_id' => 123]);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testUpdateProduct()
@@ -60,7 +69,10 @@ class LicenseClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
         $result = $client->updateProduct(['product_id' => '123']);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testDeleteProduct()
@@ -68,6 +80,9 @@ class LicenseClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
         $result = $client->deleteProduct(['product_id' => '123']);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 }

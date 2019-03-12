@@ -36,7 +36,10 @@ class IdentityClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
         $result = $client->getUser();
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testGetUsers()
@@ -44,7 +47,10 @@ class IdentityClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
         $result = $client->getUsers([]);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testUserAddGaClientId()
@@ -52,7 +58,10 @@ class IdentityClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
         $result = $client->userAddGaClientId(['user_id' => 123, 'ga_client_id' => 'abc']);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testTokenExchange()
@@ -60,7 +69,10 @@ class IdentityClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
         $result = $client->tokenExchange(['grant_type' => 'boo', 'code' => 'abc', 'redirect_uri' => 'uri']);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testTokenRefresh()
@@ -68,6 +80,9 @@ class IdentityClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
         $result = $client->tokenRefresh(['refresh_token' => 'str']);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 }

@@ -8,6 +8,9 @@ use Serato\SwsSdk\Sdk;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
+use Serato\SwsSdk\Result;
+use Exception;
 
 abstract class AbstractTestCase extends TestCase
 {
@@ -55,5 +58,22 @@ abstract class AbstractTestCase extends TestCase
             'app_id',
             'app_password'
         );
+    }
+
+    /**
+     * Returns a PSR-7 Response object from a `Serato\SwsSdk\Result` object
+     * and throws an exception of the response object is not present in the result
+     *
+     * @param Result $result
+     * @return ResponseInterface
+     * @throws Exception
+     */
+    public function getResponseObjectFromResult(Result $result): ResponseInterface
+    {
+        $response = $result->getResponse();
+        if ($response === null) {
+            throw new Exception;
+        }
+        return $response;
     }
 }

@@ -36,7 +36,10 @@ class ProfileClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
         $result = $client->getUser(['user_id' => 123]);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 
     public function testUpdateUser()
@@ -44,6 +47,9 @@ class ProfileClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
         $result = $client->updateUser(['user_id' => 123]);
-        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
     }
 }
