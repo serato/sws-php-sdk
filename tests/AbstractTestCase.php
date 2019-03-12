@@ -4,6 +4,10 @@ declare(strict_types=1);
 namespace Serato\SwsSdk\Test;
 
 use PHPUnit\Framework\TestCase;
+use Serato\SwsSdk\Sdk;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 
 abstract class AbstractTestCase extends TestCase
 {
@@ -19,5 +23,37 @@ abstract class AbstractTestCase extends TestCase
         parent::__construct($name, $data, $dataName);
         // Error reporting as defined in php.ini file
         error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+    }
+
+    /**
+     * Creates a Serato\SwsSdk\Sdk instance with a mock Response handler
+     * that contains a single HTTP 200 Response object
+     *
+     * @param string $responseBody String representation of response body
+     * @return Sdk
+     */
+    public function getSdkWithMocked200Response(string $responseBody): Sdk
+    {
+        return new Sdk(
+            [
+                Sdk::BASE_URI => [
+                    Sdk::BASE_URI_ID        => 'http://id.server.com',
+                    Sdk::BASE_URI_LICENSE   => 'http://license.server.com',
+                    Sdk::BASE_URI_PROFILE   => 'https://profile.server.com',
+                    Sdk::BASE_URI_ECOM      => 'http://ecom.server.com'
+                ],
+                'handler' => HandlerStack::create(
+                    new MockHandler([
+                        new Response(
+                            200,
+                            ['Content-Type' => 'application/json'],
+                            $responseBody
+                        )
+                    ])
+                )
+            ],
+            'app_id',
+            'app_password'
+        );
     }
 }

@@ -28,4 +28,46 @@ class IdentityClientTest extends AbstractTestCase
 
         $this->assertEquals(self::ID_SERVER_BASE_URI, $client->getBaseUri());
     }
+
+    /* The remaining tests are smoke tests for each magic method provided by the client */
+
+    public function testGetUser()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
+        $result = $client->getUser();
+        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+    }
+
+    public function testGetUsers()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
+        $result = $client->getUsers([]);
+        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+    }
+
+    public function testUserAddGaClientId()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
+        $result = $client->userAddGaClientId(['user_id' => 123, 'ga_client_id' => 'abc']);
+        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+    }
+
+    public function testTokenExchange()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
+        $result = $client->tokenExchange(['grant_type' => 'boo', 'code' => 'abc', 'redirect_uri' => 'uri']);
+        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+    }
+
+    public function testTokenRefresh()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
+        $result = $client->tokenRefresh(['refresh_token' => 'str']);
+        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+    }
 }

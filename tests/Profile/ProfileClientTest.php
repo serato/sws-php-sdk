@@ -28,4 +28,22 @@ class ProfileClientTest extends AbstractTestCase
 
         $this->assertEquals(self::PROFILE_SERVER_BASE_URI, $client->getBaseUri());
     }
+
+    /* The remaining tests are smoke tests for each magic method provided by the client */
+
+    public function testGetUser()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
+        $result = $client->getUser(['user_id' => 123]);
+        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+    }
+
+    public function testUpdateUser()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
+        $result = $client->updateUser(['user_id' => 123]);
+        $this->assertEquals((string)$result->getResponse()->getBody(), $body);
+    }
 }
