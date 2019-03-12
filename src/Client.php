@@ -191,9 +191,10 @@ abstract class Client extends GuzzleClient
                         throw $e;
                 }
             }
+        } catch (Exception $e) {
+            // Re-throw the original error
+            throw $e;
         }
-        // Re-throw the original error
-        throw $e;
     }
 
     /**
