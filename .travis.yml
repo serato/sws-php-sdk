@@ -16,6 +16,7 @@ before_install:
 install:
 - composer install
 script:
+- "./vendor/bin/phpstan analyse"
 - php vendor/bin/phpunit
 - "./vendor/bin/phpcs"
 after_success:
