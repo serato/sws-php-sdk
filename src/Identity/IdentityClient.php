@@ -9,8 +9,11 @@ use Serato\SwsSdk\Client;
 /**
  * Client used to interact with the SWS Identity service.
  *
- * @method \Psr\Http\Message\RequestInterface getUsers(array $args)
- * @method \Psr\Http\Message\RequestInterface userAddGaClientId(array $args)
+ * @method \Serato\SwsSdk\Result getUser()
+ * @method \Serato\SwsSdk\Result getUsers(array $args)
+ * @method \Serato\SwsSdk\Result userAddGaClientId(array $args)
+ * @method \Serato\SwsSdk\Result tokenExchange(array $args)
+ * @method \Serato\SwsSdk\Result tokenRefresh(array $args)
  */
 class IdentityClient extends Client
 {

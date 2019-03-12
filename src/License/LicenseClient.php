@@ -9,10 +9,11 @@ use Serato\SwsSdk\Client;
 /**
  * Client used to interact with SWS License service.
  *
- * @method \Psr\Http\Message\RequestInterface getProducts(array $args)
- * @method \Psr\Http\Message\RequestInterface getProduct(array $args)
- * @method \Psr\Http\Message\RequestInterface createProduct(array $args)
- * @method \Psr\Http\Message\RequestInterface updateProduct(array $args)
+ * @method \Serato\SwsSdk\Result getProducts(array $args)
+ * @method \Serato\SwsSdk\Result getProduct(array $args)
+ * @method \Serato\SwsSdk\Result createProduct(array $args)
+ * @method \Serato\SwsSdk\Result updateProduct(array $args)
+ * @method \Serato\SwsSdk\Result deleteProduct(array $args)
  */
 class LicenseClient extends Client
 {

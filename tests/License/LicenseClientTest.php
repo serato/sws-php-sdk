@@ -28,4 +28,61 @@ class LicenseClientTest extends AbstractTestCase
 
         $this->assertEquals(self::LICENSE_SERVER_BASE_URI, $client->getBaseUri());
     }
+
+    /* The remaining tests are smoke tests for each magic method provided by the client */
+
+    public function testGetProducts()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
+        $result = $client->getProducts([]);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testGetProduct()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
+        $result = $client->getProduct(['product_id' => '123']);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testCreateProduct()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
+        $result = $client->createProduct(['product_type_id' => 123]);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testUpdateProduct()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
+        $result = $client->updateProduct(['product_id' => '123']);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testDeleteProduct()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
+        $result = $client->deleteProduct(['product_id' => '123']);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
 }

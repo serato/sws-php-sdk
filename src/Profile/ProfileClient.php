@@ -9,8 +9,8 @@ use Serato\SwsSdk\Client;
 /**
  * Client used to interact with SWS Profile service.
  *
- * @method \Psr\Http\Message\RequestInterface getUser(array $args)
- * @method \Psr\Http\Message\RequestInterface updateUser(array $args)
+ * @method \Serato\SwsSdk\Result getUser(array $args)
+ * @method \Serato\SwsSdk\Result updateUser(array $args)
  */
 class ProfileClient extends Client
 {
