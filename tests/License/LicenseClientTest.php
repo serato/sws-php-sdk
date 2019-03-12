@@ -35,7 +35,7 @@ class LicenseClientTest extends AbstractTestCase
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
-        $result = $client->getProducts();
+        $result = $client->getProducts([]);
         $this->assertEquals(
             (string)$this->getResponseObjectFromResult($result)->getBody(),
             $body
