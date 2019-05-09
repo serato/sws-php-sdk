@@ -28,4 +28,27 @@ class EcomClientTest extends AbstractTestCase
 
         $this->assertEquals(self::ECOM_SERVER_BASE_URI, $client->getBaseUri());
     }
+
+    /* Testing magic methods (smoke test) */
+    public function testSubscriptionList()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
+        $result = $client->getSubscriptions(['user_id' => 123]);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testCancelSubscription()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
+        $result = $client->cancelSubscription(['user_id' => 123, 'subscription_id' => '233-12121']);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
 }
