@@ -13,7 +13,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  * - `user_id`: (integer) Required. User ID.
  *
  * This command can be executed on a `Serato\SwsSdk\Ecom\EcomClient` instance
- * using the `EcomClient::GetSubscriptions` magic method.
+ * using the `EcomClient::getSubscriptions` magic method.
  */
 class SubscriptionList extends CommandBasicAuth
 {

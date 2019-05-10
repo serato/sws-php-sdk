@@ -14,7 +14,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  * - `subscription_id`: (integer) Required. Subscription ID.
  *
  * This command can be executed on a `Serato\SwsSdk\Ecom\EcomClient` instance
- * using the `EcomClient::CancelSubscription` magic method.
+ * using the `EcomClient::cancelSubscription` magic method.
  */
 class SubscriptionCancel extends CommandBasicAuth
 {
