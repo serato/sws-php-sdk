@@ -42,6 +42,7 @@ class IdentityClient extends Client
             'UserAddGaClientId' => '\\Serato\\SwsSdk\\Identity\\Command\\UserAddGaClientId',
             'TokenExchange'     => '\\Serato\\SwsSdk\\Identity\\Command\\TokenExchange',
             'TokenRefresh'      => '\\Serato\\SwsSdk\\Identity\\Command\\TokenRefresh',
+            'GetUserById'       => '\\Serato\\SwsSdk\\Identity\\Command\\UserGetById',
         ];
     }
 }
