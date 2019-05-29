@@ -29,8 +29,8 @@ class Sdk
     const BASE_URI_STAGING_PROFILE      = 'https://staging-profile.serato.net';
     const BASE_URI_STAGING_ECOM         = 'https://staging-ecom.serato.net';
 
-    const BASE_URI_PRODUCTION_ID        = 'https://id.serato.io';
-    const BASE_URI_PRODUCTION_LICENSE   = 'https://license.serato.io';
+    const BASE_URI_PRODUCTION_ID        = 'https://id.serato.com';
+    const BASE_URI_PRODUCTION_LICENSE   = 'https://license.serato.com';
     const BASE_URI_PRODUCTION_PROFILE   = 'https://profile.serato.com';
     const BASE_URI_PRODUCTION_ECOM      = 'https://ecom.serato.com';
 
