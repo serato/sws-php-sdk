@@ -14,6 +14,8 @@ use Serato\SwsSdk\Client;
  * @method \Serato\SwsSdk\Result userAddGaClientId(array $args)
  * @method \Serato\SwsSdk\Result tokenExchange(array $args)
  * @method \Serato\SwsSdk\Result tokenRefresh(array $args)
+ * @method \Serato\SwsSdk\Result addUserGroup(array $args)
+ * @method \Serato\SwsSdk\Result removeUserGroup(array $args)
  */
 class IdentityClient extends Client
 {
@@ -42,6 +44,8 @@ class IdentityClient extends Client
             'UserAddGaClientId' => '\\Serato\\SwsSdk\\Identity\\Command\\UserAddGaClientId',
             'TokenExchange'     => '\\Serato\\SwsSdk\\Identity\\Command\\TokenExchange',
             'TokenRefresh'      => '\\Serato\\SwsSdk\\Identity\\Command\\TokenRefresh',
+            'AddUserGroup'      => '\\Serato\\SwsSdk\\Identity\\Command\\UserGroupAdd',
+            'RemoveUserGroup'   => '\\Serato\\SwsSdk\\Identity\\Command\\UserGroupRemove'
         ];
     }
 }
