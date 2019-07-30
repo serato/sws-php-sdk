@@ -55,6 +55,4 @@ class UserGetBetaProgramTest extends AbstractTestCase
         $this->assertRegExp('/application\/x\-www\-form\-urlencoded/', $request->getHeaderLine('Content-Type'));
         $this->assertRegExp('/' . $userId . '/', $request->getUri()->getPath());
     }
-
-    
 }
