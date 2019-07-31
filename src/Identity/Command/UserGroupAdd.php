@@ -18,6 +18,7 @@ class UserGroupAdd extends CommandBasicAuth
     public function getBody()
     {
         $args = $this->commandArgs;
+        unset($args['user_id']);
         return $this->arrayToFormUrlEncodedBody($args);
     }
 
@@ -34,7 +35,7 @@ class UserGroupAdd extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/'. $this->commandArgs['user_id'] .'/groups';
+        return '/api/v1/users/'. $this->commandArgs['user_id'] . '/groups' . $this->commandArgs['group_name'];
     }
 
     /**
@@ -51,6 +52,7 @@ class UserGroupAdd extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
+            'user_id'   => ["type" => self::ARG_TYPE_INTEGER, "required" => true],
             'group_name' => [ "type" => self::ARG_TYPE_STRING, "required" => true]
         ];
     }

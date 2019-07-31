@@ -22,6 +22,16 @@ class UserGroupRemove extends CommandBasicAuth
     {
         return 'DELETE';
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getBody()
+    {
+        $args = $this->commandArgs;
+        unset($args['user_id']);
+        return $this->arrayToFormUrlEncodedBody($args);
+    }
 
     /**
      * {@inheritdoc}
@@ -45,6 +55,7 @@ class UserGroupRemove extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
+            'user_id'   => ["type" => self::ARG_TYPE_INTEGER, "required" => true],
             'group_name' => ['type' => self::ARG_TYPE_STRING, 'required' => true]
         ];
     }
