@@ -6,7 +6,7 @@ namespace Serato\SwsSdk\Identity\Command;
 use Serato\SwsSdk\CommandBasicAuth;
 
 /**
- * Adds the authenticated client user to a user group
+ * Remove the authenticated client user to a user group
  *
  * Valid keys for the `$args` array provided to the constructor are:
  *
