@@ -35,7 +35,7 @@ class UserGroupAdd extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/'. $this->commandArgs['user_id'] . '/groups' . $this->commandArgs['group_name'];
+        return '/api/v1/users/'. $this->commandArgs['user_id'] . '/groups/' . $this->commandArgs['group_name'];
     }
 
     /**
