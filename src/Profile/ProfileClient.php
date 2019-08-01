@@ -35,7 +35,9 @@ class ProfileClient extends Client
     {
         return [
             'GetUser'    => '\\Serato\\SwsSdk\\Profile\\Command\\UserGet',
-            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate'
+            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate',
+            'GetUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserGetBetaProgram',
+            'AddUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserAddBetaProgram'
         ];
     }
 }
