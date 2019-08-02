@@ -7,7 +7,7 @@ namespace Serato\SwsSdk\Test\Profile\Command;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Profile\Command\UserAddBetaProgram;
 
-class UserGetBetaProgramTest extends AbstractTestCase
+class UserAddBetaProgramTest extends AbstractTestCase
 {
 
     /**
