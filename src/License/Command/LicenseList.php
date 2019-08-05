@@ -13,7 +13,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  * - `app_name`: (string) Only return licenses compatible with the host application.
  * - `app_version`: (string) Only return licenses compatible with the host application version.
  * - `term`: (string) Only return licenses of the specified term.
- * - `user_id`: (integer) User ID.
+ * - `user_id`: (integer) Return licenses that belong to the user id. user_id is required.
  *
  * This command can be excuted on a `Serato\SwsSdk\License\LicenseClient` instance
  * using the `LicenseClient::getLicenses` magic method.
