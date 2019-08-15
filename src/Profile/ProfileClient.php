@@ -11,6 +11,9 @@ use Serato\SwsSdk\Client;
  *
  * @method \Serato\SwsSdk\Result getUser(array $args)
  * @method \Serato\SwsSdk\Result updateUser(array $args)
+ * @method \Serato\SwsSdk\Result getUserBetProgram(array $args)
+ * @method \Serato\SwsSdk\Result addUserBetaProgram(array $args)
+ * @method \Serato\SwsSdk\Result validateAllUserBetaPrograms(array $args)
  */
 class ProfileClient extends Client
 {
