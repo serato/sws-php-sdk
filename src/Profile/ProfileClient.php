@@ -11,6 +11,9 @@ use Serato\SwsSdk\Client;
  *
  * @method \Serato\SwsSdk\Result getUser(array $args)
  * @method \Serato\SwsSdk\Result updateUser(array $args)
+ * @method \Serato\SwsSdk\Result getUserBetaProgram(array $args)
+ * @method \Serato\SwsSdk\Result addUserBetaProgram(array $args)
+ * @method \Serato\SwsSdk\Result validateAllUserBetaPrograms(array $args)
  */
 class ProfileClient extends Client
 {
@@ -34,10 +37,11 @@ class ProfileClient extends Client
     public function getCommandMap(): array
     {
         return [
-            'GetUser'    => '\\Serato\\SwsSdk\\Profile\\Command\\UserGet',
-            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate',
-            'GetUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserGetBetaProgram',
-            'AddUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserAddBetaProgram'
+            'GetUser'    => '\\Serato\\SwsSdk\\Profile\\Command\\UserGet',  # GET /users/{user_id}
+            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate',  # PUT /users/{user_id}
+            'GetUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserGetBetaProgram',  # GET /users/{user_id}/betaprograms
+            'AddUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserAddBetaProgram',  # POST /users/{user_id}/betaprograms
+            'ValidateAllUserBetaPrograms' => '\\Serato\\SwsSdk\\Profile\\Command\\UserValidateAllBetaPrograms'  # POST /users/{user_id}/betaprograms/validateall
         ];
     }
 }
