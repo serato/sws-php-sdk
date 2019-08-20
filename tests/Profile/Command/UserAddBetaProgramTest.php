@@ -53,6 +53,6 @@ class UserAddBetaProgramTest extends AbstractTestCase
         $this->assertEquals('POST', $request->getMethod());
         $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
         $this->assertRegExp('/application\/x\-www\-form\-urlencoded/', $request->getHeaderLine('Content-Type'));
-        $this->assertRegExp('/' . $userId . '/', $request->getUri()->getPath());
+        $this->assertRegExp('/^\/api\/v[0-9]+\/users\/' . $userId . '\/betaprograms$/', $request->getUri()->getPath());
     }
 }

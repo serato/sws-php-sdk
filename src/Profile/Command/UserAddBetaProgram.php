@@ -40,7 +40,7 @@ class UserAddBetaProgram extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/users/' . $this->commandArgs['user_id'] . '/betaprograms';
+        return '/api/v1/users/' . $this->commandArgs['user_id'] . '/betaprograms';
     }
 
     /**

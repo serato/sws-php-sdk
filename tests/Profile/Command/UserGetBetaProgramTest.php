@@ -47,7 +47,7 @@ class UserGetBetaProgramTest extends AbstractTestCase
 
         $this->assertEquals('GET', $request->getMethod());
         $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/' . $userId . '/', $request->getUri()->getQuery());
-        $this->assertRegExp('/user_id/', $request->getUri()->getQuery());
+        $this->assertRegExp('/^\/api\/v[0-9]+\/users\/' . $userId . '\/betaprograms$/', $request->getUri()->getPath());
+        $this->assertEquals('user_id=' . $userId, $request->getUri()->getQuery());
     }
 }
