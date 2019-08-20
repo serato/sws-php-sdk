@@ -38,6 +38,6 @@ class UserGetTest extends AbstractTestCase
 
         $this->assertEquals('GET', $request->getMethod());
         $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/' . $user_id . '/', $request->getUri()->getPath());
+        $this->assertRegExp('/^\/api\/v[0-9]+\/users\/' . $user_id . '$/', $request->getUri()->getPath());
     }
 }
