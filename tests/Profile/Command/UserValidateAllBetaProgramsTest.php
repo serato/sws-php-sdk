@@ -4,17 +4,16 @@ declare(strict_types=1);
 namespace Serato\SwsSdk\Test\Profile\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
-use Serato\SwsSdk\Profile\Command\UserUpdate;
+use Serato\SwsSdk\Profile\Command\UserValidateAllBetaPrograms;
 
-class UserUpdateTest extends AbstractTestCase
+class UserValidateAllBetaProgramsTest extends AbstractTestCase
 {
-
     /**
      * @expectedException \InvalidArgumentException
      */
     public function testMissingRequiredArg()
     {
-        $command = new UserUpdate(
+        $command = new UserValidateAllBetaPrograms(
             'app_id',
             'app_password',
             'http://my.server.com',
@@ -26,20 +25,22 @@ class UserUpdateTest extends AbstractTestCase
 
     public function testSmokeTest()
     {
-        $userId = 123;
+        $user_id = 123;
 
-        $command = new UserUpdate(
+        $command = new UserValidateAllBetaPrograms(
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['user_id' => $userId]
+            ['user_id' => $user_id]
         );
 
         $request = $command->getRequest();
 
-        $this->assertEquals('PUT', $request->getMethod());
+        $this->assertEquals('POST', $request->getMethod());
         $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/application\/x\-www\-form\-urlencoded/', $request->getHeaderLine('Content-Type'));
-        $this->assertRegExp('/^\/api\/v[0-9]+\/users\/' . $userId . '$/', $request->getUri()->getPath());
+        $this->assertRegExp(
+            '/^\/api\/v[0-9]+\/users\/' .$user_id . '\/betaprograms\/validateall$/',
+            $request->getUri()->getPath()
+        );
     }
 }

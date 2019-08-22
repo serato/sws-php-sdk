@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Profile\Command;
@@ -6,21 +7,21 @@ namespace Serato\SwsSdk\Profile\Command;
 use Serato\SwsSdk\CommandBasicAuth;
 
 /**
- * Add a User in the Beta program.
+ * Validates membership of all beta programs for an authenticated user.
  *
  * Valid keys for the `$args` array provided to the constructor are:
  *
  * - `user_id`: (integer) Required. User ID.
- * - `beta_program_id`: (string) Required Beta Program ID.
- * This command can be excuted on a `Serato\SwsSdk\Profile\ProfileClient` instance
- * using the `ProfileClient::addUserBetaProgram` magic method.
+ *
+ * This command can be executed on a `Serato\SwsSdk\Profile\ProfileClient` instance
+ * using the `ProfileClient::validateAllUserBetaPrograms` magic method.
  */
-class UserAddBetaProgram extends CommandBasicAuth
+class UserValidateAllBetaPrograms extends CommandBasicAuth
 {
-    /**
+     /**
      * {@inheritdoc}
      */
-    public function getBody()
+    public function getBody(): string
     {
         $args = $this->commandArgs;
         unset($args['user_id']);
@@ -40,15 +41,15 @@ class UserAddBetaProgram extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/' . $this->commandArgs['user_id'] . '/betaprograms';
+        return '/api/v1/users/' . $this->commandArgs['user_id'] . '/betaprograms/validateall';
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function setCommandRequestHeaders(): void
+    public function getUriQuery(): string
     {
-        $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        return http_build_query($this->commandArgs);
     }
 
     /**
@@ -57,8 +58,7 @@ class UserAddBetaProgram extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'user_id'               => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
-            'beta_program_id'       => ['type' => self::ARG_TYPE_STRING, 'required' => true]
+            'user_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
         ];
     }
 }
