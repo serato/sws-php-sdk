@@ -39,17 +39,17 @@ class SubscriptionCancelTest extends AbstractTestCase
     public function testSmokeTest()
     {
         $subId = 'sub-123';
+        $userId = 123;
         $command = new SubscriptionCancel(
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['user_id' => 123, 'subscription_id' => $subId]
+            ['user_id' => $userId, 'subscription_id' => $subId]
         );
 
         $request = $command->getRequest();
-
         $this->assertEquals('DELETE', $request->getMethod());
-        $this->assertContains('Basic', $request->getHeaderLine('Authorization'));
-        $this->assertContains('/' . $subId, $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertRegExp('/^\/api\/v1\/users\/' . $userId . '\/subscriptions\/' . $subId . '$/', $request->getUri()->getPath());
     }
 }

@@ -20,10 +20,9 @@ class ProductGetTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/' . $productId . '/', $request->getUri()->getPath());
+        $this->assertRegExp('/^\/api\/v1\/products\/products\/' . $productId . '$/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
     }
 
     /**

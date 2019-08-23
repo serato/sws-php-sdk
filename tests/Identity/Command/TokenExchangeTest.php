@@ -5,6 +5,7 @@ namespace Serato\SwsSdk\Test\Identity\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Identity\Command\TokenExchange;
+use GuzzleHttp\Psr7\Uri;
 
 class TokenExchangeTest extends AbstractTestCase
 {
@@ -49,18 +50,14 @@ class TokenExchangeTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-
+        parse_str((string)$request->getBody(), $bodyParams);
         $this->assertEquals('POST', $request->getMethod());
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/application\/x\-www\-form\-urlencoded/', $request->getHeaderLine('Content-Type'));
-
-        $this->assertRegExp('/grant_type/', (string)$request->getBody());
-        $this->assertRegExp('/' . $grantType . '/', (string)$request->getBody());
-
-        $this->assertRegExp('/code/', (string)$request->getBody());
-        $this->assertRegExp('/' . $code . '/', (string)$request->getBody());
-
-        $this->assertRegExp('/redirect_uri/', (string)$request->getBody());
-        $this->assertRegExp('/' . $redirectUri . '/', (string)$request->getBody());
+        $this->assertRegExp('/^\/api\/v1\/tokens\/exchange$/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
+        $this->assertEquals($grantType, $bodyParams['grant_type']);
+        $this->assertEquals($code, $bodyParams['code']);
+        $this->assertEquals($redirectUri, $bodyParams['redirect_uri']);
     }
 }
+

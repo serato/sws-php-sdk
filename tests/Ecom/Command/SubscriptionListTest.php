@@ -20,7 +20,7 @@ class SubscriptionListTest extends AbstractTestCase
         );
         $request = $command->getRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertContains('Basic', $request->getHeaderLine('Authorization'));
-        $this->assertContains('/' . $userId . '/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertRegExp('/^\/api\/v1\/users\/' . $userId . '\/subscriptions$/', $request->getUri()->getPath());
     }
 }

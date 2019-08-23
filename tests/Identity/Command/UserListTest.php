@@ -21,12 +21,11 @@ class UserListTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-
+        parse_str((string)$request->getUri()->getQuery(), $queryParams);
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/email_address/', $request->getUri()->getQuery());
-        $this->assertRegExp('/' . $emailAddress . '/', $request->getUri()->getQuery());
-        $this->assertRegExp('/ga_client_id/', $request->getUri()->getQuery());
-        $this->assertRegExp('/' . $gaClientId . '/', $request->getUri()->getQuery());
+        $this->assertRegExp('/^\/api\/v1\/users$/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertEquals($emailAddress, $queryParams['email_address']);
+        $this->assertEquals($gaClientId, $queryParams['ga_client_id']);
     }
 }
