@@ -21,11 +21,13 @@ class ProductCreateTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-
+        parse_str((string)$request->getBody(), $bodyParams);
         $this->assertEquals('POST', $request->getMethod());
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/application\/x\-www\-form\-urlencoded/', $request->getHeaderLine('Content-Type'));
-        $this->assertRegExp('/product_type_id/', (string)$request->getBody());
+        $this->assertRegExp('/^\/api\/v1\/products\/products$/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
+        $this->assertEquals(1, $bodyParams['product_type_id']);
+        $this->assertEquals('Canceled', $bodyParams['subscription_status']);
     }
 
     /**

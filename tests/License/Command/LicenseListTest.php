@@ -20,10 +20,10 @@ class LicenseListTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-
+        parse_str((string)$request->getUri()->getQuery(), $queryParams);
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/' . $userId . '/', $request->getUri()->getQuery());
-        $this->assertRegExp('/user_id/', $request->getUri()->getQuery());
+        $this->assertRegExp('/^\/api\/v1\/users\/' . $userId . '\/licenses$/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertEquals($userId, $queryParams['user_id']);
     }
 }
