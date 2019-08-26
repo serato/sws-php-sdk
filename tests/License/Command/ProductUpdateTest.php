@@ -6,7 +6,6 @@ namespace Serato\SwsSdk\Test\License\Command;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\License\Command\ProductUpdate;
 use DateTime;
-use DateTimeInterface;
 
 class ProductUpdateTest extends AbstractTestCase
 {
@@ -33,7 +32,7 @@ class ProductUpdateTest extends AbstractTestCase
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
         $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
         if ($dateTime) {
-            $dateString = $dateTime->format(DateTimeInterface::RFC3339);
+            $dateString = $dateTime->format(DateTime::RFC3339);
             $this->assertEquals($dateString, $bodyParams['valid_to']);
         }
         $this->assertEquals('Past Due', $bodyParams['subscription_status']);
