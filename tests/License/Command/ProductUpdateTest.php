@@ -32,7 +32,10 @@ class ProductUpdateTest extends AbstractTestCase
         $this->assertRegExp('/^\/api\/v1\/products\/products\/' . $productId . '$/', $request->getUri()->getPath());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
         $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
-        $this->assertEquals($dateTime->format(DateTimeInterface::RFC3339), $bodyParams['valid_to']);
+        if ($dateTime) {
+            $dateString = $dateTime->format(DateTimeInterface::RFC3339);
+            $this->assertEquals($dateString, $bodyParams['valid_to']);
+        }
         $this->assertEquals('Past Due', $bodyParams['subscription_status']);
     }
 
