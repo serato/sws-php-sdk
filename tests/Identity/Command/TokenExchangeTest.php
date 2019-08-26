@@ -60,4 +60,3 @@ class TokenExchangeTest extends AbstractTestCase
         $this->assertEquals($redirectUri, $bodyParams['redirect_uri']);
     }
 }
-

@@ -52,7 +52,7 @@ class UserGroupRemoveTest extends AbstractTestCase
         $request = $command->getRequest();
         parse_str((string)$request->getBody(), $bodyParams);
         $this->assertEquals('DELETE', $request->getMethod());
-        $this->assertRegExp('/^\/api\/v1\/users\/' . $userId . '\/groups\/' . $groupName . '$/', $request->getUri()->getPath());
+        $this->assertRegExp("/^\/api\/v1\/users\/{$userId}\/groups\/{$groupName}$/", $request->getUri()->getPath());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
         $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
         $this->assertEquals($groupName, $bodyParams['group_name']);

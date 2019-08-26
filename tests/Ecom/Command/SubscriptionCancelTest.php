@@ -50,6 +50,6 @@ class SubscriptionCancelTest extends AbstractTestCase
         $request = $command->getRequest();
         $this->assertEquals('DELETE', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/^\/api\/v1\/users\/' . $userId . '\/subscriptions\/' . $subId . '$/', $request->getUri()->getPath());
+        $this->assertRegExp("/^\/api\/v1\/users\/{$userId}\/subscriptions\/{$subId}$/", $request->getUri()->getPath());
     }
 }
