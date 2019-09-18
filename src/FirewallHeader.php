@@ -40,8 +40,14 @@ class FirewallHeader
      */
     private $timeStamp;
 
+    /**
+     * @var string Three letter prefix for the firewall header, from the set of PREFIX_CHARACTERS letters
+     */
+    private $prefix;
+
     public function __construct()
     {
+        $this->prefix = substr(str_shuffle(self::PREFIX_CHARACTERS),-3);
         $this->timeStamp = (new DateTime())->format(DateTime::ATOM);
     }
 
@@ -54,10 +60,9 @@ class FirewallHeader
      */
     public function getHeaderValue(): string
     {
-        $prefix = substr(str_shuffle(self::PREFIX_CHARACTERS),-3);
         $hash = $this->getHeaderHash($this->timeStamp);
 
-        return $prefix . '~' . $hash;
+        return $this->prefix . '~' . $hash;
     }
 
     private function getHeaderHash(string $textToHash): string

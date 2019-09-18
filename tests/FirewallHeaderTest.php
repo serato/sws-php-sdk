@@ -15,4 +15,14 @@ class FirewallHeaderTest extends AbstractTestCase
         // Check that the header returned matches the expected pattern (see comments in FirewallHeader)
         $this->assertRegExp(FirewallHeader::HEADER_PATTERN, $headerValue);
     }
+
+    public function testGetHeaderValueTwice(): void
+    {
+        $firewallHeader = new FirewallHeader();
+        $firstHeaderValue = $firewallHeader->getHeaderValue();
+        $secondHeaderValue = $firewallHeader->getHeaderValue();
+
+        // Check that the same header is returned if the value is requested multiple times from the same instance
+        $this->assertEquals($firstHeaderValue, $secondHeaderValue);
+    }
 }
