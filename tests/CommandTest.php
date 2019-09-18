@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test;
 
+use Serato\SwsSdk\FirewallHeader;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Command;
 use InvalidArgumentException;
@@ -16,8 +17,12 @@ class CommandTest extends AbstractTestCase
     /**
      * @dataProvider commandConstructRequestProvider
      */
-    public function testCommandConstructRequest($httpMethod, $httpScheme, $httpHost, $uriPath)
-    {
+    public function testCommandConstructRequest(
+        string $httpMethod,
+        string $httpScheme,
+        string $httpHost,
+        string $uriPath
+    ): void {
         $this->createCommandMock($httpScheme, $httpHost);
 
         $this->commandMock->expects($this->any())
@@ -53,11 +58,11 @@ class CommandTest extends AbstractTestCase
      * @dataProvider commandArgsValidationProvider
      */
     public function testCommandArgsValidation(
-        $commandArgDef,
-        $commandArgs,
+        array $commandArgDef,
+        array $commandArgs,
         array $exceptionTexts,
-        $assertText
-    ) {
+        string $assertText
+    ): void {
         $this->createCommandMock('http', 'myhost', $commandArgs);
 
         $errorMessage = '';
@@ -75,7 +80,36 @@ class CommandTest extends AbstractTestCase
         }
     }
 
-    public function commandArgsValidationProvider()
+    /**
+     * Asserts that the X-Serato-Firewall header is included in requests, and that it matches the expected pattern
+     *
+     * @dataProvider commandConstructRequestProvider
+     */
+    public function testCommandFirewallHeader(
+        string $httpMethod,
+        string $httpScheme,
+        string $httpHost,
+        string $uriPath
+    ): void {
+        $this->createCommandMock($httpScheme, $httpHost);
+
+        $this->commandMock->expects($this->any())
+            ->method('getHttpMethod')
+            ->willReturn($httpMethod);
+        $this->commandMock->expects($this->any())
+            ->method('getUriPath')
+            ->willReturn($uriPath);
+        $this->commandMock->expects($this->any())
+            ->method('getArgsDefinition')
+            ->willReturn([]);
+
+        $request = $this->commandMock->getRequest();
+
+        $firewallHeader = $request->getHeaderLine(Command::CUSTOM_FIREWALL_HEADER);
+        $this->assertRegExp(FirewallHeader::HEADER_PATTERN, $firewallHeader);
+    }
+
+    public function commandArgsValidationProvider(): array
     {
         $commandArgDef = [
             'stringValRequired' => ['type' => Command::ARG_TYPE_STRING, 'required' => true],
@@ -165,7 +199,7 @@ class CommandTest extends AbstractTestCase
     /**
      * @return Command
      */
-    private function createCommandMock($httpScheme, $httpHost, $commandArgs = [])
+    private function createCommandMock(string $httpScheme, string $httpHost, array $commandArgs = []): void
     {
         $this->commandMock = $this->getMockForAbstractClass(
             Command::class,

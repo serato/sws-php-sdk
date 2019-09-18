@@ -20,6 +20,11 @@ abstract class Command
     const ARG_TYPE_DATETIME = 'datetime';
 
     /**
+     * The custom header that identifies requests from the SDK to the application firewall
+     */
+    const CUSTOM_FIREWALL_HEADER = 'X-Serato-Firewall';
+
+    /**
      * Client application ID
      *
      * @var string
@@ -82,6 +87,7 @@ abstract class Command
     public function getRequest(): RequestInterface
     {
         $this->validateCommandArgs();
+        $this->setFirewallRequestHeader();
         $this->setCommandRequestHeaders();
         return new Request(
             $this->getHttpMethod(),
@@ -159,6 +165,17 @@ abstract class Command
             }
         }
         return http_build_query($stringArgs);
+    }
+
+    /**
+     * Sets a custom request header for the Command that identifies the request to the application firewall.
+     *
+     * @return Command The current command, with the firewall request header set
+     */
+    protected function setFirewallRequestHeader(): self
+    {
+        $firewallHeader = new FirewallHeader();
+        return $this->setRequestHeader(self::CUSTOM_FIREWALL_HEADER, $firewallHeader->getHeaderValue());
     }
 
     /**
