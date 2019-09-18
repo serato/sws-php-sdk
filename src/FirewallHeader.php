@@ -18,8 +18,7 @@ class FirewallHeader
 {
     /**
      * The values by which ordinal values of the ASCII characters in each 8-character chunk of the md5 hash will be
-     * shifted (with the intention of making the strategy for generating the header less guessable, while still allowing
-     * the header to be easily matched by a regular expression)
+     * shifted
      */
     public const SHIFTS = [-8, 8, -16, 16];
 
@@ -41,7 +40,6 @@ class FirewallHeader
 
     /**
      * Regular expression pattern that will match valid firewall header lines
-     *
      * Example match: "ras~/[Y*(0*Y9j:Ak8k9)T!Q )')@tFB@BDs"
      */
     public const HEADER_PATTERN = '/"[serato]{3}~[\x28-\x31\x59-\x5B\x5D\x5E\x79]{8}[\x38-\x41\x69-\x6E]{8}[\x20-\x21\x23-\x29\x51-\x56\x78]{8}[\x40-\x49\x71-\x76]{8}"/';
@@ -87,7 +85,7 @@ class FirewallHeader
             $shiftedHash .= $this->shiftChunk($chunk, self::SHIFTS[$i]);
         }
 
-        return $shiftedHash;
+        return $this->replaceInvalidCharacters($shiftedHash);
     }
 
     private function shiftChunk(string $chunk, int $shift): string
@@ -102,21 +100,23 @@ class FirewallHeader
         return $shiftedChunk;
     }
 
-    /**
-     * Adds or subtracts an offset to the ASCII code of a character, returning the corresponding ASCII character
-     * (assuming that the character is still in the ASCII range). Replaces characters that are invalid in HTTP headers
-     * with valid characters outside the expected range.
-     *
-     * @param string $character An ASCII character
-     * @param int $shift An offset by which to shift the ASCII code of the character
-     * @return string The input character, shifted by the given offset (and replaced if the result was invalid)
-     */
     private function shiftCharacter(string $character, int $shift): string
     {
-        $shiftedCharacter = chr(ord($character) + $shift);
+        return chr(ord($character) + $shift);
+    }
+
+    /**
+     * Replaces characters that are invalid in quoted string HTTP header field values with valid characters outside the
+     * expected range. (See RFC 2616 section 2.2 and RFC 7230 section 3.2.6)
+     *
+     * @param string $headerHash Hash in which to replace invalid characters
+     * @return string Hash with invalid characters replaced
+     */
+    private function replaceInvalidCharacters(string $headerHash): string
+    {
         $invalidCharacters = array_keys(self::CHARACTER_REPLACEMENTS);
         $replacementCharacters = array_values(self::CHARACTER_REPLACEMENTS);
 
-        return str_replace($invalidCharacters, $replacementCharacters, $shiftedCharacter);
+        return str_replace($invalidCharacters, $replacementCharacters, $headerHash);
     }
 }
