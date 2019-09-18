@@ -31,9 +31,20 @@ class FirewallHeader
     public const PREFIX_CHARACTERS = 'serato';
 
     /**
-     * Regular expression pattern that will match valid firewall header lines
+     * Characters to replace (and what to replace them with) in the header, since they'd be invalid in a quoted string
+     * under RFC 2616 or RFC 7230
      */
-    public const HEADER_PATTERN = '/[serato]{3}~[\x28-\x31\x59-\x5E]{8}[\x38-\x41\x69-\x6E]{8}[\x20-\x29\x51-\x56]{8}[\x40-\x49\x71-\x76]{8}/';
+    public const CHARACTER_REPLACEMENTS = [
+        '"' => 'x',
+        '\\' => 'y'
+    ];
+
+    /**
+     * Regular expression pattern that will match valid firewall header lines
+     *
+     * Example match: "ras~/[Y*(0*Y9j:Ak8k9)T!Q )')@tFB@BDs"
+     */
+    public const HEADER_PATTERN = '/"[serato]{3}~[\x28-\x31\x59-\x5B\x5D\x5E\x79]{8}[\x38-\x41\x69-\x6E]{8}[\x20-\x21\x23-\x29\x51-\x56\x78]{8}[\x40-\x49\x71-\x76]{8}"/';
 
     /**
      * @var string Date/time at which this header was created (used to create the hash)
@@ -56,13 +67,13 @@ class FirewallHeader
      * 1. A 3 character prefix drawn from characters in the PREFIX_CHARACTERS string with no repeats, and
      * 2. A hash, with every 8 ASCII character chunk shifted by the offsets defined in the SHIFTS array
      * - separated by a ~ character.
-     * @return string Header value, for example 'rta~Y[)(/*\,:ijkk>k:S!#R((U$tGvuIstE'
+     * @return string Header value, for example "rta~Y[)(/*\,:ijkk>k:S!#R((U$tGvuIstE"
      */
     public function getHeaderValue(): string
     {
         $hash = $this->getHeaderHash($this->timeStamp);
 
-        return $this->prefix . '~' . $hash;
+        return '"' . $this->prefix . '~' . $hash . '"';
     }
 
     private function getHeaderHash(string $textToHash): string
@@ -91,8 +102,21 @@ class FirewallHeader
         return $shiftedChunk;
     }
 
+    /**
+     * Adds or subtracts an offset to the ASCII code of a character, returning the corresponding ASCII character
+     * (assuming that the character is still in the ASCII range). Replaces characters that are invalid in HTTP headers
+     * with valid characters outside the expected range.
+     *
+     * @param string $character An ASCII character
+     * @param int $shift An offset by which to shift the ASCII code of the character
+     * @return string The input character, shifted by the given offset (and replaced if the result was invalid)
+     */
     private function shiftCharacter(string $character, int $shift): string
     {
-        return chr(ord($character) + $shift);
+        $shiftedCharacter = chr(ord($character) + $shift);
+        $invalidCharacters = array_keys(self::CHARACTER_REPLACEMENTS);
+        $replacementCharacters = array_values(self::CHARACTER_REPLACEMENTS);
+
+        return str_replace($invalidCharacters, $replacementCharacters, $shiftedCharacter);
     }
 }
