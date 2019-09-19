@@ -42,7 +42,8 @@ class FirewallHeader
      * Regular expression pattern that will match valid firewall header lines
      * Example match: "ras~/[Y*(0*Y9j:Ak8k9)T!Q )')@tFB@BDs"
      */
-    public const HEADER_PATTERN = '/"[serato]{3}~[\x28-\x31\x59-\x5B\x5D\x5E\x79]{8}[\x38-\x41\x69-\x6E]{8}[\x20-\x21\x23-\x29\x51-\x56\x78]{8}[\x40-\x49\x71-\x76]{8}"/';
+    public const HEADER_PATTERN = '/"[serato]{3}~[\x28-\x31\x59-\x5B\x5D\x5E\x79]{8}[\x38-\x41\x69-\x6E]{8}[\x20-\x21' .
+    '\x23-\x29\x51-\x56\x78]{8}[\x40-\x49\x71-\x76]{8}"/';
 
     /**
      * @var string Date/time at which this header was created (used to create the hash)
@@ -56,7 +57,7 @@ class FirewallHeader
 
     public function __construct()
     {
-        $this->prefix = substr(str_shuffle(self::PREFIX_CHARACTERS),-3);
+        $this->prefix = substr(str_shuffle(self::PREFIX_CHARACTERS), -3);
         $this->timeStamp = (new DateTime())->format(DateTime::ATOM);
     }
 
