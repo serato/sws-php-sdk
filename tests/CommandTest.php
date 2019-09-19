@@ -196,9 +196,6 @@ class CommandTest extends AbstractTestCase
         ];
     }
 
-    /**
-     * @return Command
-     */
     private function createCommandMock(string $httpScheme, string $httpHost, array $commandArgs = []): void
     {
         $this->commandMock = $this->getMockForAbstractClass(
