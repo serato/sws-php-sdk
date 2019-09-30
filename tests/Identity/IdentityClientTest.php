@@ -85,4 +85,28 @@ class IdentityClientTest extends AbstractTestCase
             $body
         );
     }
+
+    public function testUserGroupAdd()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
+        $result = $client->addUserGroup(["user_id" => 123, 'group_name' => 'Test BetaProgram']);
+        
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testUserGroupRemove()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
+        $result = $client->removeUserGroup(["user_id" => 123, 'group_name' => 'Test BetaProgram']);
+        
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
 }

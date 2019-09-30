@@ -14,6 +14,7 @@ use Serato\SwsSdk\Client;
  * @method \Serato\SwsSdk\Result createProduct(array $args)
  * @method \Serato\SwsSdk\Result updateProduct(array $args)
  * @method \Serato\SwsSdk\Result deleteProduct(array $args)
+ * @method \Serato\SwsSdk\Result getLicenses(array $args)
  */
 class LicenseClient extends Client
 {
@@ -37,11 +38,12 @@ class LicenseClient extends Client
     public function getCommandMap(): array
     {
         return [
-            'GetProducts'   => '\\Serato\\SwsSdk\\License\\Command\\ProductList',
-            'GetProduct'    => '\\Serato\\SwsSdk\\License\\Command\\ProductGet',
-            'CreateProduct' => '\\Serato\\SwsSdk\\License\\Command\\ProductCreate',
-            'UpdateProduct' => '\\Serato\\SwsSdk\\License\\Command\\ProductUpdate',
-            'DeleteProduct' => '\\Serato\\SwsSdk\\License\\Command\\ProductDelete',
+            'GetProducts'       => '\\Serato\\SwsSdk\\License\\Command\\ProductList',
+            'GetProduct'        => '\\Serato\\SwsSdk\\License\\Command\\ProductGet',
+            'CreateProduct'     => '\\Serato\\SwsSdk\\License\\Command\\ProductCreate',
+            'UpdateProduct'     => '\\Serato\\SwsSdk\\License\\Command\\ProductUpdate',
+            'DeleteProduct'     => '\\Serato\\SwsSdk\\License\\Command\\ProductDelete',
+            'GetLicenses'       => '\\Serato\\SwsSdk\\License\\Command\\LicenseList'
         ];
     }
 }
