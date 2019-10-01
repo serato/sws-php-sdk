@@ -85,7 +85,7 @@ class ProductCreate extends CommandBasicAuth
             'subscription_status'       => ['type' => self::ARG_TYPE_STRING],
             'nfr'                       => ['type' => self::ARG_TYPE_INTEGER],
             'notes'                     => ['type' => self::ARG_TYPE_STRING],
-            'admin_user_id'             => ['type' => self::ARG_TYPE_INTEGER]
+            'created_by_user_id'        => ['type' => self::ARG_TYPE_INTEGER]
         ];
     }
 }
