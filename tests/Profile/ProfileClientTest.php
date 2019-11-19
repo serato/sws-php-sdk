@@ -52,4 +52,48 @@ class ProfileClientTest extends AbstractTestCase
             $body
         );
     }
+
+    public function testGetUserBetaProgram()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
+        $result = $client->getUserBetaProgram(['user_id' => 123]);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testAddUserBetaProgram()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
+        $result = $client->addUserBetaProgram(['user_id' => 123, 'beta_program_id' => 'test-prog-id']);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testValidateAllUserBetaPrograms()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
+        $result = $client->validateAllUserBetaPrograms(['user_id' => 123]);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testPartnerPromotionAddUser()
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
+        $result = $client->parterPromotionAddUser(['user_id' => 123, 'promotion_name' => 'test-promo']);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
 }

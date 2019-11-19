@@ -14,6 +14,7 @@ use Serato\SwsSdk\Client;
  * @method \Serato\SwsSdk\Result getUserBetaProgram(array $args)
  * @method \Serato\SwsSdk\Result addUserBetaProgram(array $args)
  * @method \Serato\SwsSdk\Result validateAllUserBetaPrograms(array $args)
+ * @method \Serato\SwsSdk\Result parterPromotionAddUser(array $args)
  */
 class ProfileClient extends Client
 {
@@ -37,11 +38,18 @@ class ProfileClient extends Client
     public function getCommandMap(): array
     {
         return [
-            'GetUser'    => '\\Serato\\SwsSdk\\Profile\\Command\\UserGet',  # GET /users/{user_id}
-            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate',  # PUT /users/{user_id}
-            'GetUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserGetBetaProgram',  # GET /users/{user_id}/betaprograms
-            'AddUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserAddBetaProgram',  # POST /users/{user_id}/betaprograms
-            'ValidateAllUserBetaPrograms' => '\\Serato\\SwsSdk\\Profile\\Command\\UserValidateAllBetaPrograms'  # POST /users/{user_id}/betaprograms/validateall
+            # GET /users/{user_id}
+            'GetUser'    => '\\Serato\\SwsSdk\\Profile\\Command\\UserGet',
+            # PUT /users/{user_id}
+            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate',
+            # GET /users/{user_id}/betaprograms
+            'GetUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserGetBetaProgram',
+            # POST /users/{user_id}/betaprograms
+            'AddUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserAddBetaProgram',
+            # POST /users/{user_id}/betaprograms/validateall
+            'ValidateAllUserBetaPrograms' => '\\Serato\\SwsSdk\\Profile\\Command\\UserValidateAllBetaPrograms',
+            # POST /partnerpromotions/code
+            'ParterPromotionAddUser' => '\\Serato\\SwsSdk\\Profile\\Command\\PartnerPromotionAddUser'
         ];
     }
 }
