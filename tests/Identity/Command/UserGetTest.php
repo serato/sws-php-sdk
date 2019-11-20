@@ -17,9 +17,9 @@ class UserGetTest extends AbstractTestCase
         );
 
         $request = $command->getRequest('bearer_token_value');
-
+        parse_str((string)$request->getBody(), $bodyParams);
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertRegExp('/Bearer/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/bearer_token_value/', $request->getHeaderLine('Authorization'));
+        $this->assertRegExp('/^\/api\/v1\/me$/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Bearer [[:alnum:]=_]+$/', $request->getHeaderLine('Authorization'));
     }
 }

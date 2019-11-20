@@ -40,20 +40,21 @@ class UserGroupRemoveTest extends AbstractTestCase
     public function testSmokeTest()
     {
         $userId = 1234;
-        $group_name = "root";
+        $groupName = "root";
         
         $command = new UserGroupRemove(
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['user_id'=>$userId, 'group_name' => $group_name]
+            ['user_id'=>$userId, 'group_name' => $groupName]
         );
 
         $request = $command->getRequest();
-
+        parse_str((string)$request->getBody(), $bodyParams);
         $this->assertEquals('DELETE', $request->getMethod());
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp("/${group_name}/", $request->getUri()->getPath());
-        $this->assertRegExp('/application\/x\-www\-form\-urlencoded/', $request->getHeaderLine('Content-Type'));
+        $this->assertRegExp("/^\/api\/v1\/users\/{$userId}\/groups\/{$groupName}$/", $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
+        $this->assertEquals($groupName, $bodyParams['group_name']);
     }
 }

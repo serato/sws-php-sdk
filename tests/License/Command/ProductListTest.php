@@ -20,10 +20,10 @@ class ProductListTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-
+        parse_str((string)$request->getUri()->getQuery(), $queryParams);
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/magento_order_id/', $request->getUri()->getQuery());
-        $this->assertRegExp('/' . $orderId . '/', $request->getUri()->getQuery());
+        $this->assertRegExp('/^\/api\/v1\/products\/products$/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertEquals($orderId, $queryParams['magento_order_id']);
     }
 }

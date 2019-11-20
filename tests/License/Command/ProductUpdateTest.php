@@ -26,13 +26,16 @@ class ProductUpdateTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-
+        parse_str((string)$request->getBody(), $bodyParams);
         $this->assertEquals('PUT', $request->getMethod());
-        $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/application\/x\-www\-form\-urlencoded/', $request->getHeaderLine('Content-Type'));
-        $this->assertRegExp('/' . $productId . '/', $request->getUri()->getPath());
-        $this->assertRegExp('/valid_to/', (string)$request->getBody());
-        $this->assertRegExp('/2017\-02\-01/', (string)$request->getBody());
+        $this->assertRegExp('/^\/api\/v1\/products\/products\/' . $productId . '$/', $request->getUri()->getPath());
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
+        if ($dateTime) {
+            $dateString = $dateTime->format(DateTime::RFC3339);
+            $this->assertEquals($dateString, $bodyParams['valid_to']);
+        }
+        $this->assertEquals('Past Due', $bodyParams['subscription_status']);
     }
 
     /**
