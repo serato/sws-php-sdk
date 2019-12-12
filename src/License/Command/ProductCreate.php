@@ -77,15 +77,16 @@ class ProductCreate extends CommandBasicAuth
             'user_id'                   => ['type' => self::ARG_TYPE_INTEGER],
             'user_email_address'        => ['type' => self::ARG_TYPE_STRING],
             'reseller_name'             => ['type' => self::ARG_TYPE_STRING],
+            'created_by_user_id'        => ['type' => self::ARG_TYPE_INTEGER],
+            'nfr'                       => ['type' => self::ARG_TYPE_INTEGER],
+            'notes'                     => ['type' => self::ARG_TYPE_STRING],
             'valid_to'                  => ['type' => self::ARG_TYPE_DATETIME],
             'checkout_order_id'         => ['type' => self::ARG_TYPE_INTEGER],
             'checkout_order_item_id'    => ['type' => self::ARG_TYPE_INTEGER],
             'magento_order_id'          => ['type' => self::ARG_TYPE_INTEGER],
             'magento_order_item_id'     => ['type' => self::ARG_TYPE_INTEGER],
             'subscription_status'       => ['type' => self::ARG_TYPE_STRING],
-            'nfr'                       => ['type' => self::ARG_TYPE_INTEGER],
-            'notes'                     => ['type' => self::ARG_TYPE_STRING],
-            'created_by_user_id'        => ['type' => self::ARG_TYPE_INTEGER]
+            'upgrade_from_product_id'   => ['type' => self::ARG_TYPE_INTEGER]
         ];
     }
 }
