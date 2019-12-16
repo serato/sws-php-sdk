@@ -86,7 +86,7 @@ class ProductCreate extends CommandBasicAuth
             'magento_order_id'          => ['type' => self::ARG_TYPE_INTEGER],
             'magento_order_item_id'     => ['type' => self::ARG_TYPE_INTEGER],
             'subscription_status'       => ['type' => self::ARG_TYPE_STRING],
-            'upgrade_from_product_id'   => ['type' => self::ARG_TYPE_INTEGER]
+            'upgrade_from_product_id'   => ['type' => self::ARG_TYPE_STRING]
         ];
     }
 }
