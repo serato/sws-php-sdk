@@ -184,8 +184,8 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_STAGING_LICENSE,
                 Sdk::BASE_URI_STAGING_PROFILE,
                 Sdk::BASE_URI_STAGING_ECOM,
-                Sdk::BASE_URI_PRODUCTION_DA,
-                Sdk::BASE_URI_PRODUCTION_NOTIFICATIONS,
+                Sdk::BASE_URI_STAGING_DA,
+                Sdk::BASE_URI_STAGING_NOTIFICATIONS,
                 null,
                 null,
                 'Set `env` to ENV_STAGING'
@@ -208,8 +208,8 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_STAGING_LICENSE,
                 Sdk::BASE_URI_STAGING_PROFILE,
                 Sdk::BASE_URI_STAGING_ECOM,
-                Sdk::BASE_URI_PRODUCTION_DA,
-                Sdk::BASE_URI_PRODUCTION_NOTIFICATIONS,
+                Sdk::BASE_URI_STAGING_DA,
+                Sdk::BASE_URI_STAGING_NOTIFICATIONS,
                 0.7622,
                 null,
                 'Set `env` to ENV_STAGING and `timeout`'
