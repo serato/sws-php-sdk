@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Serato\SwsSdk\Test\Ecom;
+namespace Serato\SwsSdk\Test\Notifications;
 
 use Serato\SwsSdk\Da\DaClient;
 use Serato\SwsSdk\Test\AbstractTestCase;
