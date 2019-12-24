@@ -156,12 +156,12 @@ class SdkTest extends AbstractTestCase
 
     public function validConstructorOptionsProvider()
     {
-        $idServiceUri       = 'http://id.server.com';
+        $idServiceUri       = 'https://id.server.com';
         $licenseServiceUri  = 'https://license.server.io';
         $profileServiceUri  = 'https://profile.server.com';
         $ecomServiceUri     = 'https://ecom.server.com';
-        $daServiceUri     = 'https://ecom.server.com';
-        $notificationsServiceUri     = 'https://ecom.server.com';
+        $daServiceUri     = 'https://da.server.com';
+        $notificationsServiceUri     = 'https://notifications.server.com';
         $handler            = function () {
         };
 
