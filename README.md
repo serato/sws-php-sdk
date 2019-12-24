@@ -116,12 +116,15 @@ An instance of `Serato\SwsSdk\Sdk` can be used to create service clients.
 A clients interacts with a specific SWS service using the configuration parameters
 passed to a `Serato\SwsSdk\Sdk` instance. 
 
-There are currently two clients available:
+There are currently six clients available:
 
 * `Serato\SwsSdk\Identity\IdentityClient` - A client for interacting with SWS Identity Service.
 * `Serato\SwsSdk\License\LicenseClient` - A client for interacting with SWS License Service.
 * `Serato\SwsSdk\Profile\ProfileClient` - A client for interacting with SWS Profile Service.
 * `Serato\SwsSdk\Ecom\EcomClient` - A client for interacting with SWS Ecom Service.
+* `Serato\SwsSdk\Da\DaClient` - A client for interacting with SWS DA Service.
+* `Serato\SwsSdk\Notifications\NotificationsClient` - A client for interacting with SWS Notifications Service.
+
 
 ```php
 use Serato\SwsSdk\Sdk;
