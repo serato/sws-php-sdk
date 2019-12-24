@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace Serato\SwsSdk;
 
 use Serato\SwsSdk\Client;
+use Serato\SwsSdk\Da\DaClient;
 use Serato\SwsSdk\Ecom\EcomClient;
 use Serato\SwsSdk\License\LicenseClient;
+use Serato\SwsSdk\Notifications\NotificationsClient;
 use Serato\SwsSdk\Profile\ProfileClient;
 use Serato\SwsSdk\Identity\IdentityClient;
 use InvalidArgumentException;
@@ -256,6 +258,26 @@ class Sdk
     public function createEcomClient(): EcomClient
     {
         return $this->createClient('Serato\\SwsSdk\\Ecom\\EcomClient');
+    }
+
+    /**
+     * Create a Da Client
+     *
+     * @return DaClient
+     */
+    public function createDaClient(): DaClient
+    {
+        return $this->createClient('Serato\\SwsSdk\\Da\\DaClient');
+    }
+
+    /**
+     * Create a NotificationsClient
+     *
+     * @return NotificationsClient
+     */
+    public function createNotificationsClient(): NotificationsClient
+    {
+        return $this->createClient('Serato\\SwsSdk\\Notifications\\NotificationsClient');
     }
 
     private function createClient(string $className)
