@@ -20,19 +20,26 @@ class Sdk
     const BASE_URI_LICENSE               = 'license';
     const BASE_URI_PROFILE               = 'profile';
     const BASE_URI_ECOM                  = 'ecom';
+    const BASE_URI_DA                    = 'da';
+    const BASE_URI_NOTIFICATIONS         = 'notifications';
+
 
     const ENV_PRODUCTION                = 'production';
     const ENV_STAGING                   = 'staging';
 
-    const BASE_URI_STAGING_ID           = 'https://staging-id.serato.net';
-    const BASE_URI_STAGING_LICENSE      = 'https://staging-license.serato.net';
-    const BASE_URI_STAGING_PROFILE      = 'https://staging-profile.serato.net';
-    const BASE_URI_STAGING_ECOM         = 'https://staging-ecom.serato.net';
+    const BASE_URI_STAGING_ID           = 'https://id.serato.xyz';
+    const BASE_URI_STAGING_LICENSE      = 'https://license.serato.xyz';
+    const BASE_URI_STAGING_PROFILE      = 'https://profile.serato.xyz';
+    const BASE_URI_STAGING_ECOM         = 'https://ecom.serato.xyz';
+    const BASE_URI_STAGING_DA           = 'https://da.serato.xyz';
+    const BASE_URI_STAGING_NOTIFICATIONS  = 'https://notifications.serato.xyz';
 
     const BASE_URI_PRODUCTION_ID        = 'https://id.serato.com';
     const BASE_URI_PRODUCTION_LICENSE   = 'https://license.serato.com';
     const BASE_URI_PRODUCTION_PROFILE   = 'https://profile.serato.com';
     const BASE_URI_PRODUCTION_ECOM      = 'https://ecom.serato.com';
+    const BASE_URI_PRODUCTION_DA      = 'https://da.serato.com';
+    const BASE_URI_PRODUCTION_NOTIFICATIONS      = 'https://notifications.serato.com';
 
     /**
      * Client application ID
@@ -118,7 +125,9 @@ class Sdk
                         self::BASE_URI_STAGING_ID,
                         self::BASE_URI_STAGING_LICENSE,
                         self::BASE_URI_STAGING_PROFILE,
-                        self::BASE_URI_STAGING_ECOM
+                        self::BASE_URI_STAGING_ECOM,
+                        self::BASE_URI_STAGING_DA,
+                        self::BASE_URI_STAGING_NOTIFICATIONS
                     );
                 }
                 if ($args['env'] == self::ENV_PRODUCTION) {
@@ -126,7 +135,9 @@ class Sdk
                         self::BASE_URI_PRODUCTION_ID,
                         self::BASE_URI_PRODUCTION_LICENSE,
                         self::BASE_URI_PRODUCTION_PROFILE,
-                        self::BASE_URI_PRODUCTION_ECOM
+                        self::BASE_URI_PRODUCTION_ECOM,
+                        self::BASE_URI_PRODUCTION_DA,
+                        self::BASE_URI_PRODUCTION_NOTIFICATIONS
                     );
                 }
             } else {
@@ -191,7 +202,9 @@ class Sdk
                     $args[self::BASE_URI][self::BASE_URI_ID],
                     $args[self::BASE_URI][self::BASE_URI_LICENSE],
                     $args[self::BASE_URI][self::BASE_URI_PROFILE],
-                    $args[self::BASE_URI][self::BASE_URI_ECOM]
+                    $args[self::BASE_URI][self::BASE_URI_ECOM],
+                    $args[self::BASE_URI][self::BASE_URI_DA],
+                    $args[self::BASE_URI][self::BASE_URI_NOTIFICATIONS]
                 );
             }
         }
@@ -308,13 +321,17 @@ class Sdk
         string $idServiceBaseUri,
         string $licenseServiceBaseUri,
         string $profileServiceBaseUri,
-        string $ecomServiceBaseUri
+        string $ecomServiceBaseUri,
+        string $daServiceBaseUri,
+        string $notificationsServiceBaseUri
     ): void {
         $this->config[self::BASE_URI] = [
             self::BASE_URI_ID        => $idServiceBaseUri,
             self::BASE_URI_LICENSE   => $licenseServiceBaseUri,
             self::BASE_URI_PROFILE   => $profileServiceBaseUri,
-            self::BASE_URI_ECOM      => $ecomServiceBaseUri
+            self::BASE_URI_ECOM      => $ecomServiceBaseUri,
+            self::BASE_URI_DA        => $daServiceBaseUri,
+            self::BASE_URI_NOTIFICATIONS => $notificationsServiceBaseUri
         ];
     }
 }

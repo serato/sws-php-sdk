@@ -43,7 +43,9 @@ abstract class AbstractTestCase extends TestCase
                     Sdk::BASE_URI_ID        => 'http://id.server.com',
                     Sdk::BASE_URI_LICENSE   => 'http://license.server.com',
                     Sdk::BASE_URI_PROFILE   => 'https://profile.server.com',
-                    Sdk::BASE_URI_ECOM      => 'http://ecom.server.com'
+                    Sdk::BASE_URI_ECOM      => 'http://ecom.server.com',
+                    Sdk::BASE_URI_DA      => 'http://da.server.com',
+                    Sdk::BASE_URI_NOTIFICATIONS      => 'http://notifications.server.com',
                 ],
                 'handler' => HandlerStack::create(
                     new MockHandler([

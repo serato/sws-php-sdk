@@ -19,7 +19,9 @@ class EcomClientTest extends AbstractTestCase
                     Sdk::BASE_URI_ID        => 'https://id.server.com',
                     Sdk::BASE_URI_LICENSE   => 'http://license.server.com',
                     Sdk::BASE_URI_PROFILE   => 'http://ecom.server.com',
-                    Sdk::BASE_URI_ECOM      => self::ECOM_SERVER_BASE_URI
+                    Sdk::BASE_URI_ECOM      => self::ECOM_SERVER_BASE_URI,
+                    Sdk::BASE_URI_DA      => 'http://da.server.com',
+                    Sdk::BASE_URI_NOTIFICATIONS      => 'http://notifications.server.com',
                 ]
             ],
             'my_app',

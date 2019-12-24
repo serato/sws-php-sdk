@@ -93,6 +93,8 @@ class SdkTest extends AbstractTestCase
         $licenseServiceUri,
         $profileServiceUri,
         $ecomServiceUri,
+        $daServiceUri,
+        $notificationsServiceUri,
         $timeout,
         $handler,
         $assertText
@@ -136,6 +138,16 @@ class SdkTest extends AbstractTestCase
             $assertText . ' - `base_uri` `ecom` is correct'
         );
         $this->assertEquals(
+            $daServiceUri,
+            $config['base_uri']['da'],
+            $assertText . ' - `base_uri` `da` is correct'
+        );
+        $this->assertEquals(
+            $notificationsServiceUri,
+            $config['base_uri']['notifications'],
+            $assertText . ' - `base_uri` `notifications` is correct'
+        );
+        $this->assertEquals(
             $handler,
             $config['handler'],
             $assertText . ' - `handler` is correct'
@@ -144,10 +156,12 @@ class SdkTest extends AbstractTestCase
 
     public function validConstructorOptionsProvider()
     {
-        $idServiceUri       = 'http://id.server.com';
+        $idServiceUri       = 'https://id.server.com';
         $licenseServiceUri  = 'https://license.server.io';
         $profileServiceUri  = 'https://profile.server.com';
         $ecomServiceUri     = 'https://ecom.server.com';
+        $daServiceUri     = 'https://da.server.com';
+        $notificationsServiceUri     = 'https://notifications.server.com';
         $handler            = function () {
         };
 
@@ -158,6 +172,8 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_PRODUCTION_LICENSE,
                 Sdk::BASE_URI_PRODUCTION_PROFILE,
                 Sdk::BASE_URI_PRODUCTION_ECOM,
+                Sdk::BASE_URI_PRODUCTION_DA,
+                Sdk::BASE_URI_PRODUCTION_NOTIFICATIONS,
                 null,
                 null,
                 'Set `env` to ENV_PRODUCTION'
@@ -168,6 +184,8 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_STAGING_LICENSE,
                 Sdk::BASE_URI_STAGING_PROFILE,
                 Sdk::BASE_URI_STAGING_ECOM,
+                Sdk::BASE_URI_STAGING_DA,
+                Sdk::BASE_URI_STAGING_NOTIFICATIONS,
                 null,
                 null,
                 'Set `env` to ENV_STAGING'
@@ -178,6 +196,8 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_PRODUCTION_LICENSE,
                 Sdk::BASE_URI_PRODUCTION_PROFILE,
                 Sdk::BASE_URI_PRODUCTION_ECOM,
+                Sdk::BASE_URI_PRODUCTION_DA,
+                Sdk::BASE_URI_PRODUCTION_NOTIFICATIONS,
                 1.222,
                 null,
                 'Set `env` to ENV_PRODUCTION and `timeout`'
@@ -188,6 +208,8 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_STAGING_LICENSE,
                 Sdk::BASE_URI_STAGING_PROFILE,
                 Sdk::BASE_URI_STAGING_ECOM,
+                Sdk::BASE_URI_STAGING_DA,
+                Sdk::BASE_URI_STAGING_NOTIFICATIONS,
                 0.7622,
                 null,
                 'Set `env` to ENV_STAGING and `timeout`'
@@ -198,7 +220,9 @@ class SdkTest extends AbstractTestCase
                         'id' => $idServiceUri,
                         'license' => $licenseServiceUri,
                         'profile' => $profileServiceUri,
-                        'ecom' => $ecomServiceUri
+                        'ecom' => $ecomServiceUri,
+                        'da'   => $daServiceUri,
+                        'notifications'   => $notificationsServiceUri
                     ],
                     'timeout' => 3.2
                 ],
@@ -206,6 +230,8 @@ class SdkTest extends AbstractTestCase
                 $licenseServiceUri,
                 $profileServiceUri,
                 $ecomServiceUri,
+                $daServiceUri,
+                $notificationsServiceUri,
                 3.2,
                 null,
                 'Custom `base_uri` and `timeout`'
@@ -216,6 +242,8 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_PRODUCTION_LICENSE,
                 Sdk::BASE_URI_PRODUCTION_PROFILE,
                 Sdk::BASE_URI_PRODUCTION_ECOM,
+                Sdk::BASE_URI_PRODUCTION_DA,
+                Sdk::BASE_URI_PRODUCTION_NOTIFICATIONS,
                 null,
                 $handler,
                 'Set `env` to ENV_PRODUCTION, custom `handler`'
