@@ -53,4 +53,15 @@ class EcomClientTest extends AbstractTestCase
             $body
         );
     }
+
+    public function testInvoiceCreate(): void
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
+        $result = $client->invoiceCreate(['order_id' => 123]);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
 }
