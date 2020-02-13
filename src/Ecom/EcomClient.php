@@ -10,7 +10,7 @@ use Serato\SwsSdk\Client;
  * Client used to interact with SWS E-commerce service.
  * @method \Serato\SwsSdk\Result getSubscriptions(array $args)
  * @method \Serato\SwsSdk\Result cancelSubscription(array $args)
- * @method \Serato\SwsSdk\Result invoiceCreate(array $args)
+ * @method \Serato\SwsSdk\Result createInvoice(array $args)
  */
 class EcomClient extends Client
 {
@@ -36,7 +36,7 @@ class EcomClient extends Client
         return [
             'GetSubscriptions'      => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionList',
             'CancelSubscription'    => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionCancel',
-            'InvoiceCreate'         => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoiceCreate'
+            'CreateInvoice'         => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoiceCreate'
         ];
     }
 }
