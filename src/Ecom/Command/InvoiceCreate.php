@@ -7,7 +7,7 @@ use Serato\SwsSdk\CommandBasicAuth;
 
 /**
  * Creates an invoice for an order.
- * 
+ *
  * Parameters:
  *  - 'order_id' int (required): The order ID to create the invoice for
  */
