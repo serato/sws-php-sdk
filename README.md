@@ -49,21 +49,61 @@ response object.
 
 ### Configuring the SDK
 
-The `Serato\SwsSdk\Sdk` constructor is the means by which all required configuration data is passed
-into the SDK. `Serato\SwsSdk\Sdk::__construct` takes an `$args` array, a client application ID, client application
-password.
+### Using the `Serato\SwsSdk\Sdk::create` static method
+
+The `Serato\SwsSdk\Sdk::create` static method is the preferred way to create an SDK instance. The method requires a
+`Serato\ServiceDiscovery\HostName` instance and derives endpoint URIs for the SWS web services from this instance.
+
+It also requires a client application ID amd client application password.
+
+It can optionally be provided with an HTTP request timeout (a float representing a number of seconds), and a callable
+that transfers HTTP requests over the wire within the underlying Guzzle HTTP library (typically this is used to provide
+a mock request handler for testing purposes).
+
+```php
+use Serato\SwsSdk\Sdk;
+use Serato\ServiceDiscovery\HostName;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+
+/* Configure the SDK using a `Serato\ServiceDiscovery\HostName` instance with default timeout and no custom Guzzle handler */
+$hostNames = new HostName('production', 1);
+$sdk = Sdk::create($hostNames, 'my_app_id', 'my_app_secrety_pass');
+
+/* Configure the SDK using a `Serato\ServiceDiscovery\HostName` instance with custom timeout and custom Guzzle handler */
+
+// Create `Serato\ServiceDiscovery\HostName` instance
+$hostNames = new HostName('test', 2);
+
+// Create a mock handler
+$mock = new MockHandler([
+    new Response(200, ['X-Foo' => 'Bar'])
+]);
+$handler = HandlerStack::create($mock);
+
+$sdk = Sdk::create($hostNames, 'my_app_id', 'my_app_secrety_pass', 3.2, $handler);
+```
+
+#### Using the `Serato\SwsSdk\Sdk` constructor
+
+In almost all cases the `Serato\SwsSdk\Sdk::create` method is the preferred way of configuring the SDK. But if you need
+to provide a non-standard configuration to the SDK (eg. using service endpoints from differing environments) you can call
+the SDK constructor directly.
+
+The `Serato\SwsSdk\Sdk` constructor takes an `$args` array, a client application ID amd client application password.
 
 `$args` is used to specify the endpoints of the various SWS web services, as well as providing additional configuration to the underlying `GuzzleHttp\Client`.
 
-The endpoints of the various SWS web services can be specified by setting the `$args` `'env'` key with a value of either `Sdk::ENV_PRODUCTION` (ie. *production*)
-or `Sdk::ENV_STAGING` (ie. *staging*).
+Custom endpoints can be specified by setting the `$args` `Sdk::BASE_URI` key with an array with the following keys:
 
-Alternatively, custom endpoints can be specified by setting the `$args` `Sdk::BASE_URI` key with an array whose keys are
-`Sdk::BASE_URI_ID` (ie *id*), `Sdk::BASE_URI_LICENSE` (ie. *license*), `Sdk::BASE_URI_PROFILE` (ie. *profile*) and
-`Sdk::BASE_URI_ECOM` (ie. *ecom*), with values corresponding to the full base URIs
-(including protocol) for the respective SWS web services.
+- `Sdk::BASE_URI_ID`
+- `Sdk::BASE_URI_LICENSE`
+- `Sdk::BASE_URI_PROFILE`
+- `Sdk::BASE_URI_ECOM`
+- `Sdk::BASE_URI_DA`
+- `Sdk::BASE_URI_NOTIFICATIONS`
 
-One of `'env'` or `Sdk::BASE_URI` must be specified.
+The value of each key is the full base URI (including protocol) of the respective SWS web services.
 
 `$args` can take a `'timeout'` key which sets the request timeout for all requests. Timeout values are floats
 representing the number of seconds before the request times out.
@@ -73,39 +113,28 @@ GuzzleHttp library. The primary use for this is for mocking various HTTP respons
 
 ```php
 use Serato\SwsSdk\Sdk;
-
-/* Configure the SDK to use the production SWS endpoints */
-$args = [
-	'env' => Sdk::ENV_PRODUCTION,
-	'timeout' => 2.5
-];
-$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
-
-/* Configure the SDK to use custom SWS endpoints */
-$args = [
-	Sdk::BASE_URI => [
-		Sdk::BASE_URI_ID => 'http://id.server.com',
-		Sdk::BASE_URI_LICENSE => 'https://license.server.com',
-		Sdk::BASE_URI_PROFILE => 'https://profile.server.com',
-		Sdk::BASE_URI_ECOM    => 'https://ecom.server.com'
-	]
-];
-$sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
-
-/* Configure the SDK to use the staging SWS endpoints and a Guzzle MockHandler */
-use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+
+/* Configure the SDK to use custom SWS endpoints, a non-standard timeout and a Guzzle MockHandler */
 
 // Create a mock handler
 $mock = new MockHandler([
     new Response(200, ['X-Foo' => 'Bar'])
 ]);
 $handler = HandlerStack::create($mock);
+
 $args = [
-	'env' => Sdk::ENV_STAGING,
-	'handler' => $handler
+	Sdk::BASE_URI => [
+		Sdk::BASE_URI_ID => 'http://id.server.com',
+		Sdk::BASE_URI_LICENSE => 'https://license.server.com',
+		Sdk::BASE_URI_PROFILE => 'https://profile.server.com',
+		Sdk::BASE_URI_ECOM => 'https://ecom.server.com'
+	],
+	'handler' => $handler,
+	'timeout' => 3.2
 ];
+
 $sdk = new Sdk($args, 'my_app_id', 'my_app_secrety_pass');
 ```
 
@@ -124,7 +153,6 @@ There are currently six clients available:
 * `Serato\SwsSdk\Ecom\EcomClient` - A client for interacting with SWS Ecom Service.
 * `Serato\SwsSdk\Da\DaClient` - A client for interacting with SWS DA Service.
 * `Serato\SwsSdk\Notifications\NotificationsClient` - A client for interacting with SWS Notifications Service.
-
 
 ```php
 use Serato\SwsSdk\Sdk;

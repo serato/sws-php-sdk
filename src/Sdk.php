@@ -10,6 +10,7 @@ use Serato\SwsSdk\License\LicenseClient;
 use Serato\SwsSdk\Notifications\NotificationsClient;
 use Serato\SwsSdk\Profile\ProfileClient;
 use Serato\SwsSdk\Identity\IdentityClient;
+use Serato\ServiceDiscovery\HostName;
 use InvalidArgumentException;
 
 /**
@@ -152,61 +153,49 @@ class Sdk
         }
 
         if (isset($args[self::BASE_URI])) {
-            if (!is_array($args[self::BASE_URI]) ||
-                !isset($args[self::BASE_URI][self::BASE_URI_ID]) ||
-                !isset($args[self::BASE_URI][self::BASE_URI_LICENSE]) ||
-                !isset($args[self::BASE_URI][self::BASE_URI_PROFILE]) ||
-                !isset($args[self::BASE_URI][self::BASE_URI_ECOM])
-            ) {
+            if (!is_array($args[self::BASE_URI])) {
                 throw new InvalidArgumentException(
                     'The `base_uri` config option value must be an array containing '.
                     '`id`, `license`, `profile` and `ecom` keys.',
                     1002
                 );
             } else {
-                if (strpos($args[self::BASE_URI][self::BASE_URI_ID], 'http://') !== 0 &&
-                    strpos($args[self::BASE_URI][self::BASE_URI_ID], 'https://') !== 0
-                ) {
-                    throw new InvalidArgumentException(
-                        'The `base_uri` `id` config option value must including a ' .
-                        'valid network protocol (ie. http or https)',
-                        1003
-                    );
+                # Validate each item in $args[self::BASE_URI] such that:
+                # - It exists. If it doesn't use a default value for the production environment
+                # - It contains a valid network protocol (ie. http or https)
+
+                # Default to production endpoints
+                $services = [
+                    self::BASE_URI_ID               => self::BASE_URI_PRODUCTION_ID,
+                    self::BASE_URI_LICENSE          => self::BASE_URI_PRODUCTION_LICENSE,
+                    self::BASE_URI_PROFILE          => self::BASE_URI_PRODUCTION_PROFILE,
+                    self::BASE_URI_ECOM             => self::BASE_URI_PRODUCTION_ECOM,
+                    self::BASE_URI_DA               => self::BASE_URI_PRODUCTION_DA,
+                    self::BASE_URI_NOTIFICATIONS    => self::BASE_URI_PRODUCTION_NOTIFICATIONS
+                ];
+
+                foreach ($services as $name => $defaultUri) {
+                    if (isset($args[self::BASE_URI][$name])) {
+                        if (strpos($args[self::BASE_URI][$name], 'http://') !== 0 &&
+                            strpos($args[self::BASE_URI][$name], 'https://') !== 0
+                        ) {
+                            throw new InvalidArgumentException(
+                                'The `' . self::BASE_URI . '` `' . $name.
+                                '` config option value must including a valid network protocol (ie. http or https)',
+                                1003
+                            );
+                        }
+                        $services[$name] = $args[self::BASE_URI][$name];
+                    }
                 }
-                if (strpos($args[self::BASE_URI][self::BASE_URI_LICENSE], 'http://') !== 0 &&
-                    strpos($args[self::BASE_URI][self::BASE_URI_LICENSE], 'https://') !== 0
-                ) {
-                    throw new InvalidArgumentException(
-                        'The `base_uri` `license` config option value must including a ' .
-                        'valid network protocol (ie. http or https)',
-                        1004
-                    );
-                }
-                if (strpos($args[self::BASE_URI][self::BASE_URI_PROFILE], 'http://') !== 0 &&
-                    strpos($args[self::BASE_URI][self::BASE_URI_PROFILE], 'https://') !== 0
-                ) {
-                    throw new InvalidArgumentException(
-                        'The `base_uri` `profile` config option value must including a ' .
-                        'valid network protocol (ie. http or https)',
-                        1007
-                    );
-                }
-                if (strpos($args[self::BASE_URI][self::BASE_URI_ECOM], 'http://') !== 0 &&
-                    strpos($args[self::BASE_URI][self::BASE_URI_ECOM], 'https://') !== 0
-                ) {
-                    throw new InvalidArgumentException(
-                        'The `base_uri` `ecom` config option value must including a ' .
-                        'valid network protocol (ie. http or https)',
-                        1008
-                    );
-                }
+
                 $this->setBaseUriConfig(
-                    $args[self::BASE_URI][self::BASE_URI_ID],
-                    $args[self::BASE_URI][self::BASE_URI_LICENSE],
-                    $args[self::BASE_URI][self::BASE_URI_PROFILE],
-                    $args[self::BASE_URI][self::BASE_URI_ECOM],
-                    $args[self::BASE_URI][self::BASE_URI_DA],
-                    $args[self::BASE_URI][self::BASE_URI_NOTIFICATIONS]
+                    $services[self::BASE_URI_ID],
+                    $services[self::BASE_URI_LICENSE],
+                    $services[self::BASE_URI_PROFILE],
+                    $services[self::BASE_URI_ECOM],
+                    $services[self::BASE_URI_DA],
+                    $services[self::BASE_URI_NOTIFICATIONS]
                 );
             }
         }
@@ -218,6 +207,47 @@ class Sdk
                 1005
             );
         }
+    }
+
+    /**
+     * Creates an Sdk instance
+     *
+     * @param HostName $hostName            `Serato\ServiceDiscovery\HostName` instance.
+     * @param string $appId                 Client application ID.
+     * @param string $appPassword           Client application password.
+     * @param float|null $timeout           Request timeout (in seconds). Default is 2.0.
+     * @param callable|null $guzzleHander   Function that transfers HTTP requests over the wire. Passed to Guzzle
+     *                                      clients to override the default handler (eg. to use a mock handler).
+     *                                      See the Guzzle docs for more info.
+     *
+     * @link http://guzzle.readthedocs.io/en/latest/quickstart.html Guzzle documentation
+     *
+     * @return self
+     */
+    public static function create(
+        HostName $hostName,
+        string $appId,
+        string $appPassword,
+        ?float $timeout = null,
+        ?callable $guzzleHander = null
+    ): self {
+        $args = [
+            self::BASE_URI => [
+                self::BASE_URI_ID               => $hostName->get(HostName::IDENTITY),
+                self::BASE_URI_LICENSE          => $hostName->get(HostName::LICENSE),
+                self::BASE_URI_PROFILE          => $hostName->get(HostName::PROFILE),
+                self::BASE_URI_ECOM             => $hostName->get(HostName::ECOM),
+                self::BASE_URI_DA               => $hostName->get(HostName::DIGITAL_ASSETS),
+                self::BASE_URI_NOTIFICATIONS    => $hostName->get(HostName::NOTIFICATIONS)
+            ]
+        ];
+        if ($timeout !== null) {
+            $args['timeout'] = $timeout;
+        }
+        if ($guzzleHander !== null) {
+            $args['handler'] = $guzzleHander;
+        }
+        return new static($args, $appId, $appPassword);
     }
 
     /**

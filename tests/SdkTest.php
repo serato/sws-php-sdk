@@ -6,6 +6,7 @@ namespace Serato\SwsSdk\Test;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Sdk;
 use InvalidArgumentException;
+use Serato\ServiceDiscovery\HostName;
 
 class SdkTest extends AbstractTestCase
 {
@@ -28,10 +29,6 @@ class SdkTest extends AbstractTestCase
             [['timeout' => 2], 1000, 'Non-float value for `timeout`'],
             [['timeout' => 2.0, 'env' => 'invalid'], 1001, 'Invalid `env` value'],
             [['base_uri' => ''], 1002, 'Non-array `base_uri` value'],
-            [['base_uri' => ['id' => 'value']], 1002, 'Missing `base_uri` `license`, `profile` and `ecom` values'],
-            [['base_uri' => ['license' => 'value']], 1002, 'Missing `base_uri` `id`, `profile` and `ecom` values'],
-            [['base_uri' => ['profile' => 'value']], 1002, 'Missing `base_uri` `id`, `license` and `ecom` values'],
-            [['base_uri' => ['ecom' => 'value']], 1002, 'Missing `base_uri` `id`, `license` and `profile` values'],
             [
                 ['base_uri' => [
                         'id' => 'invalid value',
@@ -51,7 +48,7 @@ class SdkTest extends AbstractTestCase
                         'ecom' => 'http://my.server'
                    ]
                 ],
-                1004,
+                1003,
                 'Invalid `base_uri` `license` value'
             ],
             [
@@ -62,7 +59,7 @@ class SdkTest extends AbstractTestCase
                         'ecom' => 'http://my.server'
                     ]
                 ],
-                1007,
+                1003,
                 'Invalid `base_uri` `profile` value'
             ],
             [
@@ -73,7 +70,7 @@ class SdkTest extends AbstractTestCase
                         'ecom' => 'invalid value'
                     ]
                 ],
-                1008,
+                1003,
                 'Invalid `base_uri` `ecom` value'
             ],
             [
@@ -249,5 +246,32 @@ class SdkTest extends AbstractTestCase
                 'Set `env` to ENV_PRODUCTION, custom `handler`'
             ]
         ];
+    }
+
+    public function testCreateMethod(): void
+    {
+        $appId = 'my-app-id';
+        $appSecret = 'my-app-secret';
+        $timeout = 3.33;
+        $handler = function () {
+            echo 'this is a function';
+        };
+
+        $hostName = new HostName('production', 1);
+        $sdk = Sdk::create($hostName, $appId, $appSecret, $timeout, $handler);
+
+        $config = $sdk->getConfig();
+
+        $this->assertEquals($appId, $sdk->getAppId());
+        $this->assertEquals($appSecret, $sdk->getAppPassword());
+        $this->assertEquals($timeout, $config['timeout']);
+        $this->assertEquals($handler, $config['handler']);
+
+        $this->assertEquals($hostName->get(HostName::IDENTITY), $config['base_uri']['id']);
+        $this->assertEquals($hostName->get(HostName::LICENSE), $config['base_uri']['license']);
+        $this->assertEquals($hostName->get(HostName::PROFILE), $config['base_uri']['profile']);
+        $this->assertEquals($hostName->get(HostName::ECOM), $config['base_uri']['ecom']);
+        $this->assertEquals($hostName->get(HostName::DIGITAL_ASSETS), $config['base_uri']['da']);
+        $this->assertEquals($hostName->get(HostName::NOTIFICATIONS), $config['base_uri']['notifications']);
     }
 }
