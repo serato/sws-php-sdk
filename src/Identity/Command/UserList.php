@@ -50,15 +50,15 @@ class UserList extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'email_address' => ['type' => self::ARG_TYPE_STRING],
-            'ga_client_id'  => ['type' => self::ARG_TYPE_STRING],
+            'email_address' => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'ga_client_id'  => ['type' => self::ARG_TYPE_STRING, 'required' => false],
             # Part of the REST API spec, but deliberately ommitted from the
             # PHP docs because:
             # - Hopefully it will be deprecated or removed in the near future, and
             # - I can't think of a legitimate use case for sending it from a server
             #   side application
             # I've only included it for testing purposes
-            'app_session_cookie' => ['type' => self::ARG_TYPE_STRING]
+            'app_session_cookie' => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
 }

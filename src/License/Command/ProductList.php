@@ -49,9 +49,9 @@ class ProductList extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'checkout_order_id' => ['type' => self::ARG_TYPE_INTEGER],
-            'magento_order_id'  => ['type' => self::ARG_TYPE_INTEGER],
-            'user_id'           => ['type' => self::ARG_TYPE_INTEGER]
+            'checkout_order_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'magento_order_id'  => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'user_id'           => ['type' => self::ARG_TYPE_INTEGER, 'required' => false]
         ];
     }
 }

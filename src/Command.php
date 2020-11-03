@@ -48,14 +48,14 @@ abstract class Command
     /**
      * Command arguments (specified as name/value pairs)
      *
-     * @var array
+     * @var array<String, String|Integer|DateTime>
      */
     protected $commandArgs = [];
 
     /**
      * Request headers for the command
      *
-     * @var array
+     * @var array<String, String>
      */
     protected $requestHeaders = ['Accept' => 'application/json'];
 
@@ -65,7 +65,7 @@ abstract class Command
      * @param string    $appId          Client application ID
      * @param string    $appPassword    Client application password
      * @param string    $baseUri        Base request URI
-     * @param array     $args           Command arguments
+     * @param array<String, String|Integer|DateTime>     $args           Command arguments
      */
     public function __construct(
         string $appId,
@@ -77,6 +77,28 @@ abstract class Command
         $this->appPassword  = $appPassword;
         $this->baseUri      = rtrim($baseUri, '/');
         $this->commandArgs  = $args;
+    }
+
+    /**
+     * Casts values to a string. Supports any of the allowable command paramter types.
+     * ie. String, Integer, DateTime
+     *
+     * @param String|Integer|DateTime $value
+     * @return string
+     * @throws InvalidArgumentException
+     */
+    public static function toString($value): string
+    {
+        if (is_string($value)) {
+            return $value;
+        } elseif (is_int($value)) {
+            return (string)$value;
+        } elseif (is_a($value, '\DateTime')) {
+            return $value->format(DateTime::ATOM);
+        }
+        throw new InvalidArgumentException(
+            'Invalid argment type. Only string, integer and DateTime types are supported'
+        );
     }
 
     /**
@@ -122,7 +144,7 @@ abstract class Command
                         }
                         break;
                     case self::ARG_TYPE_DATETIME:
-                        if (!is_a($value, '\DateTime')) {
+                        if (is_int($value) || !is_a($value, '\DateTime')) {
                             throw new InvalidArgumentException("Command arg `$name` must be of type DateTime");
                         }
                         break;
@@ -143,7 +165,7 @@ abstract class Command
      * Convert an array into a string that is suitable for use in the body of
      * HTTP request whose `Content-Type` is `x-www-form-urlencoded`.
      *
-     * @param array     $args   Array to encode
+     * @param array<String, String|Integer|DateTime>     $args   Array to encode
      *
      * @return string
      */
@@ -152,17 +174,7 @@ abstract class Command
         $def = $this->getArgsDefinition();
         $stringArgs = [];
         foreach ($args as $name => $value) {
-            switch ($def[$name]['type']) {
-                case self::ARG_TYPE_STRING:
-                    $stringArgs[$name] = $value;
-                    break;
-                case self::ARG_TYPE_INTEGER:
-                    $stringArgs[$name] = (string)$value;
-                    break;
-                case self::ARG_TYPE_DATETIME:
-                    $stringArgs[$name] = $value->format(DateTime::ATOM);
-                    break;
-            }
+            $stringArgs[$name] = self::toString($value);
         }
         return http_build_query($stringArgs);
     }
@@ -260,7 +272,7 @@ abstract class Command
      *
      * `type` is a string value and must be one of `string`, `integer` of `datetime`.
      *
-     * @return array
+     * @return array<String, array{'type': String|Integer|DateTime, 'required': Boolean}>
      */
     abstract protected function getArgsDefinition(): array;
 }

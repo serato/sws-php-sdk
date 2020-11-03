@@ -40,7 +40,7 @@ class SubscriptionList extends CommandBasicAuth
     {
         return
             '/api/v1/users/' .
-            $this->commandArgs['user_id'] .
+            self::toString($this->commandArgs['user_id']) .
             '/subscriptions';
     }
 

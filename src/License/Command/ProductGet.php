@@ -30,7 +30,7 @@ class ProductGet extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/products/products/' . $this->commandArgs['product_id'];
+        return '/api/v1/products/products/' . self::toString($this->commandArgs['product_id']);
     }
 
     /**

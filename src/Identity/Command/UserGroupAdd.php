@@ -35,7 +35,7 @@ class UserGroupAdd extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/'. $this->commandArgs['user_id'] . '/groups';
+        return '/api/v1/users/'. self::toString($this->commandArgs['user_id']) . '/groups';
     }
 
     /**

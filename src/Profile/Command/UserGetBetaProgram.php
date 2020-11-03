@@ -41,7 +41,7 @@ class UserGetBetaProgram extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/' . $this->commandArgs['user_id'] . '/betaprograms';
+        return '/api/v1/users/' . self::toString($this->commandArgs['user_id']) . '/betaprograms';
     }
 
     /**

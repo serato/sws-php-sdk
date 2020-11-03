@@ -52,7 +52,7 @@ class ProductUpdate extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/products/products/' . $this->commandArgs['product_id'];
+        return '/api/v1/products/products/' . self::toString($this->commandArgs['product_id']);
     }
 
     /**
@@ -70,12 +70,12 @@ class ProductUpdate extends CommandBasicAuth
     {
         return [
             'product_id'                => ['type' => self::ARG_TYPE_STRING, 'required' => true],
-            'valid_to'                  => ['type' => self::ARG_TYPE_DATETIME],
-            'checkout_order_id'         => ['type' => self::ARG_TYPE_INTEGER],
-            'checkout_order_item_id'    => ['type' => self::ARG_TYPE_INTEGER],
-            'magento_order_id'          => ['type' => self::ARG_TYPE_INTEGER],
-            'magento_order_item_id'     => ['type' => self::ARG_TYPE_INTEGER],
-            'subscription_status'       => ['type' => self::ARG_TYPE_STRING]
+            'valid_to'                  => ['type' => self::ARG_TYPE_DATETIME, 'required' => false],
+            'checkout_order_id'         => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'checkout_order_item_id'    => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'magento_order_id'          => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'magento_order_item_id'     => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'subscription_status'       => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
 }

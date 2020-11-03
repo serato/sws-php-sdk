@@ -26,7 +26,7 @@ class DaClient extends Client
      * The key of the array is command's name and the value is the Command
      * class name
      *
-     * @return array
+     * @return array<String, String>
      */
     public function getCommandMap(): array
     {

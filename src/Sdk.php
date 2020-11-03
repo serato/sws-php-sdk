@@ -61,9 +61,10 @@ class Sdk
     /**
      * Client configuration data
      *
-     * @var array
+     * @var array{'base_uri': array<String, String>, 'timeout': ?float, 'handler': ?callable}
      */
     private $config = [
+        'base_uri' => [],
         'timeout' => 2.0,
         'handler' => null
     ];
@@ -85,7 +86,7 @@ class Sdk
      *
      * @link http://guzzle.readthedocs.io/en/latest/quickstart.html Guzzle documentation
      *
-     * @param array     $args           Client configuration arguments
+     * @param array<String, mixed> $args Client configuration arguments
      * @param string    $appId          Client application ID
      * @param string    $appPassword    Client application password
      *
@@ -94,7 +95,7 @@ class Sdk
      * @throws InvalidArgumentException If any required options are missing or
      *                                   an invalid value is provided.
      */
-    public function __construct(array $args, string $appId = '', string $appPassword = '')
+    final public function __construct(array $args, string $appId = '', string $appPassword = '')
     {
         $this->appId = $appId;
         $this->appPassword = $appPassword;
@@ -200,7 +201,7 @@ class Sdk
             }
         }
 
-        if (!isset($this->config[self::BASE_URI])) {
+        if (count($this->config[self::BASE_URI]) === 0) {
             throw new InvalidArgumentException(
                 'You must specify one of either the `env` or `base_uri` config ' .
                 'option values.',
@@ -224,7 +225,7 @@ class Sdk
      *
      * @return self
      */
-    public static function create(
+    final public static function create(
         HostName $hostName,
         string $appId,
         string $appPassword,
@@ -310,6 +311,12 @@ class Sdk
         return $this->createClient('Serato\\SwsSdk\\Notifications\\NotificationsClient');
     }
 
+    /**
+     * Creates a Client
+     *
+     * @param string $className
+     * @return mixed
+     */
     private function createClient(string $className)
     {
         return new $className($this->config, $this->appId, $this->appPassword);
@@ -318,7 +325,7 @@ class Sdk
     /**
      * Return the current configuration options
      *
-     * @return array
+     * @return array<String, mixed>
      */
     public function getConfig(): array
     {

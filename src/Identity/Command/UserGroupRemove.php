@@ -38,7 +38,8 @@ class UserGroupRemove extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/'. $this->commandArgs['user_id'] .'/groups/'. $this->commandArgs['group_name'];
+        return '/api/v1/users/'. self::toString($this->commandArgs['user_id']) .
+                '/groups/'. self::toString($this->commandArgs['group_name']);
     }
 
     /**

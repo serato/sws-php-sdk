@@ -26,7 +26,7 @@ class InvoiceCreate extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return "/api/v1/orders/{$this->commandArgs['order_id']}/invoice";
+        return '/api/v1/orders/' . self::toString($this->commandArgs['order_id']) . '/invoice';
     }
 
     /**

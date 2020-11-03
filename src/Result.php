@@ -15,10 +15,13 @@ use Countable;
  *
  * A simple wrapper around a `Psr\Http\Message\ResponseInterface` that parses
  * the response body and exposes it's data via native PHP array accessor syntax.
+ *
+ * @implements IteratorAggregate<String, mixed>
+ * @implements ArrayAccess<String, mixed>
  */
 class Result implements IteratorAggregate, ArrayAccess, Countable
 {
-    /** @var array */
+    /** @var array<String, mixed> */
     private $data = [];
 
     /** @var ResponseInterface */
@@ -40,7 +43,11 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
         return $this->response;
     }
 
-    private function parseResponseBody(ResponseInterface $response)
+    /**
+     * @param ResponseInterface $response
+     * @return null|array<String, mixed>
+     */
+    private function parseResponseBody(ResponseInterface $response): ?array
     {
         if ($response->getStatusCode() !== 204) {
             switch ($response->getHeaderLine('Content-Type')) {
@@ -56,23 +63,33 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
                     throw new Exception($msg);
             }
         }
+        return null;
     }
 
-    private function parseJsonResponseBody(ResponseInterface $response)
+    /**
+     * @param ResponseInterface $response
+     * @return null|array<String, mixed>
+     */
+    private function parseJsonResponseBody(ResponseInterface $response): ?array
     {
         return json_decode((string)$response->getBody(), true);
     }
 
     /**
      * Implementation for `IteratorAggregate` interface
+     *
+     * @return ArrayIterator<String, mixed>
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->data);
     }
 
     /**
      * Implementation for `ArrayAccess` interface
+     *
+     * @param mixed $offset
+     * @return mixed
      */
     public function offsetGet($offset)
     {
@@ -83,6 +100,10 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
 
     /**
      * Implementation for `ArrayAccess` interface
+     *
+     * @param mixed $offset
+     * @param mixed $value
+     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -91,6 +112,9 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
 
     /**
      * Implementation for `ArrayAccess` interface
+     *
+     * @param mixed $offset
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -99,6 +123,9 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
 
     /**
      * Implementation for `ArrayAccess` interface
+     *
+     * @param mixed $offset
+     * @return void
      */
     public function offsetUnset($offset)
     {

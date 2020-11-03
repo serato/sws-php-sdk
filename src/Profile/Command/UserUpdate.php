@@ -52,7 +52,7 @@ class UserUpdate extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/' . $this->commandArgs['user_id'];
+        return '/api/v1/users/' . self::toString($this->commandArgs['user_id']);
     }
 
     /**
@@ -70,17 +70,17 @@ class UserUpdate extends CommandBasicAuth
     {
         return [
             'user_id'               => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
-            'global_contact_status' => ['type' => self::ARG_TYPE_INTEGER],
-            'first_name'            => ['type' => self::ARG_TYPE_STRING],
-            'last_name'             => ['type' => self::ARG_TYPE_STRING],
-            'locale'                => ['type' => self::ARG_TYPE_STRING],
-            'address_1'             => ['type' => self::ARG_TYPE_STRING],
-            'address_2'             => ['type' => self::ARG_TYPE_STRING],
-            'city'                  => ['type' => self::ARG_TYPE_STRING],
-            'region'                => ['type' => self::ARG_TYPE_STRING],
-            'postcode'              => ['type' => self::ARG_TYPE_STRING],
-            'country'               => ['type' => self::ARG_TYPE_STRING],
-            'twitch_access_token'   => ['type' => self::ARG_TYPE_STRING],
+            'global_contact_status' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'first_name'            => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'last_name'             => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'locale'                => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'address_1'             => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'address_2'             => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'city'                  => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'region'                => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'postcode'              => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'country'               => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'twitch_access_token'   => ['type' => self::ARG_TYPE_STRING, 'required' => false],
         ];
     }
 }

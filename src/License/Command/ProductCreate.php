@@ -74,19 +74,19 @@ class ProductCreate extends CommandBasicAuth
     {
         return [
             'product_type_id'           => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
-            'user_id'                   => ['type' => self::ARG_TYPE_INTEGER],
-            'user_email_address'        => ['type' => self::ARG_TYPE_STRING],
-            'reseller_name'             => ['type' => self::ARG_TYPE_STRING],
-            'created_by_user_id'        => ['type' => self::ARG_TYPE_INTEGER],
-            'nfr'                       => ['type' => self::ARG_TYPE_INTEGER],
-            'notes'                     => ['type' => self::ARG_TYPE_STRING],
-            'valid_to'                  => ['type' => self::ARG_TYPE_DATETIME],
-            'checkout_order_id'         => ['type' => self::ARG_TYPE_INTEGER],
-            'checkout_order_item_id'    => ['type' => self::ARG_TYPE_INTEGER],
-            'magento_order_id'          => ['type' => self::ARG_TYPE_INTEGER],
-            'magento_order_item_id'     => ['type' => self::ARG_TYPE_INTEGER],
-            'subscription_status'       => ['type' => self::ARG_TYPE_STRING],
-            'upgrade_from_product_id'   => ['type' => self::ARG_TYPE_STRING]
+            'user_id'                   => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'user_email_address'        => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'reseller_name'             => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'created_by_user_id'        => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'nfr'                       => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'notes'                     => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'valid_to'                  => ['type' => self::ARG_TYPE_DATETIME, 'required' => false],
+            'checkout_order_id'         => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'checkout_order_item_id'    => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'magento_order_id'          => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'magento_order_item_id'     => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'subscription_status'       => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'upgrade_from_product_id'   => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
 }

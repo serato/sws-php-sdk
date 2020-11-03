@@ -17,7 +17,7 @@ use RuntimeException;
  */
 abstract class ResponseException extends RuntimeException
 {
-    /** @var Result  */
+    /** @var Result<String, mixed>  */
     private $result;
 
     public function __construct(BadResponseException $e)
@@ -47,7 +47,7 @@ abstract class ResponseException extends RuntimeException
     /**
      * Return the Result object created from the error response.
      *
-     * @return Result
+     * @return Result<String, mixed>
      */
     public function getResult(): Result
     {

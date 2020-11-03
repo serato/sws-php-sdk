@@ -45,7 +45,7 @@ class LicenseList extends CommandBasicAuth
     {
         return
         '/api/v1/users/' .
-        $this->commandArgs['user_id'] .
+        self::toString($this->commandArgs['user_id']) .
         '/licenses';
     }
 
@@ -63,9 +63,9 @@ class LicenseList extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'app_name'      => ['type' => self::ARG_TYPE_STRING],
-            'app_version'   => ['type' => self::ARG_TYPE_STRING],
-            'term'          => ['type' => self::ARG_TYPE_STRING],
+            'app_name'      => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'app_version'   => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'term'          => ['type' => self::ARG_TYPE_STRING, 'required' => false],
             'user_id'       => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
         ];
     }
