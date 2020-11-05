@@ -8,7 +8,10 @@ use Serato\SwsSdk\Identity\Command\UserGroupAdd;
 
 class UserGroupAddTest extends AbstractTestCase
 {
-     /**
+    /**
+     * @param array<mixed> $args
+     * @return void
+     *
      * @dataProvider missingRequiredArgProvider
      *
      * @expectedException \InvalidArgumentException
@@ -25,7 +28,10 @@ class UserGroupAddTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             ['group_name' => ["root"]]

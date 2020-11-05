@@ -8,7 +8,7 @@ use Serato\SwsSdk\CommandBearerTokenAuth;
 
 class CommandBearerTokenAuthTest extends AbstractTestCase
 {
-    /* @var CommandBearerTokenAuth */
+    /** @var mixed */
     private $commandMock;
 
     public function testCommandHeaders(): void
@@ -32,9 +32,9 @@ class CommandBearerTokenAuthTest extends AbstractTestCase
     }
 
     /**
-     * @return CommandBearerTokenAuth
+     * @return void
      */
-    private function createCommandBasicAuthMock()
+    private function createCommandBasicAuthMock(): void
     {
         $this->commandMock = $this->getMockForAbstractClass(
             CommandBearerTokenAuth::class,

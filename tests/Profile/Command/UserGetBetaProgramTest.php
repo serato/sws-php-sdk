@@ -10,8 +10,10 @@ use Serato\SwsSdk\Profile\Command\UserGetBetaProgram;
 class UserGetBetaProgramTest extends AbstractTestCase
 {
     /**
-     * @dataProvider missingRequiredArgProvider
+     * @param array<mixed> $args
+     * @return void
      *
+     * @dataProvider missingRequiredArgProvider
      * @expectedException \InvalidArgumentException
      */
     public function testMissingRequiredArg(array $args): void
@@ -26,7 +28,10 @@ class UserGetBetaProgramTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array{'user_id': array<Integer>}>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             ['user_id' => [1234]]

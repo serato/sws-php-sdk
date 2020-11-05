@@ -11,6 +11,9 @@ class UserAddBetaProgramTest extends AbstractTestCase
 {
 
     /**
+     * @param array<mixed> $args
+     * @return void
+     *
      * @dataProvider missingRequiredArgProvider
      *
      * @expectedException \InvalidArgumentException
@@ -27,7 +30,10 @@ class UserAddBetaProgramTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             ['beta_program_id' => ["beta_program_id"]]

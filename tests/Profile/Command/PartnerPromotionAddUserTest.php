@@ -10,6 +10,9 @@ use Serato\SwsSdk\Profile\Command\PartnerPromotionAddUser;
 class PartnerPromotionAddUserTest extends AbstractTestCase
 {
     /**
+     * @param array<mixed> $args
+     * @return void
+     *
      * @dataProvider missingRequiredArgProvider
      *
      * @expectedException \InvalidArgumentException
@@ -26,7 +29,10 @@ class PartnerPromotionAddUserTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array<mixed>>>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             [['user_id' => 1234]],

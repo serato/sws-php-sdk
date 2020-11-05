@@ -10,7 +10,7 @@ use Exception;
 
 class ErrorCodeResponseExceptionTest extends AbstractTestCase
 {
-    /* @var ErrorMessageResponseException */
+    /** @var mixed */
     private $mockException;
 
     public function testConstructor(): void
@@ -43,9 +43,9 @@ class ErrorCodeResponseExceptionTest extends AbstractTestCase
     }
 
     /**
-     * @return ErrorCodeResponseException
+     * @param Exception $e
      */
-    private function createMockException($e)
+    private function createMockException($e): void
     {
         $this->mockException = $this->getMockForAbstractClass(ErrorCodeResponseException::class, [$e]);
     }

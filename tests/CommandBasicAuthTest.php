@@ -8,7 +8,7 @@ use Serato\SwsSdk\CommandBasicAuth;
 
 class CommandBasicAuthTest extends AbstractTestCase
 {
-    /* @var CommandBasicAuth */
+    /** @var mixed */
     private $commandMock;
 
     public function testCommandHeaders(): void
@@ -31,9 +31,9 @@ class CommandBasicAuthTest extends AbstractTestCase
     }
 
     /**
-     * @return CommandBasicAuth
+     * @return void
      */
-    private function createCommandBasicAuthMock()
+    private function createCommandBasicAuthMock(): void
     {
         $this->commandMock = $this->getMockForAbstractClass(
             CommandBasicAuth::class,

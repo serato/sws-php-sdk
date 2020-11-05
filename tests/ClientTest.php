@@ -21,14 +21,14 @@ class ClientTest extends AbstractTestCase
     const BEARER_TOKEN_AUTH_COMMAND_NAME  = 'GetUser';
     const BEARER_TOKEN_AUTH_COMMAND_CLASS = '\\Serato\\SwsSdk\\Identity\\Command\\UserGet';
 
-    public function testGetValidBasicAuthCommand()
+    public function testGetValidBasicAuthCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $command = $clientMock->getCommand(self::BASIC_AUTH_COMMAND_NAME, $this->getCommandArgs());
         $this->assertTrue(is_a($command, self::BASIC_AUTH_COMMAND_CLASS));
     }
 
-    public function testGetValidBearerTokenAuthCommand()
+    public function testGetValidBearerTokenAuthCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $command = $clientMock->getCommand(self::BEARER_TOKEN_AUTH_COMMAND_NAME);
@@ -38,13 +38,13 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testGetInvalidCommand()
+    public function testGetInvalidCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->getCommand('NoSuchCommand', $this->getCommandArgs());
     }
 
-    public function testExecuteValidBasicAuthCommand()
+    public function testExecuteValidBasicAuthCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $result = $clientMock->execute(self::BASIC_AUTH_COMMAND_NAME, $this->getCommandArgs());
@@ -58,7 +58,7 @@ class ClientTest extends AbstractTestCase
         );
     }
 
-    public function testExecuteValidBearerTokenAuthCommand()
+    public function testExecuteValidBearerTokenAuthCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $result = $clientMock->execute(self::BEARER_TOKEN_AUTH_COMMAND_NAME);
@@ -75,13 +75,13 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testExecuteInvalidCommand()
+    public function testExecuteInvalidCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->execute('NoSuchCommand', $this->getCommandArgs());
     }
 
-    public function testExecuteAsyncValidCommand()
+    public function testExecuteAsyncValidCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $promise = $clientMock->executeAsync(self::BASIC_AUTH_COMMAND_NAME, $this->getCommandArgs());
@@ -99,13 +99,13 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testExecuteAsyncInvalidCommand()
+    public function testExecuteAsyncInvalidCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->executeAsync('NoSuchCommand', $this->getCommandArgs());
     }
 
-    public function testExecuteMagicMethodValidBasicAuthCommand()
+    public function testExecuteMagicMethodValidBasicAuthCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $result = $clientMock->getUser('my_bearer_token');
@@ -119,7 +119,7 @@ class ClientTest extends AbstractTestCase
         );
     }
 
-    public function testExecuteMagicMethodValidBearerTokenAuthCommand()
+    public function testExecuteMagicMethodValidBearerTokenAuthCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $result = $clientMock->getUser();
@@ -136,13 +136,13 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testExecuteMagicMethodInvalidCommand()
+    public function testExecuteMagicMethodInvalidCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->noSuchMethod($this->getCommandArgs());
     }
 
-    public function testExecuteAsyncMagicMethodValidCommand()
+    public function testExecuteAsyncMagicMethodValidCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $promise = $clientMock->getProductAsync($this->getCommandArgs());
@@ -160,7 +160,7 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testExecuteAsyncMagicMethodInvalidCommand()
+    public function testExecuteAsyncMagicMethodInvalidCommand(): void
     {
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->noSuchMethodAsync($this->getCommandArgs());
@@ -169,7 +169,7 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \Serato\SwsSdk\Exception\BadRequestException
      */
-    public function test400ClientError()
+    public function test400ClientError(): void
     {
         $response = new Response(
             400,
@@ -183,7 +183,7 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \Serato\SwsSdk\Exception\AccessDeniedException
      */
-    public function test403Response()
+    public function test403Response(): void
     {
         $response = new Response(
             403,
@@ -198,7 +198,7 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \Serato\SwsSdk\Exception\ResourceNotFoundException
      */
-    public function test404Response()
+    public function test404Response(): void
     {
         $response = new Response(
             404,
@@ -213,7 +213,7 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \Serato\SwsSdk\Exception\ServerApplicationErrorException
      */
-    public function test500Response()
+    public function test500Response(): void
     {
         $response = new Response(
             500,
@@ -228,7 +228,7 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException \Serato\SwsSdk\Exception\ServiceUnavailableException
      */
-    public function test503Response()
+    public function test503Response(): void
     {
         $response = new Response(
             503,
@@ -243,7 +243,7 @@ class ClientTest extends AbstractTestCase
     /**
      * @expectedException GuzzleHttp\Exception\ConnectException
      */
-    public function testRequestTimeout()
+    public function testRequestTimeout(): void
     {
         $exception = new ConnectException(
             "Error Communicating with Server",
@@ -254,7 +254,7 @@ class ClientTest extends AbstractTestCase
         $clientMock->getProduct($this->getCommandArgs());
     }
 
-    protected function getMock200Response()
+    protected function getMock200Response(): Response
     {
         return new Response(
             200,
@@ -263,11 +263,20 @@ class ClientTest extends AbstractTestCase
         );
     }
 
-    protected function getCommandArgs()
+    /**
+     * @return array{'product_id': String}
+     */
+    protected function getCommandArgs(): array
     {
         return ['product_id' => '100-100'];
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param array<mixed> $mockResponses
+     * @return mixed
+     */
     protected function getMockClient(array $mockResponses)
     {
         $args = [

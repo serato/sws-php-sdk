@@ -5,12 +5,17 @@ namespace Serato\SwsSdk\Test;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Result;
+use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
 use Exception;
 
 class ResultTest extends AbstractTestCase
 {
     /**
+     * @param string $httpStatusCode
+     * @param array<mixed> $body
+     * @return void
+     *
      * @dataProvider validJsonResultConstructorProvider
      */
     public function testValidJsonResultConstructor($httpStatusCode, $body): void
@@ -36,7 +41,10 @@ class ResultTest extends AbstractTestCase
         }
     }
 
-    public function validJsonResultConstructorProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function validJsonResultConstructorProvider(): array
     {
         $data = ['var1' => 'val1', 'var2' => 2, 'var3' => 'val3'];
         return [
@@ -63,9 +71,12 @@ class ResultTest extends AbstractTestCase
     /**
      * 204 responses are not required to send a `Content-Type': application/json` header
      *
+     * @param ResponseInterface $response
+     * @return void
+     *
      * @dataProvider get204ResponseProvider
      */
-    public function test204Responses($response): void
+    public function test204Responses(ResponseInterface $response): void
     {
         $result = new Result($response);
 
@@ -73,7 +84,10 @@ class ResultTest extends AbstractTestCase
         $this->assertEquals(0, count($result));
     }
 
-    public function get204ResponseProvider()
+    /**
+     * @return array<array<ResponseInterface>>
+     */
+    public function get204ResponseProvider(): array
     {
         return [
             [new Response(204, [])],
