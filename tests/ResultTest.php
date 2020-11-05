@@ -13,7 +13,7 @@ class ResultTest extends AbstractTestCase
     /**
      * @dataProvider validJsonResultConstructorProvider
      */
-    public function testValidJsonResultConstructor($httpStatusCode, $body)
+    public function testValidJsonResultConstructor($httpStatusCode, $body): void
     {
         $jsonBody = json_encode($body);
         if ($jsonBody === false) {
@@ -46,7 +46,7 @@ class ResultTest extends AbstractTestCase
         ];
     }
 
-    public function testInvalidJsonResultConstructor()
+    public function testInvalidJsonResultConstructor(): void
     {
         $response = new Response(
             200,
@@ -65,7 +65,7 @@ class ResultTest extends AbstractTestCase
      *
      * @dataProvider get204ResponseProvider
      */
-    public function test204Responses($response)
+    public function test204Responses($response): void
     {
         $result = new Result($response);
 
@@ -97,7 +97,7 @@ class ResultTest extends AbstractTestCase
     /**
      * @expectedException \Exception
      */
-    public function testInvalidContentType()
+    public function testInvalidContentType(): void
     {
         $response = new Response(
             200,

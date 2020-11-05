@@ -14,7 +14,7 @@ class TokenExchangeTest extends AbstractTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new TokenExchange(
             'app_id',
@@ -36,7 +36,7 @@ class TokenExchangeTest extends AbstractTestCase
         ];
     }
 
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $grantType      = 'my_grant_type';
         $code           = '123abc456';

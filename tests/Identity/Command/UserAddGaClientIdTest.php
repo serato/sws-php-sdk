@@ -13,7 +13,7 @@ class UserAddGaClientIdTest extends AbstractTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new UserAddGaClientId(
             'app_id',
@@ -34,7 +34,7 @@ class UserAddGaClientIdTest extends AbstractTestCase
         ];
     }
 
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
         $gaClientId = '123abc456';

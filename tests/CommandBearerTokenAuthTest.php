@@ -11,7 +11,7 @@ class CommandBearerTokenAuthTest extends AbstractTestCase
     /* @var CommandBearerTokenAuth */
     private $commandMock;
 
-    public function testCommandHeaders()
+    public function testCommandHeaders(): void
     {
         $this->createCommandBasicAuthMock();
 

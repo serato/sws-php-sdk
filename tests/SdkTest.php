@@ -13,7 +13,7 @@ class SdkTest extends AbstractTestCase
     /**
      * @dataProvider invalidConstructorOptionsProvider
      */
-    public function testInvalidConstructorOptions(array $args, $exceptionCode, $assertText)
+    public function testInvalidConstructorOptions(array $args, $exceptionCode, $assertText): void
     {
         try {
             $sdk = new Sdk($args, 'app_id', 'app_password');
@@ -95,7 +95,7 @@ class SdkTest extends AbstractTestCase
         $timeout,
         $handler,
         $assertText
-    ) {
+    ): void {
         $sdk = new Sdk($args, 'app_id', 'app_password');
         $config = $sdk->getConfig();
 

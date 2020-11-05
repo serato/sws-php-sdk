@@ -13,7 +13,7 @@ class UserGroupAddTest extends AbstractTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new UserGroupAdd(
             'app_id',
@@ -32,21 +32,7 @@ class UserGroupAddTest extends AbstractTestCase
         ];
     }
 
-    /**
-     * Test that missing user id
-     * @expectedException \InvalidArgumentException
-     */
-    public function missingUserId()
-    {
-        $command = new UserGroupAdd(
-            'app_id',
-            'app_password',
-            'http://my.server.com',
-            ['group_name' => "root"]
-        );
-    }
-
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
         $groupName = "root";

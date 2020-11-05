@@ -11,7 +11,7 @@ class IdentityClientTest extends AbstractTestCase
 {
     const ID_SERVER_BASE_URI = 'http://id.server.com';
 
-    public function testGetBaseUri()
+    public function testGetBaseUri(): void
     {
         $client = new IdentityClient(
             [
@@ -33,7 +33,7 @@ class IdentityClientTest extends AbstractTestCase
 
     /* The remaining tests are smoke tests for each magic method provided by the client */
 
-    public function testGetUser()
+    public function testGetUser(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
@@ -44,7 +44,7 @@ class IdentityClientTest extends AbstractTestCase
         );
     }
 
-    public function testGetUsers()
+    public function testGetUsers(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
@@ -55,7 +55,7 @@ class IdentityClientTest extends AbstractTestCase
         );
     }
 
-    public function testUserAddGaClientId()
+    public function testUserAddGaClientId(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
@@ -66,7 +66,7 @@ class IdentityClientTest extends AbstractTestCase
         );
     }
 
-    public function testTokenExchange()
+    public function testTokenExchange(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
@@ -77,7 +77,7 @@ class IdentityClientTest extends AbstractTestCase
         );
     }
 
-    public function testTokenRefresh()
+    public function testTokenRefresh(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
@@ -88,7 +88,7 @@ class IdentityClientTest extends AbstractTestCase
         );
     }
 
-    public function testUserGroupAdd()
+    public function testUserGroupAdd(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
@@ -100,7 +100,7 @@ class IdentityClientTest extends AbstractTestCase
         );
     }
 
-    public function testUserGroupRemove()
+    public function testUserGroupRemove(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();

@@ -8,7 +8,7 @@ use Serato\SwsSdk\License\Command\ProductGet;
 
 class ProductGetTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $productId = '100-100';
 
@@ -28,7 +28,7 @@ class ProductGetTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg()
+    public function testMissingRequiredArg(): void
     {
         $command = new ProductGet(
             'app_id',

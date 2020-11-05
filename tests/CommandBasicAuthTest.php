@@ -11,7 +11,7 @@ class CommandBasicAuthTest extends AbstractTestCase
     /* @var CommandBasicAuth */
     private $commandMock;
 
-    public function testCommandHeaders()
+    public function testCommandHeaders(): void
     {
         $this->createCommandBasicAuthMock();
 

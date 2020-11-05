@@ -9,7 +9,7 @@ use DateTime;
 
 class ProductUpdateTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $productId = '100-100';
         $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', '2017-02-01 23:30:30');
@@ -41,7 +41,7 @@ class ProductUpdateTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg()
+    public function testMissingRequiredArg(): void
     {
         $command = new ProductUpdate(
             'app_id',

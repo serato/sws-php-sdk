@@ -14,7 +14,7 @@ class UserGetBetaProgramTest extends AbstractTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new UserGetBetaProgram(
             'app_id',
@@ -32,7 +32,8 @@ class UserGetBetaProgramTest extends AbstractTestCase
             ['user_id' => [1234]]
         ];
     }
-    public function testSmokeTest()
+
+    public function testSmokeTest(): void
     {
         $userId = 123;
 

@@ -8,7 +8,7 @@ use Serato\SwsSdk\License\Command\ProductCreate;
 
 class ProductCreateTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $command = new ProductCreate(
             'app_id',
@@ -33,7 +33,7 @@ class ProductCreateTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg()
+    public function testMissingRequiredArg(): void
     {
         $command = new ProductCreate(
             'app_id',

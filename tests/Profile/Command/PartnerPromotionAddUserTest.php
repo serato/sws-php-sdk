@@ -14,7 +14,7 @@ class PartnerPromotionAddUserTest extends AbstractTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new PartnerPromotionAddUser(
             'app_id',
@@ -33,7 +33,7 @@ class PartnerPromotionAddUserTest extends AbstractTestCase
             [['promotion_name' => 'test-promo-name']]
         ];
     }
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
 

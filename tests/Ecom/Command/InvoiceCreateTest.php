@@ -5,10 +5,14 @@ namespace Serato\SwsSdk\Test\Ecom\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Ecom\Command\InvoiceCreate;
+use DateTime;
 
 class InvoiceCreateTest extends AbstractTestCase
 {
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             [[]],
@@ -18,8 +22,10 @@ class InvoiceCreateTest extends AbstractTestCase
 
     /**
      * Tests that an exception is thrown if required parameters are missing.
-     * @dataProvider missingRequiredArgProvider
      *
+     * @param array<string, DateTime|int|string> $args
+     *
+     * @dataProvider missingRequiredArgProvider
      * @expectedException \InvalidArgumentException
      */
     public function testMissingRequiredArg(array $args): void

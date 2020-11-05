@@ -11,7 +11,7 @@ class NotificationsClientTest extends AbstractTestCase
 {
     const NOTIFICATIONS_SERVER_BASE_URI = 'http://da.server.com';
 
-    public function testGetBaseUri()
+    public function testGetBaseUri(): void
     {
         $client = new DaClient(
             [

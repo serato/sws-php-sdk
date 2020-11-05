@@ -9,7 +9,7 @@ use Serato\SwsSdk\Ecom\Command\SubscriptionList;
 class SubscriptionListTest extends AbstractTestCase
 {
 
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
         $command = new SubscriptionList(

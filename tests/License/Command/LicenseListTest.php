@@ -8,7 +8,7 @@ use Serato\SwsSdk\License\Command\LicenseList;
 
 class LicenseListTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
 

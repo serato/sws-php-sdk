@@ -13,7 +13,7 @@ class ErrorMessageResponseExceptionTest extends AbstractTestCase
     /* @var ErrorMessageResponseException */
     private $mockException;
 
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $httpResponseCode = 500;
         $message = 'A meaningful error message';
