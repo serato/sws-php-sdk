@@ -5,7 +5,7 @@ namespace Serato\SwsSdk\Ecom\Command;
 
 use Serato\SwsSdk\CommandBasicAuth;
 
-/**\
+/**
  * Class UpdateCartBillingAddress
  * @package Serato\SwsSdk\Ecom\Command
  */
