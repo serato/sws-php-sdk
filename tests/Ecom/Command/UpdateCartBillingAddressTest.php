@@ -69,7 +69,7 @@ class UpdateCartBillingAddressTest extends AbstractTestCase
 
         $this->assertEquals('PUT', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
-        $this->assertStringEndsWith("/api/v1//carts/{$cartUuid}/billingaddress", $request->getUri()->getPath());
+        $this->assertStringEndsWith("/api/v1/carts/{$cartUuid}/billingaddress", $request->getUri()->getPath());
         $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
 
         unset($args['cart_uuid']);
