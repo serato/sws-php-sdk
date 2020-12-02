@@ -65,7 +65,7 @@ class UpdateCartBillingAddressTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-        parse_str((string)$request->getBody(), $bodyParams);
+        parse_str((string) $request->getBody(), $bodyParams);
 
         $this->assertEquals('PUT', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
