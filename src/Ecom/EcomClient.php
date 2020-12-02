@@ -34,9 +34,10 @@ class EcomClient extends Client
     public function getCommandMap(): array
     {
         return [
-            'GetSubscriptions'      => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionList',
-            'CancelSubscription'    => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionCancel',
-            'CreateInvoice'         => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoiceCreate'
+            'GetSubscriptions'         => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionList',
+            'CancelSubscription'       => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionCancel',
+            'CreateInvoice'            => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoiceCreate',
+            'UpdateCartBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UpdateCartBillingAddress',
         ];
     }
 }
