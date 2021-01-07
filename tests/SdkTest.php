@@ -271,7 +271,14 @@ class SdkTest extends AbstractTestCase
         ];
     }
 
-    public function testCreateMethod(): void
+    /**
+     * @param string $envName
+     * @param integer $envNumber
+     * @return void
+     *
+     * @dataProvider hostNameArgumentsProvider
+     */
+    public function testCreateMethod(string $envName, int $envNumber): void
     {
         $appId = 'my-app-id';
         $appSecret = 'my-app-secret';
@@ -280,7 +287,7 @@ class SdkTest extends AbstractTestCase
             echo 'this is a function';
         };
 
-        $hostName = new HostName('production', 1);
+        $hostName = new HostName($envName, $envNumber);
         $sdk = Sdk::create($hostName, $appId, $appSecret, $timeout, $handler);
 
         $config = $sdk->getConfig();
@@ -296,5 +303,24 @@ class SdkTest extends AbstractTestCase
         $this->assertEquals($hostName->get(HostName::ECOM), $config['base_uri']['ecom']);
         $this->assertEquals($hostName->get(HostName::DIGITAL_ASSETS), $config['base_uri']['da']);
         $this->assertEquals($hostName->get(HostName::NOTIFICATIONS), $config['base_uri']['notifications']);
+    }
+
+    /**
+     * @return array<array<mixed>>
+     */
+    public function hostNameArgumentsProvider(): array
+    {
+        return [
+            ['production', 0],
+            ['production', 1],
+            ['production', 2],
+            ['test', 0],
+            ['test', 1],
+            ['test', 2],
+            ['test', 3],
+            ['dev', 0],
+            ['dev', 1],
+            ['dev', 2]
+        ];
     }
 }
