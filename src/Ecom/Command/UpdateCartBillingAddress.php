@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Serato\SwsSdk\Ecom\Command;
 
 use Serato\SwsSdk\CommandBasicAuth;
+use Exception;
 
 /**
  * Class UpdateCartBillingAddress
@@ -34,6 +35,13 @@ class UpdateCartBillingAddress extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
+        # A bit of defensive programming to keep phpstan happy :-)
+        if (!is_string($this->commandArgs['cart_uuid'])) {
+            throw new Exception(
+                "Invalid type for 'cart_uuid' command argument. Expected type string. " .
+                gettype($this->commandArgs['cart_uuid']) . " given."
+            );
+        }
         return "/api/v1/carts/{$this->commandArgs['cart_uuid']}/billingaddress";
     }
 

@@ -12,7 +12,7 @@ class UserUpdateTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg()
+    public function testMissingRequiredArg(): void
     {
         $command = new UserUpdate(
             'app_id',
@@ -24,7 +24,7 @@ class UserUpdateTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
 

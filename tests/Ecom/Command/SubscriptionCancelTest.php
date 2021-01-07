@@ -5,13 +5,16 @@ namespace Serato\SwsSdk\Test\Ecom\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Ecom\Command\SubscriptionCancel;
+use DateTime;
 
 class SubscriptionCancelTest extends AbstractTestCase
 {
     /**
      * Data provider
+     *
+     * @return array<array>
      */
-    public function missingRequiredArgProvider()
+    public function missingRequiredArgProvider(): array
     {
         return [
             [[]],
@@ -21,11 +24,12 @@ class SubscriptionCancelTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider missingRequiredArgProvider
+     * @param array<string, DateTime|int|string> $args
      *
+     * @dataProvider missingRequiredArgProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new SubscriptionCancel(
             'app_id',
@@ -36,7 +40,7 @@ class SubscriptionCancelTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $subId = 'sub-123';
         $userId = 123;

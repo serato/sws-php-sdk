@@ -8,12 +8,15 @@ use Serato\SwsSdk\Identity\Command\UserGroupAdd;
 
 class UserGroupAddTest extends AbstractTestCase
 {
-     /**
+    /**
+     * @param array<mixed> $args
+     * @return void
+     *
      * @dataProvider missingRequiredArgProvider
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new UserGroupAdd(
             'app_id',
@@ -25,28 +28,17 @@ class UserGroupAddTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             ['group_name' => ["root"]]
         ];
     }
 
-    /**
-     * Test that missing user id
-     * @expectedException \InvalidArgumentException
-     */
-    public function missingUserId()
-    {
-        $command = new UserGroupAdd(
-            'app_id',
-            'app_password',
-            'http://my.server.com',
-            ['group_name' => "root"]
-        );
-    }
-
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
         $groupName = "root";

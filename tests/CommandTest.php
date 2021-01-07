@@ -11,7 +11,7 @@ use DateTime;
 
 class CommandTest extends AbstractTestCase
 {
-    /* @var Command */
+    /** @var mixed */
     private $commandMock;
 
     /**
@@ -45,7 +45,10 @@ class CommandTest extends AbstractTestCase
         $this->assertEquals('', (string)$request->getBody());
     }
 
-    public function commandConstructRequestProvider()
+    /**
+     * @return array<array<String>>
+     */
+    public function commandConstructRequestProvider(): array
     {
         return [
             ['GET', 'http', 'my.getserver.com', '/my/get/path'],
@@ -55,6 +58,14 @@ class CommandTest extends AbstractTestCase
     }
 
     /**
+     * Undocumented function
+     *
+     * @param array<mixed> $commandArgDef
+     * @param array<mixed> $commandArgs
+     * @param array<String> $exceptionTexts
+     * @param string $assertText
+     * @return void
+     *
      * @dataProvider commandArgsValidationProvider
      */
     public function testCommandArgsValidation(
@@ -109,6 +120,9 @@ class CommandTest extends AbstractTestCase
         $this->assertRegExp(FirewallHeader::HEADER_PATTERN, $firewallHeader);
     }
 
+    /**
+     * @return array<array<mixed>>>
+     */
     public function commandArgsValidationProvider(): array
     {
         $commandArgDef = [
@@ -196,6 +210,12 @@ class CommandTest extends AbstractTestCase
         ];
     }
 
+    /**
+     * @param string $httpScheme
+     * @param string $httpHost
+     * @param array<mixed> $commandArgs
+     * @return void
+     */
     private function createCommandMock(string $httpScheme, string $httpHost, array $commandArgs = []): void
     {
         $this->commandMock = $this->getMockForAbstractClass(

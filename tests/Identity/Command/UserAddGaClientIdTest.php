@@ -9,11 +9,14 @@ use Serato\SwsSdk\Identity\Command\UserAddGaClientId;
 class UserAddGaClientIdTest extends AbstractTestCase
 {
     /**
+     * @param array<mixed> $args
+     * @return void
+     *
      * @dataProvider missingRequiredArgProvider
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new UserAddGaClientId(
             'app_id',
@@ -25,7 +28,10 @@ class UserAddGaClientIdTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             [[]],
@@ -34,7 +40,7 @@ class UserAddGaClientIdTest extends AbstractTestCase
         ];
     }
 
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
         $gaClientId = '123abc456';

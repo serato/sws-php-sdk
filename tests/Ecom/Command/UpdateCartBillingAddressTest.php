@@ -5,6 +5,7 @@ namespace Serato\SwsSdk\Test\Ecom\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Ecom\Command\UpdateCartBillingAddress;
+use DateTime;
 
 /**
  * Class UpdateCartBillingAddressTest
@@ -12,7 +13,10 @@ use Serato\SwsSdk\Ecom\Command\UpdateCartBillingAddress;
  */
 class UpdateCartBillingAddressTest extends AbstractTestCase
 {
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<int, array<int, array<string, string>>>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             [[]],
@@ -22,8 +26,11 @@ class UpdateCartBillingAddressTest extends AbstractTestCase
 
     /**
      * Tests that an exception is thrown if required parameters are missing.
-     * @dataProvider missingRequiredArgProvider
      *
+     * @param array<string, string> $args
+     * @return void
+     *
+     * @dataProvider missingRequiredArgProvider
      * @expectedException \InvalidArgumentException
      */
     public function testMissingRequiredArg(array $args): void

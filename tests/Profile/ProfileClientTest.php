@@ -11,7 +11,7 @@ class ProfileClientTest extends AbstractTestCase
 {
     const PROFILE_SERVER_BASE_URI = 'http://profile.server.com';
 
-    public function testGetBaseUri()
+    public function testGetBaseUri(): void
     {
         $client = new ProfileClient(
             [
@@ -33,7 +33,7 @@ class ProfileClientTest extends AbstractTestCase
 
     /* The remaining tests are smoke tests for each magic method provided by the client */
 
-    public function testGetUser()
+    public function testGetUser(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
@@ -44,7 +44,7 @@ class ProfileClientTest extends AbstractTestCase
         );
     }
 
-    public function testUpdateUser()
+    public function testUpdateUser(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
@@ -55,7 +55,7 @@ class ProfileClientTest extends AbstractTestCase
         );
     }
 
-    public function testGetUserBetaProgram()
+    public function testGetUserBetaProgram(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
@@ -66,7 +66,7 @@ class ProfileClientTest extends AbstractTestCase
         );
     }
 
-    public function testAddUserBetaProgram()
+    public function testAddUserBetaProgram(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
@@ -77,7 +77,7 @@ class ProfileClientTest extends AbstractTestCase
         );
     }
 
-    public function testValidateAllUserBetaPrograms()
+    public function testValidateAllUserBetaPrograms(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
@@ -88,7 +88,7 @@ class ProfileClientTest extends AbstractTestCase
         );
     }
 
-    public function testPartnerPromotionAddUser()
+    public function testPartnerPromotionAddUser(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createProfileClient();

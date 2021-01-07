@@ -8,7 +8,7 @@ use Serato\SwsSdk\Identity\Command\UserList;
 
 class UserListTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $emailAddress   = 'emailadress';
         $gaClientId     = '123abc456def';

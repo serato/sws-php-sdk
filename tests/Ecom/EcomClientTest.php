@@ -11,7 +11,7 @@ class EcomClientTest extends AbstractTestCase
 {
     const ECOM_SERVER_BASE_URI = 'http://ecom.server.com';
 
-    public function testGetBaseUri()
+    public function testGetBaseUri(): void
     {
         $client = new EcomClient(
             [
@@ -32,7 +32,7 @@ class EcomClientTest extends AbstractTestCase
     }
 
     /* Testing magic methods (smoke test) */
-    public function testSubscriptionList()
+    public function testSubscriptionList(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
@@ -43,7 +43,7 @@ class EcomClientTest extends AbstractTestCase
         );
     }
 
-    public function testCancelSubscription()
+    public function testCancelSubscription(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createEcomClient();

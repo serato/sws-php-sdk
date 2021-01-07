@@ -8,7 +8,7 @@ use Serato\SwsSdk\License\Command\ProductDelete;
 
 class ProductDeleteTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $productId = '100-100';
 
@@ -29,7 +29,7 @@ class ProductDeleteTest extends AbstractTestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg()
+    public function testMissingRequiredArg(): void
     {
         $command = new ProductDelete(
             'app_id',

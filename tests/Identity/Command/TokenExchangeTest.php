@@ -10,11 +10,14 @@ use GuzzleHttp\Psr7\Uri;
 class TokenExchangeTest extends AbstractTestCase
 {
     /**
+     * @param array<mixed> $args
+     * @return void
+     *
      * @dataProvider missingRequiredArgProvider
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new TokenExchange(
             'app_id',
@@ -26,7 +29,10 @@ class TokenExchangeTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             [[]],
@@ -36,7 +42,7 @@ class TokenExchangeTest extends AbstractTestCase
         ];
     }
 
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $grantType      = 'my_grant_type';
         $code           = '123abc456';

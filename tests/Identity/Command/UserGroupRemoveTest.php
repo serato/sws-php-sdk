@@ -11,7 +11,7 @@ class UserGroupRemoveTest extends AbstractTestCase
      /**
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg()
+    public function testMissingRequiredArg(): void
     {
         $command = new UserGroupRemove(
             'app_id',
@@ -23,21 +23,7 @@ class UserGroupRemoveTest extends AbstractTestCase
         $command->getRequest();
     }
 
-     /**
-     * Test that missing user id
-     * @expectedException \InvalidArgumentException
-     */
-    public function missingUserId()
-    {
-        $command = new UserGroupRemove(
-            'app_id',
-            'app_password',
-            'http://my.server.com',
-            ['group_name' => "root"]
-        );
-    }
-
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 1234;
         $groupName = "root";

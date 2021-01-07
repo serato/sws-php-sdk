@@ -6,13 +6,14 @@ namespace Serato\SwsSdk\Test\License\Command;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\License\Command\ProductUpdate;
 use DateTime;
+use Exception;
 
 class ProductUpdateTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $productId = '100-100';
-        $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', '2017-02-01 23:30:30');
+        $dateTime = new DateTime;
 
         $command = new ProductUpdate(
             'app_id',
@@ -31,17 +32,15 @@ class ProductUpdateTest extends AbstractTestCase
         $this->assertRegExp('/^\/api\/v1\/products\/products\/' . $productId . '$/', $request->getUri()->getPath());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
         $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
-        if ($dateTime) {
-            $dateString = $dateTime->format(DateTime::RFC3339);
-            $this->assertEquals($dateString, $bodyParams['valid_to']);
-        }
+        $dateString = $dateTime->format(DateTime::RFC3339);
+        $this->assertEquals($dateString, $bodyParams['valid_to']);
         $this->assertEquals('Past Due', $bodyParams['subscription_status']);
     }
 
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg()
+    public function testMissingRequiredArg(): void
     {
         $command = new ProductUpdate(
             'app_id',

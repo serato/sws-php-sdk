@@ -10,10 +10,10 @@ use Exception;
 
 class ErrorMessageResponseExceptionTest extends AbstractTestCase
 {
-    /* @var ErrorMessageResponseException */
+    /** @var mixed */
     private $mockException;
 
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $httpResponseCode = 500;
         $message = 'A meaningful error message';
@@ -43,9 +43,10 @@ class ErrorMessageResponseExceptionTest extends AbstractTestCase
     }
 
     /**
-     * @return ErrorMessageResponseException
+     * @param Exception $e
+     * @return void
      */
-    private function createMockException($e)
+    private function createMockException($e): void
     {
         $this->mockException = $this->getMockForAbstractClass(ErrorMessageResponseException::class, [$e]);
     }

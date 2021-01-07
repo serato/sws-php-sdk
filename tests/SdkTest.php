@@ -11,9 +11,14 @@ use Serato\ServiceDiscovery\HostName;
 class SdkTest extends AbstractTestCase
 {
     /**
+     * @param array<mixed> $args
+     * @param int $exceptionCode
+     * @param string $assertText
+     * @return void
+     *
      * @dataProvider invalidConstructorOptionsProvider
      */
-    public function testInvalidConstructorOptions(array $args, $exceptionCode, $assertText)
+    public function testInvalidConstructorOptions(array $args, int $exceptionCode, string $assertText): void
     {
         try {
             $sdk = new Sdk($args, 'app_id', 'app_password');
@@ -22,7 +27,10 @@ class SdkTest extends AbstractTestCase
         }
     }
 
-    public function invalidConstructorOptionsProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function invalidConstructorOptionsProvider(): array
     {
         return [
             [[], 1005, 'No `env` or `base_uri` provided'],
@@ -82,20 +90,32 @@ class SdkTest extends AbstractTestCase
     }
 
     /**
+     * @param array<mixed> $args
+     * @param string  $idServiceUri
+     * @param string  $licenseServiceUri
+     * @param string  $profileServiceUri
+     * @param string  $ecomServiceUri
+     * @param string  $daServiceUri
+     * @param string  $notificationsServiceUri
+     * @param float $timeout|null
+     * @param callable $handler|null
+     * @param string $assertText
+     * @return void
+     *
      * @dataProvider validConstructorOptionsProvider
      */
     public function testValidConstructorOptions(
         array $args,
-        $idServiceUri,
-        $licenseServiceUri,
-        $profileServiceUri,
-        $ecomServiceUri,
-        $daServiceUri,
-        $notificationsServiceUri,
-        $timeout,
-        $handler,
-        $assertText
-    ) {
+        string $idServiceUri,
+        string $licenseServiceUri,
+        string $profileServiceUri,
+        string $ecomServiceUri,
+        string $daServiceUri,
+        string $notificationsServiceUri,
+        ?float $timeout = null,
+        ?callable $handler = null,
+        string $assertText
+    ): void {
         $sdk = new Sdk($args, 'app_id', 'app_password');
         $config = $sdk->getConfig();
 
@@ -151,7 +171,10 @@ class SdkTest extends AbstractTestCase
         );
     }
 
-    public function validConstructorOptionsProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function validConstructorOptionsProvider(): array
     {
         $idServiceUri       = 'https://id.server.com';
         $licenseServiceUri  = 'https://license.server.io';

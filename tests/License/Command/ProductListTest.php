@@ -8,7 +8,7 @@ use Serato\SwsSdk\License\Command\ProductList;
 
 class ProductListTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $orderId = 100000;
 

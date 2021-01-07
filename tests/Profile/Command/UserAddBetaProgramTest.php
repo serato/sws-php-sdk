@@ -11,11 +11,14 @@ class UserAddBetaProgramTest extends AbstractTestCase
 {
 
     /**
+     * @param array<mixed> $args
+     * @return void
+     *
      * @dataProvider missingRequiredArgProvider
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testMissingRequiredArg(array $args)
+    public function testMissingRequiredArg(array $args): void
     {
         $command = new UserAddBetaProgram(
             'app_id',
@@ -27,14 +30,17 @@ class UserAddBetaProgramTest extends AbstractTestCase
         $command->getRequest();
     }
 
-    public function missingRequiredArgProvider()
+    /**
+     * @return array<array<mixed>>
+     */
+    public function missingRequiredArgProvider(): array
     {
         return [
             ['beta_program_id' => ["beta_program_id"]]
         ];
     }
 
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $userId = 123;
         $betaProgramId = "serato_studio_beta";

@@ -8,7 +8,7 @@ use Serato\SwsSdk\Identity\Command\UserGet;
 
 class UserGetTest extends AbstractTestCase
 {
-    public function testSmokeTest()
+    public function testSmokeTest(): void
     {
         $command = new UserGet(
             'app_id',

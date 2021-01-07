@@ -11,7 +11,7 @@ class LicenseClientTest extends AbstractTestCase
 {
     const LICENSE_SERVER_BASE_URI = 'http://license.server.com';
 
-    public function testGetBaseUri()
+    public function testGetBaseUri(): void
     {
         $client = new LicenseClient(
             [
@@ -33,7 +33,7 @@ class LicenseClientTest extends AbstractTestCase
 
     /* The remaining tests are smoke tests for each magic method provided by the client */
 
-    public function testGetProducts()
+    public function testGetProducts(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
@@ -44,7 +44,7 @@ class LicenseClientTest extends AbstractTestCase
         );
     }
 
-    public function testGetProduct()
+    public function testGetProduct(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
@@ -55,7 +55,7 @@ class LicenseClientTest extends AbstractTestCase
         );
     }
 
-    public function testCreateProduct()
+    public function testCreateProduct(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
@@ -66,7 +66,7 @@ class LicenseClientTest extends AbstractTestCase
         );
     }
 
-    public function testUpdateProduct()
+    public function testUpdateProduct(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
@@ -77,7 +77,7 @@ class LicenseClientTest extends AbstractTestCase
         );
     }
 
-    public function testDeleteProduct()
+    public function testDeleteProduct(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
