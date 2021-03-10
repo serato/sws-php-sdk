@@ -5,7 +5,7 @@ namespace Serato\SwsSdk\Test\Ecom\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Ecom\Command\VoucherCreate;
-
+use DateTime;
 
 class VoucherCreateTest extends AbstractTestCase
 {
