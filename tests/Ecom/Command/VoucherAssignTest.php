@@ -4,10 +4,9 @@ declare(strict_types=1);
 namespace Serato\SwsSdk\Test\Ecom\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
-use Serato\SwsSdk\Ecom\Command\VoucherCreate;
+use Serato\SwsSdk\Ecom\Command\VoucherAssign;
 
-
-class VoucherCreateTest extends AbstractTestCase
+class VoucherAssignTest extends AbstractTestCase
 {
     /**
      * @return array<array>
@@ -30,7 +29,7 @@ class VoucherCreateTest extends AbstractTestCase
      */
     public function testMissingRequiredArg(array $args): void
     {
-        $command = new VoucherCreate(
+        $command = new VoucherAssign(
             'app_id',
             'app_password',
             'http://my.server.com',
@@ -46,16 +45,17 @@ class VoucherCreateTest extends AbstractTestCase
      */
     public function testSmokeTest(): void
     {
-        $command = new VoucherCreate(
+        $userId = 123;
+        $command = new VoucherAssign(
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['voucher_type_id' => 123]
+            ['user_id' => $userId, 'voucher_id' => 'voucherid']
         );
 
         $request = $command->getRequest();
         $this->assertEquals('POST', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
-        $this->assertStringEndsWith("/api/v1/vouchers/", $request->getUri()->getPath());
+        $this->assertStringEndsWith("/api/v1/users/{$userId}/vouchers", $request->getUri()->getPath());
     }
 }

@@ -10,7 +10,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  *
  * Valid keys for the `$args` array provided to the constructor are:
  *
- * - `product_type_id`: (integer) Required.
+ * - `product_type_id`: (integer) Optional.
  * - `offer_type`: (string) Optional.
  *
  * This command can be executed on a `Serato\SwsSdk\Ecom\EcomClient` instance
@@ -49,7 +49,7 @@ class OfferList extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'product_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
+            'product_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
             'offer_type' => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
