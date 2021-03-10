@@ -50,7 +50,7 @@ class VoucherCreateTest extends AbstractTestCase
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['voucher_type_id' => 123]
+            ['voucher_type_id' => 123, 'batch_id' => 2]
         );
 
         $request = $command->getRequest();

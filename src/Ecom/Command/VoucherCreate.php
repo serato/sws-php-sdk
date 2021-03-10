@@ -38,7 +38,8 @@ class VoucherCreate extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'voucher_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
+            'voucher_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
+            'batch_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
         ];
     }
 }
