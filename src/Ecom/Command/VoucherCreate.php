@@ -39,7 +39,7 @@ class VoucherCreate extends CommandBasicAuth
     {
         return [
             'voucher_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
-            'batch_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
+            'batch_id' => ['type' => self::ARG_TYPE_STRING, 'required' => true]
         ];
     }
 }
