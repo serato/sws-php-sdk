@@ -10,7 +10,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  *
  * Parameters:
  *  - 'voucher_id': (string) Required.
- * 
+ *
  * This command can be executed on a `Serato\SwsSdk\Ecom\EcomClient` instance
  * using the `EcomClient::assignVoucher` magic method.
  */
