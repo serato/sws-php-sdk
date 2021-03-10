@@ -16,7 +16,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  * This command can be executed on a `Serato\SwsSdk\Ecom\EcomClient` instance
  * using the `EcomClient::getOffers` magic method.
  */
-class OfferList extends CommandBasicAuth
+class VoucherTypeList extends CommandBasicAuth
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class OfferList extends CommandBasicAuth
     public function getUriPath(): string
     {
         return
-            '/api/v1/offers/';
+            '/api/v1/vouchers/types/';
     }
 
     /**
@@ -50,7 +50,7 @@ class OfferList extends CommandBasicAuth
     {
         return [
             'product_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'offer_type' => ['type' => self::ARG_TYPE_STRING, 'required' => false]
+            'voucher_type' => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
 }
