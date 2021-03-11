@@ -38,7 +38,7 @@ class EcomClient extends Client
             'CancelSubscription'       => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionCancel',
             'CreateInvoice'            => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoiceCreate',
             'UpdateCartBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UpdateCartBillingAddress',
-            'GetVoucherTypes'                => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherTypeList',
+            'GetVoucherTypes'          => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherTypeList',
             'CreateVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherCreate',
             'AssignVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherAssign'
         ];
