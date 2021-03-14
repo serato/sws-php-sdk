@@ -27,6 +27,6 @@ class VoucherTypeListTest extends AbstractTestCase
         $request = $command->getRequest();
         $this->assertEquals('GET', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
-        $this->assertStringEndsWith('/api/v1/vouchers/types/', $request->getUri()->getPath());
+        $this->assertStringEndsWith('/api/v1/vouchers/types', $request->getUri()->getPath());
     }
 }
