@@ -40,7 +40,15 @@ class VoucherTypeList extends CommandBasicAuth
     public function getUriPath(): string
     {
         return
-            '/api/v1/vouchers/types/';
+            '/api/v1/vouchers/types';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUriQuery(): string
+    {
+        return http_build_query($this->commandArgs);
     }
 
     /**
