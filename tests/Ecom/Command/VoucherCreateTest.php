@@ -56,6 +56,6 @@ class VoucherCreateTest extends AbstractTestCase
         $request = $command->getRequest();
         $this->assertEquals('POST', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
-        $this->assertStringEndsWith("/api/v1/vouchers/", $request->getUri()->getPath());
+        $this->assertStringEndsWith("/api/v1/vouchers", $request->getUri()->getPath());
     }
 }
