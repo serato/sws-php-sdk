@@ -19,6 +19,14 @@ class VoucherAssign extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    public function getBody()
+    {
+        return $this->arrayToFormUrlEncodedBody($this->commandArgs);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getHttpMethod(): string
     {
         return 'POST';
@@ -32,6 +40,14 @@ class VoucherAssign extends CommandBasicAuth
         return '/api/v1/users/' .
                 self::toString($this->commandArgs['user_id']) .
                 '/vouchers';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setCommandRequestHeaders(): void
+    {
+        $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
 
     /**

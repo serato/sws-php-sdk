@@ -16,7 +16,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  */
 class VoucherCreate extends CommandBasicAuth
 {
-     /**
+    /**
      * {@inheritdoc}
      */
     public function getBody()
