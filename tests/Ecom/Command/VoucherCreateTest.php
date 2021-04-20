@@ -50,12 +50,12 @@ class VoucherCreateTest extends AbstractTestCase
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['voucher_type_id' => 123]
+            ['voucher_type_id' => 123, 'batch_id' => '4HDO']
         );
 
         $request = $command->getRequest();
         $this->assertEquals('POST', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
-        $this->assertStringEndsWith("/api/v1/vouchers/", $request->getUri()->getPath());
+        $this->assertStringEndsWith("/api/v1/vouchers", $request->getUri()->getPath());
     }
 }

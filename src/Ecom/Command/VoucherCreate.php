@@ -19,6 +19,14 @@ class VoucherCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    public function getBody()
+    {
+        return $this->arrayToFormUrlEncodedBody($this->commandArgs);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function getHttpMethod(): string
     {
         return 'POST';
@@ -29,7 +37,15 @@ class VoucherCreate extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/vouchers/';
+        return '/api/v1/vouchers';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setCommandRequestHeaders(): void
+    {
+        $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
 
     /**
@@ -38,7 +54,8 @@ class VoucherCreate extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'voucher_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
+            'voucher_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
+            'batch_id' => ['type' => self::ARG_TYPE_STRING, 'required' => true]
         ];
     }
 }
