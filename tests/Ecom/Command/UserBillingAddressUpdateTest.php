@@ -3,13 +3,13 @@ namespace Serato\SwsSdk\Test\Ecom\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use InvalidArgumentException;
-use Serato\SwsSdk\Ecom\Command\SubscriptionBillingAddressUpdate;
+use Serato\SwsSdk\Ecom\Command\UserBillingAddressUpdate;
 
 /**
- * Class SubscriptionBillingAddressUpdateTest
+ * Class UserBillingAddressUpdateTest
  * @package Serato\SwsSdk\Test\Ecom\Command
  */
-class SubscriptionBillingAddressUpdateTest extends AbstractTestCase
+class UserBillingAddressUpdateTest extends AbstractTestCase
 {
     /**
      * @return array<int, array<int, array<string, string>>>
@@ -33,7 +33,7 @@ class SubscriptionBillingAddressUpdateTest extends AbstractTestCase
     public function testMissingRequiredArg(array $args): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $command = new SubscriptionBillingAddressUpdate(
+        $command = new UserBillingAddressUpdate(
             'app_id',
             'app_password',
             'http://my.server.com',
@@ -45,7 +45,7 @@ class SubscriptionBillingAddressUpdateTest extends AbstractTestCase
     public function testSmokeTest(): void
     {
         $userId  = 1;
-        $command = new SubscriptionBillingAddressUpdate(
+        $command = new UserBillingAddressUpdate(
             'app_id',
             'app_password',
             'http://my.server.com',
@@ -58,11 +58,11 @@ class SubscriptionBillingAddressUpdateTest extends AbstractTestCase
         $this->assertEquals('PUT', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
         $this->assertStringEndsWith(
-            "/api/v1/users/{$userId}/subscriptions/billingaddress",
+            "/api/v1/users/{$userId}/billingaddress",
             $request->getUri()->getPath()
         );
         $this->assertRegExp(
-            "/^\/api\/v1\/users\/{$userId}\/subscriptions\/billingaddress$/",
+            "/^\/api\/v1\/users\/{$userId}\/billingaddress$/",
             $request->getUri()->getPath()
         );
     }

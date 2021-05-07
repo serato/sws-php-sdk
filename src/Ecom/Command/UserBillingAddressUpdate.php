@@ -4,13 +4,13 @@ namespace Serato\SwsSdk\Ecom\Command;
 use Serato\SwsSdk\CommandBasicAuth;
 
 /**
- * Class SubscriptionBillingAddressUpdate
+ * Class UserBillingAddressUpdate
  *
  * Updates the billing address of all the active and pending subscriptions.
  *
  * @package Serato\SwsSdk\Ecom\Command
  */
-class SubscriptionBillingAddressUpdate extends CommandBasicAuth
+class UserBillingAddressUpdate extends CommandBasicAuth
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class SubscriptionBillingAddressUpdate extends CommandBasicAuth
     public function getUriPath(): string
     {
         $userId = self::toString($this->commandArgs['user_id']);
-        return "/api/v1/users/{$userId}/subscriptions/billingaddress";
+        return "/api/v1/users/{$userId}/billingaddress";
     }
 
     /**
