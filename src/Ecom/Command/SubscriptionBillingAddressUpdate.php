@@ -35,7 +35,7 @@ class SubscriptionBillingAddressUpdate extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        $userId = $this->commandArgs['user_id'];
+        $userId = self::toString($this->commandArgs['user_id']);
         return "/api/v1/users/{$userId}/subscriptions/billingaddress";
     }
 

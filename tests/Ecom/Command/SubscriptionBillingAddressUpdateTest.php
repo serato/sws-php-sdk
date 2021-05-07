@@ -1,9 +1,9 @@
 <?php
 namespace Serato\SwsSdk\Test\Ecom\Command;
 
-use Serato\SwsSdk\Ecom\Command\UpdateCartBillingAddress;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use InvalidArgumentException;
+use Serato\SwsSdk\Ecom\Command\SubscriptionBillingAddressUpdate;
 
 /**
  * Class SubscriptionBillingAddressUpdateTest
@@ -33,7 +33,7 @@ class SubscriptionBillingAddressUpdateTest extends AbstractTestCase
     public function testMissingRequiredArg(array $args): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $command = new UpdateCartBillingAddress(
+        $command = new SubscriptionBillingAddressUpdate(
             'app_id',
             'app_password',
             'http://my.server.com',
@@ -45,7 +45,7 @@ class SubscriptionBillingAddressUpdateTest extends AbstractTestCase
     public function testSmokeTest(): void
     {
         $userId  = 1;
-        $command = new UpdateCartBillingAddress(
+        $command = new SubscriptionBillingAddressUpdate(
             'app_id',
             'app_password',
             'http://my.server.com',
@@ -55,14 +55,15 @@ class SubscriptionBillingAddressUpdateTest extends AbstractTestCase
         );
 
         $request = $command->getRequest();
-        parse_str((string) $request->getBody(), $bodyParams);
-
         $this->assertEquals('PUT', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
         $this->assertStringEndsWith(
             "/api/v1/users/{$userId}/subscriptions/billingaddress",
             $request->getUri()->getPath()
         );
-        $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
+        $this->assertRegExp(
+            "/^\/api\/v1\/users\/{$userId}\/subscriptions\/billingaddress$/",
+            $request->getUri()->getPath()
+        );
     }
 }
