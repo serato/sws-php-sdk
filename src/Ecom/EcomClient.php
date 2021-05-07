@@ -47,7 +47,7 @@ class EcomClient extends Client
             'GetVoucherTypes'          => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherTypeList',
             'CreateVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherCreate',
             'AssignVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherAssign',
-            'updateUserBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UserBillingAddressUpdate'
+            'UpdateUserBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UserBillingAddressUpdate'
         ];
     }
 }
