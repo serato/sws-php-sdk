@@ -44,19 +44,30 @@ class UserBillingAddressUpdateTest extends AbstractTestCase
 
     public function testSmokeTest(): void
     {
-        $userId  = 1;
+        $userId = 1;
+        $args   = [
+            'user_id'          => 1,
+            'country_code'     => 'NZ',
+            'state'            => 'Auckland',
+            'zip'              => '1010',
+            'address_extended' => 'Level 2',
+            'address'          => '80 Greys Avenue',
+            'city'             => 'Auckland',
+        ];
+
         $command = new UserBillingAddressUpdate(
             'app_id',
             'app_password',
             'http://my.server.com',
-            [
-                'user_id' => $userId,
-            ]
+            $args
         );
 
         $request = $command->getRequest();
+        parse_str((string) $request->getBody(), $bodyParams);
+
         $this->assertEquals('PUT', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertEquals('application/x-www-form-urlencoded', $request->getHeaderLine('Content-Type'));
         $this->assertStringEndsWith(
             "/api/v1/users/{$userId}/billingaddress",
             $request->getUri()->getPath()
@@ -65,5 +76,10 @@ class UserBillingAddressUpdateTest extends AbstractTestCase
             "/^\/api\/v1\/users\/{$userId}\/billingaddress$/",
             $request->getUri()->getPath()
         );
+
+        unset($args['user_id']);
+        $expectedBodyParams = $args;
+
+        $this->assertEquals($expectedBodyParams, $bodyParams);
     }
 }

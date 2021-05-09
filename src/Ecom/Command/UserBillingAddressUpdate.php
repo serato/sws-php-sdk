@@ -42,10 +42,45 @@ class UserBillingAddressUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    protected function setCommandRequestHeaders(): void
+    {
+        $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getArgsDefinition(): array
     {
         return [
-            'user_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
+            'user_id' => [
+                'type' => self::ARG_TYPE_INTEGER,
+                'required' => true
+            ],
+            'city' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
+            'zip' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
+            'country_code' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
+            'state' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
+            'address' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
+            'address_extended' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
         ];
     }
 }
