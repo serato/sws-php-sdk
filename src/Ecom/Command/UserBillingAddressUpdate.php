@@ -57,19 +57,19 @@ class UserBillingAddressUpdate extends CommandBasicAuth
                 'type' => self::ARG_TYPE_INTEGER,
                 'required' => true
             ],
-            'city' => [
-                'type'     => self::ARG_TYPE_STRING,
-                'required' => false
-            ],
-            'zip' => [
-                'type'     => self::ARG_TYPE_STRING,
-                'required' => false
-            ],
             'country_code' => [
                 'type'     => self::ARG_TYPE_STRING,
                 'required' => false
             ],
-            'state' => [
+            'post_code' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
+            'region' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
+            'city' => [
                 'type'     => self::ARG_TYPE_STRING,
                 'required' => false
             ],
