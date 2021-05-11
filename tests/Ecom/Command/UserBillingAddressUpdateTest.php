@@ -48,8 +48,8 @@ class UserBillingAddressUpdateTest extends AbstractTestCase
         $args   = [
             'user_id'          => 1,
             'country_code'     => 'NZ',
-            'state'            => 'Auckland',
-            'zip'              => '1010',
+            'region'           => 'Auckland',
+            'post_code'        => '1010',
             'address_extended' => 'Level 2',
             'address'          => '80 Greys Avenue',
             'city'             => 'Auckland',
