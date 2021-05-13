@@ -53,6 +53,7 @@ class UserBillingAddressUpdateTest extends AbstractTestCase
             'address_extended' => 'Level 2',
             'address'          => '80 Greys Avenue',
             'city'             => 'Auckland',
+            'company'          => 'Orange County Choppers',
         ];
 
         $command = new UserBillingAddressUpdate(
