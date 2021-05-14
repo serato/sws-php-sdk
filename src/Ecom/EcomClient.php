@@ -8,9 +8,15 @@ use Serato\SwsSdk\Client;
 
 /**
  * Client used to interact with SWS E-commerce service.
+ *
  * @method \Serato\SwsSdk\Result getSubscriptions(array $args)
  * @method \Serato\SwsSdk\Result cancelSubscription(array $args)
  * @method \Serato\SwsSdk\Result createInvoice(array $args)
+ * @method \Serato\SwsSdk\Result updateCartBillingAddress(array $args)
+ * @method \Serato\SwsSdk\Result getVoucherTypes(array $args)
+ * @method \Serato\SwsSdk\Result createVoucher(array $args)
+ * @method \Serato\SwsSdk\Result assignVoucher(array $args)
+ * @method \Serato\SwsSdk\Result updateUserBillingAddress(array $args)
  */
 class EcomClient extends Client
 {
@@ -40,7 +46,8 @@ class EcomClient extends Client
             'UpdateCartBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UpdateCartBillingAddress',
             'GetVoucherTypes'          => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherTypeList',
             'CreateVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherCreate',
-            'AssignVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherAssign'
+            'AssignVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherAssign',
+            'UpdateUserBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UserBillingAddressUpdate'
         ];
     }
 }

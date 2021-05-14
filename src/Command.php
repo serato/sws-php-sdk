@@ -93,7 +93,7 @@ abstract class Command
             return $value;
         } elseif (is_int($value)) {
             return (string)$value;
-        } elseif (is_a($value, '\DateTime')) {
+        } elseif (is_a($value, DateTime::class)) {
             return $value->format(DateTime::ATOM);
         }
         throw new InvalidArgumentException(
