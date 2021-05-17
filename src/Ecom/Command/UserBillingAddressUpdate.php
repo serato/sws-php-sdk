@@ -57,6 +57,14 @@ class UserBillingAddressUpdate extends CommandBasicAuth
                 'type' => self::ARG_TYPE_INTEGER,
                 'required' => true
             ],
+            'first_name' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
+            'last_name' => [
+                'type'     => self::ARG_TYPE_STRING,
+                'required' => false
+            ],
             'country_code' => [
                 'type'     => self::ARG_TYPE_STRING,
                 'required' => false
