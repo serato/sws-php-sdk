@@ -47,6 +47,8 @@ class UserBillingAddressUpdateTest extends AbstractTestCase
         $userId = 1;
         $args   = [
             'user_id'          => 1,
+            'first_name'       => 'Andy',
+            'last_name'        => 'Harris',
             'country_code'     => 'NZ',
             'region'           => 'Auckland',
             'post_code'        => '1010',
