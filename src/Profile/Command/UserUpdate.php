@@ -23,6 +23,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  * - `postcode`: (string) Postcode
  * - `country_code`: (string) Country Code (Alpha-2)
  * - `twitch_access_token`: (string) A Twitch Extension access token
+ * - `company`: (string) Company name
  *
  * This command can be excuted on a `Serato\SwsSdk\Profile\ProfileClient` instance
  * using the `ProfileClient::updateUser` magic method.
@@ -81,6 +82,7 @@ class UserUpdate extends CommandBasicAuth
             'postcode'              => ['type' => self::ARG_TYPE_STRING, 'required' => false],
             'country_code'          => ['type' => self::ARG_TYPE_STRING, 'required' => false],
             'twitch_access_token'   => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'company'               => ['type' => self::ARG_TYPE_STRING, 'required' => false],
         ];
     }
 }
