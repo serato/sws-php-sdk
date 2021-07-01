@@ -6,7 +6,7 @@ namespace Serato\SwsSdk\Profile\Command;
 use Serato\SwsSdk\CommandBasicAuth;
 
 /**
- * Add a User in the Beta program.
+ * Add a survey.
  *
  * Valid keys for the `$args` array provided to the constructor are:
  *
@@ -24,9 +24,7 @@ class SurveyAdd extends CommandBasicAuth
      */
     public function getBody()
     {
-        $args = $this->commandArgs;
-        unset($args['user_id']);
-        return $this->arrayToFormUrlEncodedBody($args);
+        return $this->arrayToFormUrlEncodedBody($this->commandArgs);
     }
 
     /**
