@@ -15,6 +15,7 @@ use Serato\SwsSdk\Client;
  * @method \Serato\SwsSdk\Result addUserBetaProgram(array $args)
  * @method \Serato\SwsSdk\Result validateAllUserBetaPrograms(array $args)
  * @method \Serato\SwsSdk\Result parterPromotionAddUser(array $args)
+ * @method \Serato\SwsSdk\Result addSurvey(array $args)
  */
 class ProfileClient extends Client
 {
@@ -49,7 +50,9 @@ class ProfileClient extends Client
             # POST /users/{user_id}/betaprograms/validateall
             'ValidateAllUserBetaPrograms' => '\\Serato\\SwsSdk\\Profile\\Command\\UserValidateAllBetaPrograms',
             # POST /partnerpromotions/code
-            'ParterPromotionAddUser' => '\\Serato\\SwsSdk\\Profile\\Command\\PartnerPromotionAddUser'
+            'ParterPromotionAddUser' => '\\Serato\\SwsSdk\\Profile\\Command\\PartnerPromotionAddUser',
+            # POST /survey
+            'AddSurvey' => '\\Serato\\SwsSdk\\Profile\\Command\\SurveyAdd'
         ];
     }
 }
