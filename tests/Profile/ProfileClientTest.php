@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\Profile;
@@ -9,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class ProfileClientTest extends AbstractTestCase
 {
-    const PROFILE_SERVER_BASE_URI = 'http://profile.server.com';
+    private const PROFILE_SERVER_BASE_URI = 'http://profile.server.com';
 
     public function testGetBaseUri(): void
     {

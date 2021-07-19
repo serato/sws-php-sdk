@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk;
@@ -15,14 +16,14 @@ use DateTime;
  */
 abstract class Command
 {
-    const ARG_TYPE_STRING   = 'string';
-    const ARG_TYPE_INTEGER  = 'integer';
-    const ARG_TYPE_DATETIME = 'datetime';
+    public const ARG_TYPE_STRING   = 'string';
+    public const ARG_TYPE_INTEGER  = 'integer';
+    public const ARG_TYPE_DATETIME = 'datetime';
 
     /**
      * The custom header that identifies requests from the SDK to the application firewall
      */
-    const CUSTOM_FIREWALL_HEADER = 'X-Serato-Firewall';
+    public const CUSTOM_FIREWALL_HEADER = 'X-Serato-Firewall';
 
     /**
      * Client application ID
@@ -152,7 +153,8 @@ abstract class Command
             }
         }
         foreach ($this->getArgsDefinition() as $name => $def) {
-            if (isset($def['required'])
+            if (
+                isset($def['required'])
                     && $def['required'] === true
                     && !isset($this->commandArgs[$name])
             ) {

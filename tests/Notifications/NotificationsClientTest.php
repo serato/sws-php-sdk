@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\Notifications;
@@ -9,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class NotificationsClientTest extends AbstractTestCase
 {
-    const NOTIFICATIONS_SERVER_BASE_URI = 'http://da.server.com';
+    private const NOTIFICATIONS_SERVER_BASE_URI = 'http://da.server.com';
 
     public function testGetBaseUri(): void
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Identity\Command;
@@ -35,7 +36,7 @@ class UserGroupAdd extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/'. self::toString($this->commandArgs['user_id']) . '/groups';
+        return '/api/v1/users/' . self::toString($this->commandArgs['user_id']) . '/groups';
     }
 
     /**

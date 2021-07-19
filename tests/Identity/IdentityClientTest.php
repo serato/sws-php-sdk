@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\Identity;
@@ -9,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class IdentityClientTest extends AbstractTestCase
 {
-    const ID_SERVER_BASE_URI = 'http://id.server.com';
+    private const ID_SERVER_BASE_URI = 'http://id.server.com';
 
     public function testGetBaseUri(): void
     {
@@ -93,7 +94,7 @@ class IdentityClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
         $result = $client->addUserGroup(["user_id" => 123, 'group_name' => 'Test BetaProgram']);
-        
+
         $this->assertEquals(
             (string)$this->getResponseObjectFromResult($result)->getBody(),
             $body
@@ -105,7 +106,7 @@ class IdentityClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createIdentityClient();
         $result = $client->removeUserGroup(["user_id" => 123, 'group_name' => 'Test BetaProgram']);
-        
+
         $this->assertEquals(
             (string)$this->getResponseObjectFromResult($result)->getBody(),
             $body

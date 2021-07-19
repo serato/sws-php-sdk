@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\Da;
@@ -9,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class DaClientTest extends AbstractTestCase
 {
-    const DA_SERVER_BASE_URI = 'http://da.server.com';
+    private const DA_SERVER_BASE_URI = 'http://da.server.com';
 
     public function testGetBaseUri(): void
     {

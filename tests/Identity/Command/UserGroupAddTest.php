@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\Identity\Command;
@@ -42,7 +43,7 @@ class UserGroupAddTest extends AbstractTestCase
     {
         $userId = 123;
         $groupName = "root";
-        
+
         $command = new UserGroupAdd(
             'app_id',
             'app_password',

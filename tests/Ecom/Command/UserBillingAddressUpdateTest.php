@@ -1,4 +1,5 @@
 <?php
+
 namespace Serato\SwsSdk\Test\Ecom\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Identity\Command;
@@ -22,7 +23,7 @@ class UserGroupRemove extends CommandBasicAuth
     {
         return 'DELETE';
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -38,8 +39,8 @@ class UserGroupRemove extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/users/'. self::toString($this->commandArgs['user_id']) .
-                '/groups/'. self::toString($this->commandArgs['group_name']);
+        return '/api/v1/users/' . self::toString($this->commandArgs['user_id']) .
+                '/groups/' . self::toString($this->commandArgs['group_name']);
     }
 
     /**

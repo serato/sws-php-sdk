@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\License;
@@ -9,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class LicenseClientTest extends AbstractTestCase
 {
-    const LICENSE_SERVER_BASE_URI = 'http://license.server.com';
+    private const LICENSE_SERVER_BASE_URI = 'http://license.server.com';
 
     public function testGetBaseUri(): void
     {

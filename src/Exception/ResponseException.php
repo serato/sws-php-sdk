@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Exception;
@@ -26,7 +27,7 @@ abstract class ResponseException extends RuntimeException
 
         # Should never happen
         if ($response === null) {
-            $response = new Response;
+            $response = new Response();
         }
 
         $this->result = new Result($response);

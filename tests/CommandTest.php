@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test;
@@ -149,7 +150,7 @@ class CommandTest extends AbstractTestCase
             ],
             [
                 $commandArgDef,
-                ['stringValRequired' => 'string value', 'stringValNotRequired' => new DateTime],
+                ['stringValRequired' => 'string value', 'stringValNotRequired' => new DateTime()],
                 ['stringValNotRequired', 'type string'],
                 'Invalid type for `stringValNotRequired`'
             ],
@@ -188,7 +189,7 @@ class CommandTest extends AbstractTestCase
                     'stringValRequired' => 'string value',
                     'stringValNotRequired' => 'another string value',
                     'intValRequired' => 1111,
-                    'dateTimeValRequired' => new DateTime,
+                    'dateTimeValRequired' => new DateTime(),
                     'dateTimeValNotRequired' => 23232
                 ],
                 ['dateTimeValNotRequired', 'type DateTime'],
@@ -200,8 +201,8 @@ class CommandTest extends AbstractTestCase
                     'stringValRequired' => 'string value',
                     'stringValNotRequired' => 'another string value',
                     'intValRequired' => 1111,
-                    'dateTimeValRequired' => new DateTime,
-                    'dateTimeValNotRequired' => new DateTime,
+                    'dateTimeValRequired' => new DateTime(),
+                    'dateTimeValNotRequired' => new DateTime(),
                     'invalidArgument' => 'some value'
                 ],
                 ['invalid key', 'invalidArgument'],
