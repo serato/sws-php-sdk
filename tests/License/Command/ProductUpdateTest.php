@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\License\Command;
@@ -13,7 +14,7 @@ class ProductUpdateTest extends AbstractTestCase
     public function testSmokeTest(): void
     {
         $productId = '100-100';
-        $dateTime = new DateTime;
+        $dateTime = new DateTime();
 
         $command = new ProductUpdate(
             'app_id',

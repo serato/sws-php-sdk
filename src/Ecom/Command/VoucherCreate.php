@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Ecom\Command;
@@ -23,7 +24,7 @@ class VoucherCreate extends CommandBasicAuth
     {
         return $this->arrayToFormUrlEncodedBody($this->commandArgs);
     }
-    
+
     /**
      * {@inheritdoc}
      */

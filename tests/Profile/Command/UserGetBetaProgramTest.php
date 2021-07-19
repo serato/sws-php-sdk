@@ -46,7 +46,7 @@ class UserGetBetaProgramTest extends AbstractTestCase
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['user_id'=>$userId]
+            ['user_id' => $userId]
         );
 
         $request = $command->getRequest();

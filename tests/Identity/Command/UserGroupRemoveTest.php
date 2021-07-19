@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\Identity\Command;
@@ -27,12 +28,12 @@ class UserGroupRemoveTest extends AbstractTestCase
     {
         $userId = 1234;
         $groupName = "root";
-        
+
         $command = new UserGroupRemove(
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['user_id'=>$userId, 'group_name' => $groupName]
+            ['user_id' => $userId, 'group_name' => $groupName]
         );
 
         $request = $command->getRequest();

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk;
@@ -18,31 +19,31 @@ use InvalidArgumentException;
  */
 class Sdk
 {
-    const BASE_URI                       = 'base_uri';
-    const BASE_URI_ID                    = 'id';
-    const BASE_URI_LICENSE               = 'license';
-    const BASE_URI_PROFILE               = 'profile';
-    const BASE_URI_ECOM                  = 'ecom';
-    const BASE_URI_DA                    = 'da';
-    const BASE_URI_NOTIFICATIONS         = 'notifications';
+    public const BASE_URI                       = 'base_uri';
+    public const BASE_URI_ID                    = 'id';
+    public const BASE_URI_LICENSE               = 'license';
+    public const BASE_URI_PROFILE               = 'profile';
+    public const BASE_URI_ECOM                  = 'ecom';
+    public const BASE_URI_DA                    = 'da';
+    public const BASE_URI_NOTIFICATIONS         = 'notifications';
 
 
-    const ENV_PRODUCTION                = 'production';
-    const ENV_STAGING                   = 'staging';
+    public const ENV_PRODUCTION                = 'production';
+    public const ENV_STAGING                   = 'staging';
 
-    const BASE_URI_STAGING_ID           = 'https://id.serato.xyz';
-    const BASE_URI_STAGING_LICENSE      = 'https://license.serato.xyz';
-    const BASE_URI_STAGING_PROFILE      = 'https://profile.serato.xyz';
-    const BASE_URI_STAGING_ECOM         = 'https://ecom.serato.xyz';
-    const BASE_URI_STAGING_DA           = 'https://da.serato.xyz';
-    const BASE_URI_STAGING_NOTIFICATIONS  = 'https://notifications.serato.xyz';
+    public const BASE_URI_STAGING_ID           = 'https://id.serato.xyz';
+    public const BASE_URI_STAGING_LICENSE      = 'https://license.serato.xyz';
+    public const BASE_URI_STAGING_PROFILE      = 'https://profile.serato.xyz';
+    public const BASE_URI_STAGING_ECOM         = 'https://ecom.serato.xyz';
+    public const BASE_URI_STAGING_DA           = 'https://da.serato.xyz';
+    public const BASE_URI_STAGING_NOTIFICATIONS  = 'https://notifications.serato.xyz';
 
-    const BASE_URI_PRODUCTION_ID        = 'https://id.serato.com';
-    const BASE_URI_PRODUCTION_LICENSE   = 'https://license.serato.com';
-    const BASE_URI_PRODUCTION_PROFILE   = 'https://profile.serato.com';
-    const BASE_URI_PRODUCTION_ECOM      = 'https://ecom.serato.com';
-    const BASE_URI_PRODUCTION_DA      = 'https://da.serato.com';
-    const BASE_URI_PRODUCTION_NOTIFICATIONS      = 'https://notifications.serato.com';
+    public const BASE_URI_PRODUCTION_ID            = 'https://id.serato.com';
+    public const BASE_URI_PRODUCTION_LICENSE       = 'https://license.serato.com';
+    public const BASE_URI_PRODUCTION_PROFILE       = 'https://profile.serato.com';
+    public const BASE_URI_PRODUCTION_ECOM          = 'https://ecom.serato.com';
+    public const BASE_URI_PRODUCTION_DA            = 'https://da.serato.com';
+    public const BASE_URI_PRODUCTION_NOTIFICATIONS = 'https://notifications.serato.com';
 
     /**
      * Client application ID
@@ -156,7 +157,7 @@ class Sdk
         if (isset($args[self::BASE_URI])) {
             if (!is_array($args[self::BASE_URI])) {
                 throw new InvalidArgumentException(
-                    'The `base_uri` config option value must be an array containing '.
+                    'The `base_uri` config option value must be an array containing ' .
                     '`id`, `license`, `profile` and `ecom` keys.',
                     1002
                 );
@@ -177,11 +178,12 @@ class Sdk
 
                 foreach ($services as $name => $defaultUri) {
                     if (isset($args[self::BASE_URI][$name])) {
-                        if (strpos($args[self::BASE_URI][$name], 'http://') !== 0 &&
+                        if (
+                            strpos($args[self::BASE_URI][$name], 'http://') !== 0 &&
                             strpos($args[self::BASE_URI][$name], 'https://') !== 0
                         ) {
                             throw new InvalidArgumentException(
-                                'The `' . self::BASE_URI . '` `' . $name.
+                                'The `' . self::BASE_URI . '` `' . $name .
                                 '` config option value must including a valid network protocol (ie. http or https)',
                                 1003
                             );

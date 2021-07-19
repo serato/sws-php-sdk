@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\Profile\Command;
@@ -39,7 +40,7 @@ class UserValidateAllBetaProgramsTest extends AbstractTestCase
         $this->assertEquals('POST', $request->getMethod());
         $this->assertRegExp('/Basic/', $request->getHeaderLine('Authorization'));
         $this->assertRegExp(
-            '/^\/api\/v[0-9]+\/users\/' .$user_id . '\/betaprograms\/validateall$/',
+            '/^\/api\/v[0-9]+\/users\/' . $user_id . '\/betaprograms\/validateall$/',
             $request->getUri()->getPath()
         );
     }

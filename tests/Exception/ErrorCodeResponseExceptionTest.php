@@ -1,4 +1,5 @@
 <?php
+
 namespace Serato\SwsSdk\Test\Exception;
 
 use Serato\SwsSdk\Test\AbstractTestCase;

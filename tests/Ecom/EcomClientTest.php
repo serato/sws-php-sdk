@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test\Ecom;
@@ -9,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class EcomClientTest extends AbstractTestCase
 {
-    const ECOM_SERVER_BASE_URI = 'http://ecom.server.com';
+    private const ECOM_SERVER_BASE_URI = 'http://ecom.server.com';
 
     public function testGetBaseUri(): void
     {

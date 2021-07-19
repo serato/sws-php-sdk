@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test;
@@ -16,10 +17,10 @@ use InvalidArgumentException;
 
 class ClientTest extends AbstractTestCase
 {
-    const BASIC_AUTH_COMMAND_NAME  = 'GetProduct';
-    const BASIC_AUTH_COMMAND_CLASS = '\\Serato\\SwsSdk\\License\\Command\\ProductGet';
-    const BEARER_TOKEN_AUTH_COMMAND_NAME  = 'GetUser';
-    const BEARER_TOKEN_AUTH_COMMAND_CLASS = '\\Serato\\SwsSdk\\Identity\\Command\\UserGet';
+    private const BASIC_AUTH_COMMAND_NAME  = 'GetProduct';
+    private const BASIC_AUTH_COMMAND_CLASS = '\\Serato\\SwsSdk\\License\\Command\\ProductGet';
+    private const BEARER_TOKEN_AUTH_COMMAND_NAME  = 'GetUser';
+    private const BEARER_TOKEN_AUTH_COMMAND_CLASS = '\\Serato\\SwsSdk\\Identity\\Command\\UserGet';
 
     public function testGetValidBasicAuthCommand(): void
     {
@@ -288,7 +289,7 @@ class ClientTest extends AbstractTestCase
                 new MockHandler($mockResponses)
             )
         ];
-        
+
         $clientMock = $this->getMockForAbstractClass(
             Client::class,
             [$args, 'my_app', 'my_pass']

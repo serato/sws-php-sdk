@@ -1,4 +1,5 @@
 <?php
+
 namespace Serato\SwsSdk\Ecom\Command;
 
 use Serato\SwsSdk\CommandBasicAuth;

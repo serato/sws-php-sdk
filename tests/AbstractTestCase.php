@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test;
@@ -74,7 +75,7 @@ abstract class AbstractTestCase extends TestCase
     {
         $response = $result->getResponse();
         if ($response === null) {
-            throw new Exception;
+            throw new Exception();
         }
         return $response;
     }
