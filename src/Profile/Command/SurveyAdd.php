@@ -57,9 +57,7 @@ class SurveyAdd extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'user_id'               => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'survey_name'       => ['type' => self::ARG_TYPE_STRING, 'required' => true],
-            'general_feedback'       => ['type' => self::ARG_TYPE_STRING, 'required' => true]
+            'survey'               => ['type' => self::ARG_TYPE_STRING, 'required' => true],
         ];
     }
 }
