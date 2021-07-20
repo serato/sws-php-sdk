@@ -143,7 +143,8 @@ abstract class Client extends GuzzleClient
             array_merge(
                 [
                     'timeout' => $this->config['timeout'],
-                    RequestOptions::SYNCHRONOUS =>  true
+                    RequestOptions::SYNCHRONOUS =>  true,
+                    'debug' => true
                 ],
                 $options
             )
