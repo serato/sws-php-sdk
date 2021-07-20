@@ -22,7 +22,7 @@ class SurveyAdd extends CommandBasicAuth
      */
     public function getBody()
     {
-        return $this->arrayToFormUrlEncodedBody($this->commandArgs);
+        return json_encode($this->commandArgs);
     }
 
     /**
@@ -46,7 +46,7 @@ class SurveyAdd extends CommandBasicAuth
      */
     protected function setCommandRequestHeaders(): void
     {
-        $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        $this->setRequestHeader('Content-Type', 'application/json');
     }
 
     /**
