@@ -10,9 +10,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  *
  * Valid keys for the `$args` array provided to the constructor are:
  *
- * - `user_id`: (integer) Optional. User ID.
- * - `survey_name`: (string) Required. Name of survey being submitted.
- * - `general_feedback`: (string) Required. Survey feedback.
+ * - `survey`: (string) .
 
  * This command can be excuted on a `Serato\SwsSdk\Profile\ProfileClient` instance
  * using the `ProfileClient::addSurvey` magic method.
