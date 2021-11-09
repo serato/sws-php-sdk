@@ -19,6 +19,7 @@ use Serato\SwsSdk\Client;
  * @method \Serato\SwsSdk\Result assignVoucher(array $args)
  * @method \Serato\SwsSdk\Result redeemVoucher(array $args)
  * @method \Serato\SwsSdk\Result updateUserBillingAddress(array $args)
+ * @method \Serato\SwsSdk\Result getCatalog(array $args)
  */
 class EcomClient extends Client
 {
