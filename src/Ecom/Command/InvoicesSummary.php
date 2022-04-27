@@ -1,0 +1,64 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Serato\SwsSdk\Ecom\Command;
+
+use Serato\SwsSdk\CommandBasicAuth;
+
+/**
+ * Get list of all available offers
+ *
+ * Valid keys for the `$args` array provided to the constructor are:
+ *
+ * - `product_type_id`: (integer) Optional.
+ * - `offer_type`: (string) Optional.
+ *
+ * This command can be executed on a `Serato\SwsSdk\Ecom\EcomClient` instance
+ * using the `EcomClient::getOffers` magic method.
+ */
+class InvoicesSummary extends CommandBasicAuth
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getBody(): string
+    {
+        return $this->arrayToFormUrlEncodedBody($this->commandArgs);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHttpMethod(): string
+    {
+        return 'GET';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUriPath(): string
+    {
+        return
+            '/api/v1/invoices/summary';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUriQuery(): string
+    {
+        return http_build_query($this->commandArgs);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getArgsDefinition(): array
+    {
+        return [
+            'date' => ['type' => self::ARG_TYPE_STRING, 'required' => true]
+        ];
+    }
+}
