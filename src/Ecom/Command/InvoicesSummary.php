@@ -7,15 +7,14 @@ namespace Serato\SwsSdk\Ecom\Command;
 use Serato\SwsSdk\CommandBasicAuth;
 
 /**
- * Get list of all available offers
+ * Get subscription invoices summary
  *
  * Valid keys for the `$args` array provided to the constructor are:
  *
- * - `product_type_id`: (integer) Optional.
- * - `offer_type`: (string) Optional.
+ * - `date`: (string) Compulsory.
  *
  * This command can be executed on a `Serato\SwsSdk\Ecom\EcomClient` instance
- * using the `EcomClient::getOffers` magic method.
+ * using the `EcomClient::getInvoicesSummary` magic method.
  */
 class InvoicesSummary extends CommandBasicAuth
 {
