@@ -9,7 +9,6 @@ use Serato\SwsSdk\Profile\Command\UserUpdate;
 
 class UserUpdateTest extends AbstractTestCase
 {
-
     /**
      * @expectedException \InvalidArgumentException
      */
