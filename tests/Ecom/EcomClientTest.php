@@ -65,4 +65,15 @@ class EcomClientTest extends AbstractTestCase
             $body
         );
     }
+
+    public function testGetInvoicesSummary(): void
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
+        $result = $client->getInvoicesSummary(['date' => '2020-05-14']);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
 }

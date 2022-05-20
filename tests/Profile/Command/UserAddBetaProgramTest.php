@@ -9,7 +9,6 @@ use Serato\SwsSdk\Profile\Command\UserAddBetaProgram;
 
 class UserAddBetaProgramTest extends AbstractTestCase
 {
-
     /**
      * @param array<mixed> $args
      * @return void

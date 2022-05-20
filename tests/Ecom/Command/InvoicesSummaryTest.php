@@ -5,22 +5,28 @@ declare(strict_types=1);
 namespace Serato\SwsSdk\Test\Ecom\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
-use Serato\SwsSdk\Ecom\Command\SubscriptionList;
+use Serato\SwsSdk\Ecom\Command\InvoicesSummary;
 
-class SubscriptionListTest extends AbstractTestCase
+class InvoicesSummaryTest extends AbstractTestCase
 {
+    /**
+     * Smoke test to verify that the command is creating a valid request.
+     *
+     * @return void
+     */
     public function testSmokeTest(): void
     {
-        $userId = 123;
-        $command = new SubscriptionList(
+        $command = new InvoicesSummary(
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['user_id' => $userId]
+            [
+                'date' => '2020-03-19',
+            ]
         );
         $request = $command->getRequest();
         $this->assertEquals('GET', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/^\/api\/v1\/users\/' . $userId . '\/subscriptions$/', $request->getUri()->getPath());
+        $this->assertStringEndsWith('/api/v1/invoices/summary', $request->getUri()->getPath());
     }
 }
