@@ -20,6 +20,7 @@ use Serato\SwsSdk\Client;
  * @method \Serato\SwsSdk\Result redeemVoucher(array $args)
  * @method \Serato\SwsSdk\Result updateUserBillingAddress(array $args)
  * @method \Serato\SwsSdk\Result getInvoicesSummary(array $args)
+ * @method \Serato\SwsSdk\Result getVouchers(array $args)
  */
 class EcomClient extends Client
 {
@@ -52,7 +53,8 @@ class EcomClient extends Client
             'AssignVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherAssign',
             'RedeemVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherRedeem',
             'UpdateUserBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UserBillingAddressUpdate',
-            'GetInvoicesSummary'       => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoicesSummary'
+            'GetInvoicesSummary'       => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoicesSummary',
+            'GetVouchers'              => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherList'
         ];
     }
 }

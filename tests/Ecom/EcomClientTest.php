@@ -76,4 +76,15 @@ class EcomClientTest extends AbstractTestCase
             $body
         );
     }
+
+    public function testGetVouchers(): void
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
+        $result = $client->getVouchers(['user_id' => 123]);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
 }
