@@ -91,18 +91,17 @@ class SdkTest extends AbstractTestCase
     }
 
     /**
-     * @param array<mixed> $args
-     * @param string  $idServiceUri
-     * @param string  $licenseServiceUri
-     * @param string  $profileServiceUri
-     * @param string  $ecomServiceUri
-     * @param string  $daServiceUri
-     * @param string  $notificationsServiceUri
-     * @param float $timeout|null
-     * @param callable $handler|null
+     * @param array $args
+     * @param string $idServiceUri
+     * @param string $licenseServiceUri
+     * @param string $profileServiceUri
+     * @param string $ecomServiceUri
+     * @param string $daServiceUri
+     * @param string $notificationsServiceUri
+     * @param string $rewardsServiceUri
+     * @param float|null $timeout
+     * @param callable|null $handler
      * @param string $assertText
-     * @return void
-     *
      * @dataProvider validConstructorOptionsProvider
      */
     public function testValidConstructorOptions(
@@ -113,6 +112,7 @@ class SdkTest extends AbstractTestCase
         string $ecomServiceUri,
         string $daServiceUri,
         string $notificationsServiceUri,
+        string $rewardsServiceUri,
         ?float $timeout = null,
         ?callable $handler = null,
         string $assertText
@@ -166,6 +166,11 @@ class SdkTest extends AbstractTestCase
             $assertText . ' - `base_uri` `notifications` is correct'
         );
         $this->assertEquals(
+            $rewardsServiceUri,
+            $config['base_uri']['rewards'],
+            $assertText . ' - `base_uri` `rewards` is correct'
+        );
+        $this->assertEquals(
             $handler,
             $config['handler'],
             $assertText . ' - `handler` is correct'
@@ -183,6 +188,7 @@ class SdkTest extends AbstractTestCase
         $ecomServiceUri     = 'https://ecom.server.com';
         $daServiceUri     = 'https://da.server.com';
         $notificationsServiceUri     = 'https://notifications.server.com';
+        $rewardsServiceUri     = 'https://rewards.server.com';
         $handler            = function () {
         };
 
@@ -195,6 +201,7 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_PRODUCTION_ECOM,
                 Sdk::BASE_URI_PRODUCTION_DA,
                 Sdk::BASE_URI_PRODUCTION_NOTIFICATIONS,
+                Sdk::BASE_URI_PRODUCTION_REWARDS,
                 null,
                 null,
                 'Set `env` to ENV_PRODUCTION'
@@ -207,6 +214,7 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_STAGING_ECOM,
                 Sdk::BASE_URI_STAGING_DA,
                 Sdk::BASE_URI_STAGING_NOTIFICATIONS,
+                Sdk::BASE_URI_STAGING_REWARDS,
                 null,
                 null,
                 'Set `env` to ENV_STAGING'
@@ -219,6 +227,7 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_PRODUCTION_ECOM,
                 Sdk::BASE_URI_PRODUCTION_DA,
                 Sdk::BASE_URI_PRODUCTION_NOTIFICATIONS,
+                Sdk::BASE_URI_PRODUCTION_REWARDS,
                 1.222,
                 null,
                 'Set `env` to ENV_PRODUCTION and `timeout`'
@@ -231,6 +240,7 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_STAGING_ECOM,
                 Sdk::BASE_URI_STAGING_DA,
                 Sdk::BASE_URI_STAGING_NOTIFICATIONS,
+                Sdk::BASE_URI_STAGING_REWARDS,
                 0.7622,
                 null,
                 'Set `env` to ENV_STAGING and `timeout`'
@@ -243,7 +253,8 @@ class SdkTest extends AbstractTestCase
                         'profile' => $profileServiceUri,
                         'ecom' => $ecomServiceUri,
                         'da'   => $daServiceUri,
-                        'notifications'   => $notificationsServiceUri
+                        'notifications'   => $notificationsServiceUri,
+                        'rewards'   => $rewardsServiceUri
                     ],
                     'timeout' => 3.2
                 ],
@@ -253,6 +264,7 @@ class SdkTest extends AbstractTestCase
                 $ecomServiceUri,
                 $daServiceUri,
                 $notificationsServiceUri,
+                $rewardsServiceUri,
                 3.2,
                 null,
                 'Custom `base_uri` and `timeout`'
@@ -265,6 +277,7 @@ class SdkTest extends AbstractTestCase
                 Sdk::BASE_URI_PRODUCTION_ECOM,
                 Sdk::BASE_URI_PRODUCTION_DA,
                 Sdk::BASE_URI_PRODUCTION_NOTIFICATIONS,
+                Sdk::BASE_URI_PRODUCTION_REWARDS,
                 null,
                 $handler,
                 'Set `env` to ENV_PRODUCTION, custom `handler`'
@@ -304,6 +317,8 @@ class SdkTest extends AbstractTestCase
         $this->assertEquals($hostName->get(HostName::ECOM), $config['base_uri']['ecom']);
         $this->assertEquals($hostName->get(HostName::DIGITAL_ASSETS), $config['base_uri']['da']);
         $this->assertEquals($hostName->get(HostName::NOTIFICATIONS), $config['base_uri']['notifications']);
+        $this->assertEquals($hostName->get(HostName::REWARDS), $config['base_uri']['rewards']);
+
     }
 
     /**

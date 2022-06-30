@@ -23,6 +23,7 @@ class LicenseClientTest extends AbstractTestCase
                     Sdk::BASE_URI_ECOM      => 'http://ecom.server.com',
                     Sdk::BASE_URI_DA      => 'http://da.server.com',
                     Sdk::BASE_URI_NOTIFICATIONS      => 'http://notifications.server.com',
+                    Sdk::BASE_URI_REWARDS => 'http://rewards.server.com'
                 ]
             ],
             'my_app',
