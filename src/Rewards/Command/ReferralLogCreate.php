@@ -54,14 +54,14 @@ class ReferralLogCreate extends CommandBasicAuth
     {
         return [
             'code' => ['type' => self::ARG_TYPE_STRING, 'required' => true],
-            'referrer_user_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false], # EITHER this on
-            # `referee_user_id` is required.
-            'referee_user_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false], # EITHER this on
-            # `referrer_user_id` is required.
-            'voucher_id' => ['type' => self::ARG_TYPE_STRING, 'required' => false], # EITHER this on
-            # `product_id` is required.
-            'product_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false] # EITHER this on
-            # `voucher_id` is required.
+            # EITHER this or `referee_user_id` is required.
+            'referrer_user_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            # EITHER this or `referrer_user_id` is required.
+            'referee_user_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            # EITHER this or `product_id` is required.
+            'voucher_id' => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            # EITHER this or `voucher_id` is required.
+            'product_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false]
         ];
     }
 }
