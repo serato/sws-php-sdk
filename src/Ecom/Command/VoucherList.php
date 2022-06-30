@@ -61,7 +61,7 @@ class VoucherList extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'user_id'       => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
+            'user_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
         ];
     }
 }
