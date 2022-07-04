@@ -13,6 +13,7 @@ use Serato\SwsSdk\Profile\ProfileClient;
 use Serato\SwsSdk\Identity\IdentityClient;
 use Serato\ServiceDiscovery\HostName;
 use InvalidArgumentException;
+use Serato\SwsSdk\Rewards\RewardsClient;
 
 /**
  * Builds SWS clients based on configuration settings.
@@ -26,6 +27,7 @@ class Sdk
     public const BASE_URI_ECOM                  = 'ecom';
     public const BASE_URI_DA                    = 'da';
     public const BASE_URI_NOTIFICATIONS         = 'notifications';
+    public const BASE_URI_REWARDS              = 'rewards';
 
 
     public const ENV_PRODUCTION                = 'production';
@@ -37,6 +39,7 @@ class Sdk
     public const BASE_URI_STAGING_ECOM         = 'https://ecom.serato.xyz';
     public const BASE_URI_STAGING_DA           = 'https://da.serato.xyz';
     public const BASE_URI_STAGING_NOTIFICATIONS  = 'https://notifications.serato.xyz';
+    public const BASE_URI_STAGING_REWARDS  = 'https://rewards.serato.xyz';
 
     public const BASE_URI_PRODUCTION_ID            = 'https://id.serato.com';
     public const BASE_URI_PRODUCTION_LICENSE       = 'https://license.serato.com';
@@ -44,6 +47,8 @@ class Sdk
     public const BASE_URI_PRODUCTION_ECOM          = 'https://ecom.serato.com';
     public const BASE_URI_PRODUCTION_DA            = 'https://da.serato.com';
     public const BASE_URI_PRODUCTION_NOTIFICATIONS = 'https://notifications.serato.com';
+    public const BASE_URI_PRODUCTION_REWARDS = 'https://rewards.serato.com';
+
 
     /**
      * Client application ID
@@ -132,7 +137,8 @@ class Sdk
                         self::BASE_URI_STAGING_PROFILE,
                         self::BASE_URI_STAGING_ECOM,
                         self::BASE_URI_STAGING_DA,
-                        self::BASE_URI_STAGING_NOTIFICATIONS
+                        self::BASE_URI_STAGING_NOTIFICATIONS,
+                        self::BASE_URI_STAGING_REWARDS
                     );
                 }
                 if ($args['env'] == self::ENV_PRODUCTION) {
@@ -142,7 +148,8 @@ class Sdk
                         self::BASE_URI_PRODUCTION_PROFILE,
                         self::BASE_URI_PRODUCTION_ECOM,
                         self::BASE_URI_PRODUCTION_DA,
-                        self::BASE_URI_PRODUCTION_NOTIFICATIONS
+                        self::BASE_URI_PRODUCTION_NOTIFICATIONS,
+                        self::BASE_URI_PRODUCTION_REWARDS
                     );
                 }
             } else {
@@ -173,7 +180,8 @@ class Sdk
                     self::BASE_URI_PROFILE          => self::BASE_URI_PRODUCTION_PROFILE,
                     self::BASE_URI_ECOM             => self::BASE_URI_PRODUCTION_ECOM,
                     self::BASE_URI_DA               => self::BASE_URI_PRODUCTION_DA,
-                    self::BASE_URI_NOTIFICATIONS    => self::BASE_URI_PRODUCTION_NOTIFICATIONS
+                    self::BASE_URI_NOTIFICATIONS    => self::BASE_URI_PRODUCTION_NOTIFICATIONS,
+                    self::BASE_URI_REWARDS          => self::BASE_URI_PRODUCTION_REWARDS
                 ];
 
                 foreach ($services as $name => $defaultUri) {
@@ -198,7 +206,8 @@ class Sdk
                     $services[self::BASE_URI_PROFILE],
                     $services[self::BASE_URI_ECOM],
                     $services[self::BASE_URI_DA],
-                    $services[self::BASE_URI_NOTIFICATIONS]
+                    $services[self::BASE_URI_NOTIFICATIONS],
+                    $services[self::BASE_URI_REWARDS]
                 );
             }
         }
@@ -241,7 +250,8 @@ class Sdk
                 self::BASE_URI_PROFILE          => $hostName->get(HostName::PROFILE),
                 self::BASE_URI_ECOM             => $hostName->get(HostName::ECOM),
                 self::BASE_URI_DA               => $hostName->get(HostName::DIGITAL_ASSETS),
-                self::BASE_URI_NOTIFICATIONS    => $hostName->get(HostName::NOTIFICATIONS)
+                self::BASE_URI_NOTIFICATIONS    => $hostName->get(HostName::NOTIFICATIONS),
+                self::BASE_URI_REWARDS    => $hostName->get(HostName::REWARDS)
             ]
         ];
         if ($timeout !== null) {
@@ -260,7 +270,7 @@ class Sdk
      */
     public function createIdentityClient(): IdentityClient
     {
-        return $this->createClient('Serato\\SwsSdk\\Identity\\IdentityClient');
+        return $this->createClient(IdentityClient::class);
     }
 
     /**
@@ -270,7 +280,7 @@ class Sdk
      */
     public function createLicenseClient(): LicenseClient
     {
-        return $this->createClient('Serato\\SwsSdk\\License\\LicenseClient');
+        return $this->createClient(LicenseClient::class);
     }
 
     /**
@@ -280,7 +290,7 @@ class Sdk
      */
     public function createProfileClient(): ProfileClient
     {
-        return $this->createClient('Serato\\SwsSdk\\Profile\\ProfileClient');
+        return $this->createClient(ProfileClient::class);
     }
 
     /**
@@ -290,7 +300,7 @@ class Sdk
      */
     public function createEcomClient(): EcomClient
     {
-        return $this->createClient('Serato\\SwsSdk\\Ecom\\EcomClient');
+        return $this->createClient(EcomClient::class);
     }
 
     /**
@@ -300,7 +310,7 @@ class Sdk
      */
     public function createDaClient(): DaClient
     {
-        return $this->createClient('Serato\\SwsSdk\\Da\\DaClient');
+        return $this->createClient(DaClient::class);
     }
 
     /**
@@ -310,7 +320,17 @@ class Sdk
      */
     public function createNotificationsClient(): NotificationsClient
     {
-        return $this->createClient('Serato\\SwsSdk\\Notifications\\NotificationsClient');
+        return $this->createClient(NotificationsClient::class);
+    }
+
+    /**
+     * Create a RewardsClient
+     *
+     * @return RewardsClient
+     */
+    public function createRewardsClient(): RewardsClient
+    {
+        return $this->createClient(RewardsClient::class);
     }
 
     /**
@@ -384,7 +404,8 @@ class Sdk
         string $profileServiceBaseUri,
         string $ecomServiceBaseUri,
         string $daServiceBaseUri,
-        string $notificationsServiceBaseUri
+        string $notificationsServiceBaseUri,
+        string $rewardsServiceBaseUri
     ): void {
         $this->config[self::BASE_URI] = [
             self::BASE_URI_ID        => $idServiceBaseUri,
@@ -392,7 +413,8 @@ class Sdk
             self::BASE_URI_PROFILE   => $profileServiceBaseUri,
             self::BASE_URI_ECOM      => $ecomServiceBaseUri,
             self::BASE_URI_DA        => $daServiceBaseUri,
-            self::BASE_URI_NOTIFICATIONS => $notificationsServiceBaseUri
+            self::BASE_URI_NOTIFICATIONS => $notificationsServiceBaseUri,
+            self::BASE_URI_REWARDS => $rewardsServiceBaseUri
         ];
     }
 }
