@@ -27,7 +27,7 @@ class RefereeActivityListTest extends AbstractTestCase
         $request = $command->getRequest();
         $this->assertEquals('GET', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp('/^\/api\/v1\/referralcode\/asdasd7s676\/referee\/121121212/', $request->getUri()->getPath
-        ());
+        $this->assertRegExp('/^\/api\/v1\/referralcode\/asdasd7s676\/referee\/121121212/', $request->getUri()->getPath(
+        ));
     }
 }

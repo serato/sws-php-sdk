@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Serato\SwsSdk\Rewards\Command;
-
 
 use Serato\SwsSdk\CommandBasicAuth;
 

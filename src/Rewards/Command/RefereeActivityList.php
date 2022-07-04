@@ -20,7 +20,6 @@ class RefereeActivityList extends CommandBasicAuth
     public function getBody(): string
     {
         return $this->arrayToFormUrlEncodedBody($this->commandArgs);
-
     }
 
     /**

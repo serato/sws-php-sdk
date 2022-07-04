@@ -91,7 +91,7 @@ class SdkTest extends AbstractTestCase
     }
 
     /**
-     * @param array $args
+     * @param array<mixed> $args
      * @param string $idServiceUri
      * @param string $licenseServiceUri
      * @param string $profileServiceUri
@@ -318,7 +318,6 @@ class SdkTest extends AbstractTestCase
         $this->assertEquals($hostName->get(HostName::DIGITAL_ASSETS), $config['base_uri']['da']);
         $this->assertEquals($hostName->get(HostName::NOTIFICATIONS), $config['base_uri']['notifications']);
         $this->assertEquals($hostName->get(HostName::REWARDS), $config['base_uri']['rewards']);
-
     }
 
     /**
