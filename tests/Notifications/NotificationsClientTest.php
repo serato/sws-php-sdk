@@ -23,6 +23,7 @@ class NotificationsClientTest extends AbstractTestCase
                     Sdk::BASE_URI_NOTIFICATIONS     => self::NOTIFICATIONS_SERVER_BASE_URI,
                     Sdk::BASE_URI_DA      => 'http://da.server.com',
                     Sdk::BASE_URI_ECOM     => 'http://ecom.server.com',
+                    Sdk::BASE_URI_REWARDS => 'http://rewards.server.com'
                 ]
             ],
             'my_app',

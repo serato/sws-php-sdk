@@ -23,6 +23,7 @@ class EcomClientTest extends AbstractTestCase
                     Sdk::BASE_URI_ECOM      => self::ECOM_SERVER_BASE_URI,
                     Sdk::BASE_URI_DA      => 'http://da.server.com',
                     Sdk::BASE_URI_NOTIFICATIONS      => 'http://notifications.server.com',
+                    Sdk::BASE_URI_REWARDS => 'http://rewards.server.com'
                 ]
             ],
             'my_app',
@@ -71,6 +72,17 @@ class EcomClientTest extends AbstractTestCase
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
         $result = $client->getInvoicesSummary(['date' => '2020-05-14']);
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
+    public function testGetVouchers(): void
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
+        $result = $client->getVouchers(['user_id' => 123]);
         $this->assertEquals(
             (string)$this->getResponseObjectFromResult($result)->getBody(),
             $body

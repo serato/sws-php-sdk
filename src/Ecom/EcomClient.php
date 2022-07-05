@@ -6,6 +6,17 @@ namespace Serato\SwsSdk\Ecom;
 
 use Serato\SwsSdk\Sdk;
 use Serato\SwsSdk\Client;
+use Serato\SwsSdk\Ecom\Command\SubscriptionList;
+use Serato\SwsSdk\Ecom\Command\SubscriptionCancel;
+use Serato\SwsSdk\Ecom\Command\InvoiceCreate;
+use Serato\SwsSdk\Ecom\Command\UpdateCartBillingAddress;
+use Serato\SwsSdk\Ecom\Command\VoucherTypeList;
+use Serato\SwsSdk\Ecom\Command\VoucherCreate;
+use Serato\SwsSdk\Ecom\Command\VoucherAssign;
+use Serato\SwsSdk\Ecom\Command\VoucherRedeem;
+use Serato\SwsSdk\Ecom\Command\UserBillingAddressUpdate;
+use Serato\SwsSdk\Ecom\Command\InvoicesSummary;
+use Serato\SwsSdk\Ecom\Command\VoucherList;
 
 /**
  * Client used to interact with SWS E-commerce service.
@@ -20,6 +31,7 @@ use Serato\SwsSdk\Client;
  * @method \Serato\SwsSdk\Result redeemVoucher(array $args)
  * @method \Serato\SwsSdk\Result updateUserBillingAddress(array $args)
  * @method \Serato\SwsSdk\Result getInvoicesSummary(array $args)
+ * @method \Serato\SwsSdk\Result getVouchers(array $args)
  */
 class EcomClient extends Client
 {
@@ -43,16 +55,17 @@ class EcomClient extends Client
     public function getCommandMap(): array
     {
         return [
-            'GetSubscriptions'         => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionList',
-            'CancelSubscription'       => '\\Serato\\SwsSdk\\Ecom\\Command\\SubscriptionCancel',
-            'CreateInvoice'            => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoiceCreate',
-            'UpdateCartBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UpdateCartBillingAddress',
-            'GetVoucherTypes'          => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherTypeList',
-            'CreateVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherCreate',
-            'AssignVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherAssign',
-            'RedeemVoucher'            => '\\Serato\\SwsSdk\\Ecom\\Command\\VoucherRedeem',
-            'UpdateUserBillingAddress' => '\\Serato\\SwsSdk\\Ecom\\Command\\UserBillingAddressUpdate',
-            'GetInvoicesSummary'       => '\\Serato\\SwsSdk\\Ecom\\Command\\InvoicesSummary'
+            'GetSubscriptions'         => SubscriptionList::class,
+            'CancelSubscription'       => SubscriptionCancel::class,
+            'CreateInvoice'            => InvoiceCreate::class,
+            'UpdateCartBillingAddress' => UpdateCartBillingAddress::class,
+            'GetVoucherTypes'          => VoucherTypeList::class,
+            'CreateVoucher'            => VoucherCreate::class,
+            'AssignVoucher'            => VoucherAssign::class,
+            'RedeemVoucher'            => VoucherRedeem::class,
+            'UpdateUserBillingAddress' => UserBillingAddressUpdate::class,
+            'GetInvoicesSummary'       => InvoicesSummary::class,
+            'GetVouchers'              => VoucherList::class
         ];
     }
 }
