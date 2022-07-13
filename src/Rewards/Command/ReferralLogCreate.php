@@ -59,7 +59,10 @@ class ReferralLogCreate extends CommandBasicAuth
             # EITHER this or `product_id` is required.
             'voucher_id' => ['type' => self::ARG_TYPE_STRING, 'required' => false],
             # EITHER this or `voucher_id` is required.
-            'product_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false]
+            'product_id' => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'product_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'voucher_type_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'voucher_batch_id' => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
 }

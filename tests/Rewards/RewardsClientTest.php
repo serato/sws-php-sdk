@@ -40,7 +40,9 @@ class RewardsClientTest extends AbstractTestCase
         $client = $this->getSdkWithMocked200Response($body)->createRewardsClient();
         $result = $client->createReferralLog(['code' => 'sdfsdfsdfsd',
             'referrer_user_id' => 3423432,
-            'voucher_id' => 'ewrwerwerwerwe'
+            'voucher_id' => 'ewrwerwerwerwe',
+            'voucher_type_id' => 324234,
+            'voucher_batch_id' => 'RF35S'
            ]);
         $this->assertEquals(
             (string)$this->getResponseObjectFromResult($result)->getBody(),
