@@ -58,7 +58,8 @@ class VoucherAssign extends CommandBasicAuth
     {
         return [
             'user_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
-            'voucher_id' => ['type' => self::ARG_TYPE_STRING, 'required' => true]
+            'voucher_id' => ['type' => self::ARG_TYPE_STRING, 'required' => true],
+            'referral_code' => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
 }
