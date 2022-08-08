@@ -43,14 +43,6 @@ class RefereeActivityList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getUriQuery(): string
-    {
-        return http_build_query($this->commandArgs);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getArgsDefinition(): array
     {
         return [
