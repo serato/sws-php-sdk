@@ -26,6 +26,11 @@ abstract class Command
     public const CUSTOM_FIREWALL_HEADER = 'X-Serato-Firewall';
 
     /**
+     * Custom header that identifies requests from the SDK to test stack CDNs
+     */
+    public const CUSTOM_CDN_AUTH_HEADER = 'X-Serato-Cdn-Auth';
+
+    /**
      * Client application ID
      *
      * @var string
@@ -38,6 +43,21 @@ abstract class Command
      * @var string
      */
     protected $appPassword;
+
+    /**
+     * Client identifier used to identify the application to test stack CDNs
+     *
+     * @var string
+     */
+    protected $cdnAuthId;
+
+    /**
+     * Secret used to authenticate requests to test stack CDNs. $appId is currently used as the client ID in these
+     * credentials.
+     *
+     * @var string
+     */
+    protected $cdnAuthSecret;
 
     /**
      * Base URI of the Command
@@ -66,18 +86,24 @@ abstract class Command
      * @param string    $appId          Client application ID
      * @param string    $appPassword    Client application password
      * @param string    $baseUri        Base request URI
+     * @param string    $cdnAuthId      Client identifier used to identify the application to test stack CDNs
+     * @param string    $cdnAuthSecret  Secret used to authenticate requests to test stack CDNs
      * @param array<String, String|Integer|DateTime>     $args           Command arguments
      */
     public function __construct(
         string $appId,
         string $appPassword,
         string $baseUri,
-        array $args = []
+        array $args = [],
+        string $cdnAuthId = '',
+        string $cdnAuthSecret = ''
     ) {
-        $this->appId        = $appId;
-        $this->appPassword  = $appPassword;
-        $this->baseUri      = rtrim($baseUri, '/');
-        $this->commandArgs  = $args;
+        $this->appId         = $appId;
+        $this->appPassword   = $appPassword;
+        $this->baseUri       = rtrim($baseUri, '/');
+        $this->commandArgs   = $args;
+        $this->cdnAuthId     = $cdnAuthId;
+        $this->cdnAuthSecret = $cdnAuthSecret;
     }
 
     /**
@@ -110,6 +136,7 @@ abstract class Command
     public function getRequest(): RequestInterface
     {
         $this->validateCommandArgs();
+        $this->setCdnAuthHeader();
         $this->setFirewallRequestHeader();
         $this->setCommandRequestHeaders();
         return new Request(
@@ -179,6 +206,23 @@ abstract class Command
             $stringArgs[$name] = self::toString($value);
         }
         return http_build_query($stringArgs);
+    }
+
+    /**
+     * Sets a custom header that authenticates requests to test stack CloudFront distributions. The SWS client ID is
+     * currently reused as the client identifier in the CDN auth header. This header is only set in test environments.
+     *
+     * @return Command The current command, with the CDN auth header set
+     */
+    protected function setCdnAuthHeader(): self
+    {
+        // This secret should only be set in test environments. It is an empty string by default.
+        if ($this->cdnAuthSecret !== '') {
+            $encodedCredentials = base64_encode("{$this->cdnAuthId}:{$this->cdnAuthSecret}");
+            return $this->setRequestHeader(self::CUSTOM_CDN_AUTH_HEADER, $encodedCredentials);
+        } else {
+            return $this;
+        }
     }
 
     /**

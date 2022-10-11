@@ -47,6 +47,20 @@ abstract class Client extends GuzzleClient
     protected $config;
 
     /**
+     * Client identifier used to identify the application to test stack CDNs
+     *
+     * @var string
+     */
+    protected $cdnAuthId;
+
+    /**
+     * Secret used to authenticate requests to test stack CDNs.
+     *
+     * @var string
+     */
+    protected $cdnAuthSecret;
+
+    /**
      * The `$args` parameter is an array containing any value configuration for
      * a `GuzzleHttp\Client`. See the Guzzle docs for more info.
      *
@@ -55,16 +69,25 @@ abstract class Client extends GuzzleClient
      * @param array     $args           Client configuration arguments
      * @param string    $appId          Client application ID
      * @param string    $appPassword    Client application password
+     * @param string    $cdnAuthId      Client identifier used to identify the application to test stack CDNs
+     * @param string    $cdnAuthSecret  Secret used to authenticate requests to test stack CDNs
      *
      * @return void
      */
-    public function __construct(array $args, string $appId, string $appPassword)
-    {
-        $this->appId        = $appId;
-        $this->appPassword  = $appPassword;
-        $this->config       = $args;
+    public function __construct(
+        array $args,
+        string $appId,
+        string $appPassword,
+        string $cdnAuthId = '',
+        string $cdnAuthSecret = ''
+    ) {
+        $this->appId         = $appId;
+        $this->appPassword   = $appPassword;
+        $this->config        = $args;
+        $this->cdnAuthSecret = $cdnAuthSecret;
+        $this->cdnAuthId     = $cdnAuthId;
         unset($args[Sdk::BASE_URI]);
-        $argsNoBaseUri      = $args;
+        $argsNoBaseUri       = $args;
 
         parent::__construct($argsNoBaseUri);
     }
@@ -89,7 +112,9 @@ abstract class Client extends GuzzleClient
             $this->appId,
             $this->appPassword,
             $this->getBaseUri(),
-            $args
+            $args,
+            $this->cdnAuthId,
+            $this->cdnAuthSecret
         );
     }
 

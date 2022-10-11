@@ -121,6 +121,28 @@ class CommandTest extends AbstractTestCase
         $this->assertRegExp(FirewallHeader::HEADER_PATTERN, $firewallHeader);
     }
 
+    public function testCommandCdnAuthHeader(): void
+    {
+        $this->createCommandMock('http', 'myhost');
+
+        $this->commandMock->expects($this->any())
+            ->method('getHttpMethod')
+            ->willReturn('GET');
+        $this->commandMock->expects($this->any())
+            ->method('getUriPath')
+            ->willReturn('/my/path');
+        $this->commandMock->expects($this->any())
+            ->method('getArgsDefinition')
+            ->willReturn([]);
+
+        $request = $this->commandMock->getRequest();
+
+        $cdnAuthHeader = $request->getHeaderLine(Command::CUSTOM_CDN_AUTH_HEADER);
+        $decodedHeader = base64_decode($cdnAuthHeader);
+        $this->assertNotFalse($decodedHeader, 'x-serato-cdn-auth header should be a base-64-encoded string');
+        $this->assertEquals('my_cdn_client_id:my_cdn_secret', $decodedHeader);
+    }
+
     /**
      * @return array<array<mixed>>>
      */
@@ -225,7 +247,9 @@ class CommandTest extends AbstractTestCase
                 'my_app',
                 'my_pass',
                 $httpScheme . '://' . $httpHost,
-                $commandArgs
+                $commandArgs,
+                'my_cdn_client_id',
+                'my_cdn_secret'
             ]
         );
     }
