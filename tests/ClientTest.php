@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test;
 
+use Serato\SwsSdk\Command;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Client;
 use Serato\SwsSdk\Sdk;
@@ -255,6 +256,24 @@ class ClientTest extends AbstractTestCase
         $clientMock->getProduct($this->getCommandArgs());
     }
 
+    /**
+     * Tests that setting the $cdnAuthSecret constructor argument results in an x-serato-cdn-auth header being added to
+     * requests.
+     *
+     * @return void
+     */
+    public function testClientRequestCdnAuthHeader(): void
+    {
+        $clientMock = $this->getMockClient([$this->getMock200Response()]);
+        $command = $clientMock->getCommand(self::BASIC_AUTH_COMMAND_NAME, $this->getCommandArgs());
+        $request = $command->getRequest();
+
+        $cdnAuthHeader = $request->getHeaderLine(Command::CUSTOM_CDN_AUTH_HEADER);
+        $decodedHeader = base64_decode($cdnAuthHeader);
+        $this->assertNotFalse($decodedHeader, 'x-serato-cdn-auth header should be a base-64-encoded string');
+        $this->assertEquals('my_cdn_client_id:my_cdn_secret', $decodedHeader);
+    }
+
     protected function getMock200Response(): Response
     {
         return new Response(
@@ -292,7 +311,7 @@ class ClientTest extends AbstractTestCase
 
         $clientMock = $this->getMockForAbstractClass(
             Client::class,
-            [$args, 'my_app', 'my_pass']
+            [$args, 'my_app', 'my_pass', 'my_cdn_client_id', 'my_cdn_secret']
         );
 
         $clientMock->expects($this->any())

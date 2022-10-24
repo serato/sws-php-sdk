@@ -14,9 +14,15 @@ abstract class CommandBasicAuth extends Command
     /**
      * {@inheritdoc}
      */
-    public function __construct(string $appId, string $appPassword, string $baseUri, array $args)
-    {
-        parent::__construct($appId, $appPassword, $baseUri, $args);
+    public function __construct(
+        string $appId,
+        string $appPassword,
+        string $baseUri,
+        array $args,
+        string $cdnAuthId = '',
+        string $cdnAuthSecret = ''
+    ) {
+        parent::__construct($appId, $appPassword, $baseUri, $args, $cdnAuthId, $cdnAuthSecret);
         $this->setBasicAuthHeader();
     }
 

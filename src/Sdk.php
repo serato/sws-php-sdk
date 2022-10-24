@@ -65,6 +65,20 @@ class Sdk
     private $appPassword;
 
     /**
+     * Client identifier used to identify the application to test stack CDNs via a custom header
+     *
+     * @var string
+     */
+    private $cdnAuthId;
+
+    /**
+     * Secret used to authenticate with test stack CDNs via a custom header
+     *
+     * @var string
+     */
+    private $cdnAuthSecret;
+
+    /**
      * Client configuration data
      *
      * @var array{'base_uri': array<String, String>, 'timeout': ?float, 'handler': ?callable}
@@ -95,16 +109,25 @@ class Sdk
      * @param array<String, mixed> $args Client configuration arguments
      * @param string    $appId          Client application ID
      * @param string    $appPassword    Client application password
+     * @param string    $cdnAuthId      Client identifier used to identify the application to test stack CDNs
+     * @param string    $cdnAuthSecret  Secret used to authenticate with test stack CDNs via a custom header
      *
      * @return void
      *
      * @throws InvalidArgumentException If any required options are missing or
      *                                   an invalid value is provided.
      */
-    final public function __construct(array $args, string $appId = '', string $appPassword = '')
-    {
+    final public function __construct(
+        array $args,
+        string $appId = '',
+        string $appPassword = '',
+        string $cdnAuthId = '',
+        string $cdnAuthSecret = ''
+    ) {
         $this->appId = $appId;
         $this->appPassword = $appPassword;
+        $this->cdnAuthId = $cdnAuthId;
+        $this->cdnAuthSecret = $cdnAuthSecret;
 
         if (isset($args['timeout'])) {
             if (!is_float($args['timeout'])) {
@@ -231,6 +254,8 @@ class Sdk
      * @param callable|null $guzzleHander   Function that transfers HTTP requests over the wire. Passed to Guzzle
      *                                      clients to override the default handler (eg. to use a mock handler).
      *                                      See the Guzzle docs for more info.
+     * @param string $cdnAuthId             Client identifier used to identify the application to test stack CDNs
+     * @param string $cdnAuthSecret         Secret used to authenticate with test stack CDNs via a custom header
      *
      * @link http://guzzle.readthedocs.io/en/latest/quickstart.html Guzzle documentation
      *
@@ -241,7 +266,9 @@ class Sdk
         string $appId,
         string $appPassword,
         ?float $timeout = null,
-        ?callable $guzzleHander = null
+        ?callable $guzzleHander = null,
+        string $cdnAuthId = '',
+        string $cdnAuthSecret = ''
     ): self {
         $args = [
             self::BASE_URI => [
@@ -260,7 +287,7 @@ class Sdk
         if ($guzzleHander !== null) {
             $args['handler'] = $guzzleHander;
         }
-        return new static($args, $appId, $appPassword);
+        return new static($args, $appId, $appPassword, $cdnAuthId, $cdnAuthSecret);
     }
 
     /**
@@ -341,7 +368,7 @@ class Sdk
      */
     private function createClient(string $className)
     {
-        return new $className($this->config, $this->appId, $this->appPassword);
+        return new $className($this->config, $this->appId, $this->appPassword, $this->cdnAuthId, $this->cdnAuthSecret);
     }
 
     /**
@@ -416,5 +443,49 @@ class Sdk
             self::BASE_URI_NOTIFICATIONS => $notificationsServiceBaseUri,
             self::BASE_URI_REWARDS => $rewardsServiceBaseUri
         ];
+    }
+
+    /**
+     * Returns the client identifier used to identify the application to test stack CDNs via a custom header
+     *
+     * @return string Client identifier used to identify the application to test stack CDNs
+     */
+    public function getCdnAuthId(): string
+    {
+        return $this->cdnAuthId;
+    }
+
+    /**
+     * Returns the ID used to identify this application to test stack CDNs
+     *
+     * @param string $cdnAuthId Client identifier used to identify the application to test stack CDNs
+     * @return $this
+     */
+    public function setCdnAuthId(string $cdnAuthId): self
+    {
+        $this->cdnAuthId = $cdnAuthId;
+        return $this;
+    }
+
+    /**
+     * Returns the secret used to authenticate with test stack CDNs via a custom header
+     *
+     * @return string
+     */
+    public function getCdnAuthSecret(): string
+    {
+        return $this->cdnAuthSecret;
+    }
+
+    /**
+     * Set the secret used to authenticate with test stack CDNs via a custom header for all requests made using the SDK
+     *
+     * @param string $cdnAuthSecret Secret used to authenticate with test stack CDNs via a custom header
+     * @return $this
+     */
+    public function setCdnAuthSecret(string $cdnAuthSecret): self
+    {
+        $this->cdnAuthSecret = $cdnAuthSecret;
+        return $this;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Serato\SwsSdk\Test;
 
+use Serato\SwsSdk\Command;
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Sdk;
 use InvalidArgumentException;
@@ -318,6 +319,49 @@ class SdkTest extends AbstractTestCase
         $this->assertEquals($hostName->get(HostName::DIGITAL_ASSETS), $config['base_uri']['da']);
         $this->assertEquals($hostName->get(HostName::NOTIFICATIONS), $config['base_uri']['notifications']);
         $this->assertEquals($hostName->get(HostName::REWARDS), $config['base_uri']['rewards']);
+    }
+
+    public function testCreateMethodCdnAuthArguments(): void
+    {
+        $timeout = 3.33;
+        $handler = function () {
+            echo 'this is a function';
+        };
+        $sdk = Sdk::create(
+            new HostName('test', 8),
+            'my-app-id',
+            'my-app-secret',
+            $timeout,
+            $handler,
+            'my-cdn-auth-id',
+            'my-cdn-auth-secret'
+        );
+
+        // Instantiate (but don't execute) a request using the SDK
+        $testRequest = $sdk->createIdentityClient()->getCommand('GetUser')->getRequest();
+
+        $cdnAuthHeader = $testRequest->getHeaderLine(Command::CUSTOM_CDN_AUTH_HEADER);
+        $decodedHeader = base64_decode($cdnAuthHeader);
+        $this->assertNotFalse($decodedHeader, 'x-serato-cdn-auth header should be a base-64-encoded string');
+        $this->assertEquals('my-cdn-auth-id:my-cdn-auth-secret', $decodedHeader);
+    }
+
+    public function testConstructorWithCdnAuthArguments(): void
+    {
+        $sdk = new Sdk(
+            ['env' => Sdk::ENV_STAGING],
+            'my-app-id',
+            'my-app-secret',
+            'my-cdn-auth-id',
+            'my-cdn-auth-secret'
+        );
+
+        $testRequest = $sdk->createIdentityClient()->getCommand('GetUser')->getRequest();
+
+        $cdnAuthHeader = $testRequest->getHeaderLine(Command::CUSTOM_CDN_AUTH_HEADER);
+        $decodedHeader = base64_decode($cdnAuthHeader);
+        $this->assertNotFalse($decodedHeader, 'x-serato-cdn-auth header should be a base-64-encoded string');
+        $this->assertEquals('my-cdn-auth-id:my-cdn-auth-secret', $decodedHeader);
     }
 
     /**
