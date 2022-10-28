@@ -21,14 +21,6 @@ class InvoicesSummary extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getBody(): string
-    {
-        return $this->arrayToFormUrlEncodedBody($this->commandArgs);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getHttpMethod(): string
     {
         return 'GET';

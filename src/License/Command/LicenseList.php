@@ -24,16 +24,6 @@ class LicenseList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
-    public function getBody(): string
-    {
-        $args = $this->commandArgs;
-        unset($args['user_id']);
-        return $this->arrayToFormUrlEncodedBody($args);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getHttpMethod(): string
     {
         return 'GET';
