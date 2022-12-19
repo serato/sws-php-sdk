@@ -84,6 +84,7 @@ class UserUpdate extends CommandBasicAuth
             'country_code'          => ['type' => self::ARG_TYPE_STRING, 'required' => false],
             'twitch_access_token'   => ['type' => self::ARG_TYPE_STRING, 'required' => false],
             'company'               => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'daw'                   => ['type' => self::ARG_TYPE_STRING, 'required' => false],
         ];
     }
 }
