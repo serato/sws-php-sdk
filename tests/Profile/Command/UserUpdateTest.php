@@ -41,6 +41,7 @@ class UserUpdateTest extends AbstractTestCase
             'locale'                => 'en',
             'global_contact_status' => 3,
             'twitch_access_token'   => 'gdfsgdfgsgdfgfgdsgfd',
+            'daw'                   => 'logic'
         ];
 
         $command = new UserUpdate(
