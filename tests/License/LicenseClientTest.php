@@ -90,11 +90,11 @@ class LicenseClientTest extends AbstractTestCase
         );
     }
 
-    public function testGetProductTypes(): void
+    public function testGetProductType(): void
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createLicenseClient();
-        $result = $client->getProductTypes(['product_type_id' => 100]);
+        $result = $client->getProductType(['product_type_id' => 100]);
         $this->assertEquals(
             (string)$this->getResponseObjectFromResult($result)->getBody(),
             $body

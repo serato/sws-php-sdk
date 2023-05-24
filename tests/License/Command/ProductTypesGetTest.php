@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Serato\SwsSdk\Test\License\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
-use Serato\SwsSdk\License\Command\ProductTypesGet;
+use Serato\SwsSdk\License\Command\ProductTypeGet;
 
-class ProductTypesGetTest extends AbstractTestCase
+class ProductTypeGetTest extends AbstractTestCase
 {
     public function testSmokeTest(): void
     {
         $productTypeId = 100;
-        $command = new ProductTypesGet(
+        $command = new ProductTypeGet(
             'app_id',
             'app_password',
             'http://my.server.com',
@@ -31,7 +31,7 @@ class ProductTypesGetTest extends AbstractTestCase
      */
     public function testMissingRequiredArg(): void
     {
-        $command = new ProductTypesGet(
+        $command = new ProductTypeGet(
             'app_id',
             'app_password',
             'http://my.server.com',

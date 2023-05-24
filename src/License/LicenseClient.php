@@ -16,7 +16,7 @@ use Serato\SwsSdk\Client;
  * @method \Serato\SwsSdk\Result updateProduct(array $args)
  * @method \Serato\SwsSdk\Result deleteProduct(array $args)
  * @method \Serato\SwsSdk\Result getLicenses(array $args)
- * @method \Serato\SwsSdk\Result getProductTypes(array $args)
+ * @method \Serato\SwsSdk\Result getProductType(array $args)
  */
 class LicenseClient extends Client
 {
@@ -46,7 +46,7 @@ class LicenseClient extends Client
             'UpdateProduct'     => '\\Serato\\SwsSdk\\License\\Command\\ProductUpdate',
             'DeleteProduct'     => '\\Serato\\SwsSdk\\License\\Command\\ProductDelete',
             'GetLicenses'       => '\\Serato\\SwsSdk\\License\\Command\\LicenseList',
-            'GetProductTypes'   => '\\Serato\\SwsSdk\\License\\Command\\ProductTypesGet'
+            'GetProductType'   => '\\Serato\\SwsSdk\\License\\Command\\ProductTypeGet'
         ];
     }
 }

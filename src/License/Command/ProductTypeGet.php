@@ -14,9 +14,9 @@ use Serato\SwsSdk\CommandBearerTokenAuth;
  * - `product_type_id`: (integer) Required. Product type id of the Product to create
  *
  * This command can be excuted on a `Serato\SwsSdk\License\LicenseClient` instance
- * using the `LicenseClient::getProductTypes` magic method.
+ * using the `LicenseClient::getProductType` magic method.
  */
-class ProductTypesGet extends CommandBearerTokenAuth
+class ProductTypeGet extends CommandBearerTokenAuth
 {
     /**
      * {@inheritdoc}
