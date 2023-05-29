@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Serato\SwsSdk\License\Command;
 
-use Serato\SwsSdk\CommandBearerTokenAuth;
+use Serato\SwsSdk\CommandBasicAuth;
 
 /**
  * Gets information about Product Types from the SWS License service.
@@ -16,7 +16,7 @@ use Serato\SwsSdk\CommandBearerTokenAuth;
  * This command can be excuted on a `Serato\SwsSdk\License\LicenseClient` instance
  * using the `LicenseClient::getProductType` magic method.
  */
-class ProductTypeGet extends CommandBearerTokenAuth
+class ProductTypeGet extends CommandBasicAuth
 {
     /**
      * {@inheritdoc}

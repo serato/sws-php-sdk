@@ -19,11 +19,11 @@ class ProductTypeGetTest extends AbstractTestCase
             ['product_type_id' => $productTypeId]
         );
 
-        $request = $command->getRequest('bearer_token_value');
+        $request = $command->getRequest();
         parse_str((string)$request->getBody(), $bodyParams);
         $this->assertEquals('GET', $request->getMethod());
         $this->assertRegExp('/^\/api\/v1\/products\/types\/' . $productTypeId . '$/', $request->getUri()->getPath());
-        $this->assertRegExp('/^Bearer [[:alnum:]=_]+$/', $request->getHeaderLine('Authorization'));
+        $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
     }
 
     /**
