@@ -36,7 +36,9 @@ class InvoiceCreate extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'order_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true]
+            'order_id' => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
+            'transaction_reference' => ['type' => self::ARG_TYPE_STRING, 'required' => true],
+            'payment_instrument_transaction_reference' => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
 }

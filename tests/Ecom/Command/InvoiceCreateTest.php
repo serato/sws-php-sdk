@@ -52,7 +52,11 @@ class InvoiceCreateTest extends AbstractTestCase
             'app_id',
             'app_password',
             'http://my.server.com',
-            ['order_id' => $orderId]
+            [
+                'order_id' => $orderId,
+                'transaction_reference' => 'mock_transaction_ref',
+                'payment_instrument_transaction_reference' => 'mock_payment_instrument_transaction_ref'
+            ]
         );
 
         $request = $command->getRequest();
