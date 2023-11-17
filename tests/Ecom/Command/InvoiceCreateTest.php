@@ -48,20 +48,29 @@ class InvoiceCreateTest extends AbstractTestCase
     public function testSmokeTest(): void
     {
         $orderId = 123;
+
+        $args = [
+            'order_id' => $orderId,
+            'transaction_reference' => 'mock_transaction_ref',
+            'payment_instrument_transaction_reference' => 'mock_payment_instrument_transaction_ref'
+        ];
+
         $command = new InvoiceCreate(
             'app_id',
             'app_password',
             'http://my.server.com',
-            [
-                'order_id' => $orderId,
-                'transaction_reference' => 'mock_transaction_ref',
-                'payment_instrument_transaction_reference' => 'mock_payment_instrument_transaction_ref'
-            ]
+            $args
         );
 
         $request = $command->getRequest();
+        parse_str((string) $request->getBody(), $bodyParams);
+
         $this->assertEquals('POST', $request->getMethod());
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
         $this->assertStringEndsWith("/api/v1/orders/{$orderId}/invoice", $request->getUri()->getPath());
+
+        unset($args['order_id']);
+        $expectedBodyParams = $args;
+        $this->assertEquals($expectedBodyParams, $bodyParams);
     }
 }
