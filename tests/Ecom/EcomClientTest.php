@@ -60,7 +60,13 @@ class EcomClientTest extends AbstractTestCase
     {
         $body = '{"var1":"val1"}';
         $client = $this->getSdkWithMocked200Response($body)->createEcomClient();
-        $result = $client->createInvoice(['order_id' => 123]);
+        $result = $client->createInvoice(
+            [
+                'order_id' => 123,
+                'transaction_reference' => 'mock_transaction_ref',
+                'payment_instrument_transaction_reference' => 'mock_payment_instrument_transaction_ref'
+            ]
+        );
         $this->assertEquals(
             (string)$this->getResponseObjectFromResult($result)->getBody(),
             $body
