@@ -19,7 +19,7 @@ script:
 - "./vendor/bin/phpstan analyse"
 - php vendor/bin/phpunit
 - "./vendor/bin/phpcs"
-#- "./vendor/bin/security-checker security:check" it is failing due to a critical vulnerability in AWS SDK
+- "./vendor/bin/security-checker security:check --allow-list CVE-2023-51651"
 after_success:
 addons:
   artifacts:
