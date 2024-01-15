@@ -21,6 +21,8 @@ use Serato\SwsSdk\CommandBasicAuth;
  *   the `checkout_order_item_id` parameter.
  * - `checkout_order_item_id`: (integer) Serato Checkout Order Item ID. Must be
  *   accompanied by the `checkout_order_id` parameter.
+ * - `checkout_order_item_quantity`: (integer) Max number of products that can be created for the provided checkout
+ *    order item. Must be accompanied by the `checkout_order_item_id` parameter.
  * - `magento_order_id`: (integer) Magento Order ID. Must be accompanied by the
  *   `magento_order_item_id` parameter.
  * - `magento_order_item_id`: (integer) Magento Order Item ID. Must be accompanied
@@ -74,20 +76,21 @@ class ProductCreate extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'product_type_id'           => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
-            'user_id'                   => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'user_email_address'        => ['type' => self::ARG_TYPE_STRING, 'required' => false],
-            'reseller_name'             => ['type' => self::ARG_TYPE_STRING, 'required' => false],
-            'created_by_user_id'        => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'nfr'                       => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'notes'                     => ['type' => self::ARG_TYPE_STRING, 'required' => false],
-            'valid_to'                  => ['type' => self::ARG_TYPE_DATETIME, 'required' => false],
-            'checkout_order_id'         => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'checkout_order_item_id'    => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'magento_order_id'          => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'magento_order_item_id'     => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
-            'subscription_status'       => ['type' => self::ARG_TYPE_STRING, 'required' => false],
-            'upgrade_from_product_id'   => ['type' => self::ARG_TYPE_STRING, 'required' => false]
+            'product_type_id'              => ['type' => self::ARG_TYPE_INTEGER, 'required' => true],
+            'user_id'                      => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'user_email_address'           => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'reseller_name'                => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'created_by_user_id'           => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'nfr'                          => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'notes'                        => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'valid_to'                     => ['type' => self::ARG_TYPE_DATETIME, 'required' => false],
+            'checkout_order_id'            => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'checkout_order_item_id'       => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'checkout_order_item_quantity' => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'magento_order_id'             => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'magento_order_item_id'        => ['type' => self::ARG_TYPE_INTEGER, 'required' => false],
+            'subscription_status'          => ['type' => self::ARG_TYPE_STRING, 'required' => false],
+            'upgrade_from_product_id'      => ['type' => self::ARG_TYPE_STRING, 'required' => false]
         ];
     }
 }
