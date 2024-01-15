@@ -19,6 +19,7 @@ script:
 - "./vendor/bin/phpstan analyse"
 - php vendor/bin/phpunit
 - "./vendor/bin/phpcs"
+# We allow CVE-2023-51651 vulnerability until we upgrade PHP to at least 7.2 to upgrade the AWS SDK.
 - "./vendor/bin/security-checker security:check --allow-list CVE-2023-51651"
 after_success:
 addons:
