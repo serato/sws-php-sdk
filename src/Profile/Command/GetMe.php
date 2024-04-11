@@ -29,7 +29,7 @@ class GetMe extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/me/';
+        return '/api/v1/me';
     }
 
     /**
