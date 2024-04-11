@@ -35,6 +35,17 @@ class ProfileClientTest extends AbstractTestCase
 
     /* The remaining tests are smoke tests for each magic method provided by the client */
 
+    public function testGetMe(): void
+    {
+        $body = '{"var1":"val1"}';
+        $client = $this->getSdkWithMocked200Response($body)->createProfileClient();
+        $result = $client->getMe();
+        $this->assertEquals(
+            (string)$this->getResponseObjectFromResult($result)->getBody(),
+            $body
+        );
+    }
+
     public function testGetUser(): void
     {
         $body = '{"var1":"val1"}';
