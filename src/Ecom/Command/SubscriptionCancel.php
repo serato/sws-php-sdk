@@ -22,6 +22,7 @@ class SubscriptionCancel extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody(): string
     {
         $args = $this->commandArgs;
@@ -32,6 +33,7 @@ class SubscriptionCancel extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'DELETE';
@@ -40,6 +42,7 @@ class SubscriptionCancel extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return
@@ -52,6 +55,7 @@ class SubscriptionCancel extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

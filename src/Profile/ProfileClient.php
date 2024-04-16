@@ -24,6 +24,7 @@ class ProfileClient extends Client
      *
      * @return string
      */
+    #[\Override]
     public function getBaseUri(): string
     {
         return $this->config[Sdk::BASE_URI][Sdk::BASE_URI_PROFILE];
@@ -36,21 +37,22 @@ class ProfileClient extends Client
      *
      * @return array<String, String>
      */
+    #[\Override]
     public function getCommandMap(): array
     {
         return [
             # GET /users/{user_id}
-            'GetUser'    => '\\Serato\\SwsSdk\\Profile\\Command\\UserGet',
+            'GetUser'    => \Serato\SwsSdk\Profile\Command\UserGet::class,
             # PUT /users/{user_id}
-            'UpdateUser' => '\\Serato\\SwsSdk\\Profile\\Command\\UserUpdate',
+            'UpdateUser' => \Serato\SwsSdk\Profile\Command\UserUpdate::class,
             # GET /users/{user_id}/betaprograms
-            'GetUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserGetBetaProgram',
+            'GetUserBetaProgram' => \Serato\SwsSdk\Profile\Command\UserGetBetaProgram::class,
             # POST /users/{user_id}/betaprograms
-            'AddUserBetaProgram' => '\\Serato\\SwsSdk\\Profile\\Command\\UserAddBetaProgram',
+            'AddUserBetaProgram' => \Serato\SwsSdk\Profile\Command\UserAddBetaProgram::class,
             # POST /users/{user_id}/betaprograms/validateall
-            'ValidateAllUserBetaPrograms' => '\\Serato\\SwsSdk\\Profile\\Command\\UserValidateAllBetaPrograms',
+            'ValidateAllUserBetaPrograms' => \Serato\SwsSdk\Profile\Command\UserValidateAllBetaPrograms::class,
             # POST /partnerpromotions/code
-            'ParterPromotionAddUser' => '\\Serato\\SwsSdk\\Profile\\Command\\PartnerPromotionAddUser'
+            'ParterPromotionAddUser' => \Serato\SwsSdk\Profile\Command\PartnerPromotionAddUser::class
         ];
     }
 }

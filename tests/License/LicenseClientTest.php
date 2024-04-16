@@ -10,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class LicenseClientTest extends AbstractTestCase
 {
-    private const LICENSE_SERVER_BASE_URI = 'http://license.server.com';
+    private const string LICENSE_SERVER_BASE_URI = 'http://license.server.com';
 
     public function testGetBaseUri(): void
     {

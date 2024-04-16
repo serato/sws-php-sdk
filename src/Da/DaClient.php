@@ -17,6 +17,7 @@ class DaClient extends Client
      *
      * @return string
      */
+    #[\Override]
     public function getBaseUri(): string
     {
         return $this->config[Sdk::BASE_URI][Sdk::BASE_URI_DA];
@@ -29,6 +30,7 @@ class DaClient extends Client
      *
      * @return array<String, String>
      */
+    #[\Override]
     public function getCommandMap(): array
     {
         return [];

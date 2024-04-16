@@ -12,6 +12,7 @@ use Serato\SwsSdk\Exception\ErrorCodeResponseException;
  */
 class UnauthorizedException extends ErrorCodeResponseException
 {
+    #[\Override]
     protected function getHttpResponseName(): string
     {
         return '401 Unauthorized';

@@ -33,6 +33,7 @@ class ProductUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody()
     {
         $args = $this->commandArgs;
@@ -43,6 +44,7 @@ class ProductUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'PUT';
@@ -51,6 +53,7 @@ class ProductUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/products/products/' . self::toString($this->commandArgs['product_id']);
@@ -59,6 +62,7 @@ class ProductUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -67,6 +71,7 @@ class ProductUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

@@ -17,6 +17,7 @@ class RefereeActivityList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'GET';
@@ -25,6 +26,7 @@ class RefereeActivityList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return
@@ -35,6 +37,7 @@ class RefereeActivityList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

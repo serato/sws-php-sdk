@@ -23,6 +23,7 @@ class ProductList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'GET';
@@ -31,6 +32,7 @@ class ProductList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/products/products';
@@ -39,6 +41,7 @@ class ProductList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriQuery(): string
     {
         return http_build_query($this->commandArgs);
@@ -47,6 +50,7 @@ class ProductList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

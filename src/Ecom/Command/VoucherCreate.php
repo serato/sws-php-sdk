@@ -20,6 +20,7 @@ class VoucherCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody()
     {
         return $this->arrayToFormUrlEncodedBody($this->commandArgs);
@@ -28,6 +29,7 @@ class VoucherCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'POST';
@@ -36,6 +38,7 @@ class VoucherCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/vouchers';
@@ -44,6 +47,7 @@ class VoucherCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -52,6 +56,7 @@ class VoucherCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

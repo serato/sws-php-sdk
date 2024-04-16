@@ -16,6 +16,7 @@ class UserBillingAddressUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody(): string
     {
         $args = $this->commandArgs;
@@ -26,6 +27,7 @@ class UserBillingAddressUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'PUT';
@@ -34,6 +36,7 @@ class UserBillingAddressUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         $userId = self::toString($this->commandArgs['user_id']);
@@ -43,6 +46,7 @@ class UserBillingAddressUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -51,6 +55,7 @@ class UserBillingAddressUpdate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

@@ -254,6 +254,7 @@ abstract class Client extends GuzzleClient
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function __call($name, $args)
     {
         # Magic method that allows Commands to be executed on a Client by using
@@ -285,7 +286,7 @@ abstract class Client extends GuzzleClient
             $params = $args[1];
         }
 
-        if (substr($name, -5) === 'Async') {
+        if (str_ends_with($name, 'Async')) {
             return $this->executeAsync(ucfirst(substr($name, 0, -5)), $params, $bearerToken);
         }
 

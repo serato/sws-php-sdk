@@ -13,11 +13,13 @@ use Serato\SwsSdk\Exception\ResponseException;
  */
 abstract class ErrorMessageResponseException extends ResponseException
 {
+    #[\Override]
     protected function getResultMessage(): string
     {
-        return "Message: " . trim($this->getResult()['message']);
+        return "Message: " . trim((string) $this->getResult()['message']);
     }
 
+    #[\Override]
     protected function getResultCode(): int
     {
         $response = $this->getResult()->getResponse();

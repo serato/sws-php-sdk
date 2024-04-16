@@ -22,6 +22,7 @@ class VoucherTypeList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'GET';
@@ -30,6 +31,7 @@ class VoucherTypeList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return
@@ -39,6 +41,7 @@ class VoucherTypeList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriQuery(): string
     {
         return http_build_query($this->commandArgs);
@@ -47,6 +50,7 @@ class VoucherTypeList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

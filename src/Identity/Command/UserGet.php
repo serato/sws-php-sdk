@@ -19,6 +19,7 @@ class UserGet extends CommandBearerTokenAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'GET';
@@ -27,6 +28,7 @@ class UserGet extends CommandBearerTokenAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/me';
@@ -35,6 +37,7 @@ class UserGet extends CommandBearerTokenAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [];

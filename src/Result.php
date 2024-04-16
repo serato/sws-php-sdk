@@ -25,13 +25,9 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     /** @var array<String, mixed> */
     private $data = [];
 
-    /** @var ResponseInterface */
-    private $response;
-
-    public function __construct(ResponseInterface $response)
+    public function __construct(private readonly ResponseInterface $response)
     {
-        $this->response = $response;
-        $this->data = $this->parseResponseBody($response) ?? [];
+        $this->data = $this->parseResponseBody($this->response) ?? [];
     }
 
     /**
@@ -45,7 +41,6 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     }
 
     /**
-     * @param ResponseInterface $response
      * @return null|array<String, mixed>
      */
     private function parseResponseBody(ResponseInterface $response): ?array
@@ -68,7 +63,6 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     }
 
     /**
-     * @param ResponseInterface $response
      * @return null|array<String, mixed>
      */
     private function parseJsonResponseBody(ResponseInterface $response): ?array
@@ -81,6 +75,7 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
      *
      * @return ArrayIterator<String, mixed>
      */
+    #[\Override]
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->data);
@@ -89,10 +84,10 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     /**
      * Implementation for `ArrayAccess` interface
      *
-     * @param mixed $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    #[\Override]
+    public function offsetGet(mixed $offset)
     {
         if (isset($this->data[$offset])) {
             return $this->data[$offset];
@@ -102,11 +97,10 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     /**
      * Implementation for `ArrayAccess` interface
      *
-     * @param mixed $offset
-     * @param mixed $value
      * @return void
      */
-    public function offsetSet($offset, $value)
+    #[\Override]
+    public function offsetSet(mixed $offset, mixed $value)
     {
         $this->data[$offset] = $value;
     }
@@ -114,10 +108,10 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     /**
      * Implementation for `ArrayAccess` interface
      *
-     * @param mixed $offset
      * @return boolean
      */
-    public function offsetExists($offset)
+    #[\Override]
+    public function offsetExists(mixed $offset)
     {
         return isset($this->data[$offset]);
     }
@@ -125,10 +119,10 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     /**
      * Implementation for `ArrayAccess` interface
      *
-     * @param mixed $offset
      * @return void
      */
-    public function offsetUnset($offset)
+    #[\Override]
+    public function offsetUnset(mixed $offset)
     {
         unset($this->data[$offset]);
     }
@@ -136,6 +130,7 @@ class Result implements IteratorAggregate, ArrayAccess, Countable
     /**
      * Implementation for `Countable` interface
      */
+    #[\Override]
     public function count()
     {
         return count($this->data);

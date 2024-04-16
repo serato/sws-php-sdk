@@ -12,6 +12,7 @@ use Serato\SwsSdk\Exception\ErrorCodeResponseException;
  */
 class BadRequestException extends ErrorCodeResponseException
 {
+    #[\Override]
     protected function getHttpResponseName(): string
     {
         return '400 Bad Request';

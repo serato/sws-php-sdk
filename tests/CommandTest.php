@@ -64,9 +64,7 @@ class CommandTest extends AbstractTestCase
      * @param array<mixed> $commandArgDef
      * @param array<mixed> $commandArgs
      * @param array<String> $exceptionTexts
-     * @param string $assertText
      * @return void
-     *
      * @dataProvider commandArgsValidationProvider
      */
     public function testCommandArgsValidation(
@@ -138,7 +136,7 @@ class CommandTest extends AbstractTestCase
         $request = $this->commandMock->getRequest();
 
         $cdnAuthHeader = $request->getHeaderLine(Command::CUSTOM_CDN_AUTH_HEADER);
-        $decodedHeader = base64_decode($cdnAuthHeader);
+        $decodedHeader = base64_decode((string) $cdnAuthHeader);
         $this->assertNotFalse($decodedHeader, 'x-serato-cdn-auth header should be a base-64-encoded string');
         $this->assertEquals('my_cdn_client_id:my_cdn_secret', $decodedHeader);
     }
@@ -234,8 +232,6 @@ class CommandTest extends AbstractTestCase
     }
 
     /**
-     * @param string $httpScheme
-     * @param string $httpHost
      * @param array<mixed> $commandArgs
      * @return void
      */

@@ -10,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class IdentityClientTest extends AbstractTestCase
 {
-    private const ID_SERVER_BASE_URI = 'http://id.server.com';
+    private const string ID_SERVER_BASE_URI = 'http://id.server.com';
 
     public function testGetBaseUri(): void
     {

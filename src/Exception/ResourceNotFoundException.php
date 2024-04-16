@@ -12,6 +12,7 @@ use Serato\SwsSdk\Exception\ErrorMessageResponseException;
  */
 class ResourceNotFoundException extends ErrorMessageResponseException
 {
+    #[\Override]
     protected function getHttpResponseName(): string
     {
         return '404 Not Found';

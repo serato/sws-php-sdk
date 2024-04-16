@@ -10,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class NotificationsClientTest extends AbstractTestCase
 {
-    private const NOTIFICATIONS_SERVER_BASE_URI = 'http://da.server.com';
+    private const string NOTIFICATIONS_SERVER_BASE_URI = 'http://da.server.com';
 
     public function testGetBaseUri(): void
     {

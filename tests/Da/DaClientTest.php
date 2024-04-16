@@ -10,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class DaClientTest extends AbstractTestCase
 {
-    private const DA_SERVER_BASE_URI = 'http://da.server.com';
+    private const string DA_SERVER_BASE_URI = 'http://da.server.com';
 
     public function testGetBaseUri(): void
     {

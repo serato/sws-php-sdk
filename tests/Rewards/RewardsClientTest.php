@@ -10,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class RewardsClientTest extends AbstractTestCase
 {
-    private const REWARDS_SERVER_BASE_URI = 'http://rewards.server.com';
+    private const string REWARDS_SERVER_BASE_URI = 'http://rewards.server.com';
 
     public function testGetBaseUri(): void
     {

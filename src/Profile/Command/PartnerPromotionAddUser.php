@@ -22,6 +22,7 @@ class PartnerPromotionAddUser extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody()
     {
         return $this->arrayToFormUrlEncodedBody($this->commandArgs);
@@ -30,6 +31,7 @@ class PartnerPromotionAddUser extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'POST';
@@ -38,6 +40,7 @@ class PartnerPromotionAddUser extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/partnerpromotions/code';
@@ -46,6 +49,7 @@ class PartnerPromotionAddUser extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -54,6 +58,7 @@ class PartnerPromotionAddUser extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

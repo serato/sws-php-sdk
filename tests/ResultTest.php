@@ -72,9 +72,7 @@ class ResultTest extends AbstractTestCase
     /**
      * 204 responses are not required to send a `Content-Type': application/json` header
      *
-     * @param ResponseInterface $response
      * @return void
-     *
      * @dataProvider get204ResponseProvider
      */
     public function test204Responses(ResponseInterface $response): void

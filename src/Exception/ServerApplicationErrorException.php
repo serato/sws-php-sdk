@@ -12,6 +12,7 @@ use Serato\SwsSdk\Exception\ErrorMessageResponseException;
  */
 class ServerApplicationErrorException extends ErrorMessageResponseException
 {
+    #[\Override]
     protected function getHttpResponseName(): string
     {
         return '500 Application Error';

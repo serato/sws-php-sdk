@@ -15,6 +15,7 @@ abstract class CommandBearerTokenAuth extends Command
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getRequest(string $bearerToken = ''): RequestInterface
     {
         $this->setBearerAuthHeader($bearerToken);

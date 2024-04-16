@@ -24,6 +24,7 @@ class LicenseClient extends Client
      *
      * @return string
      */
+    #[\Override]
     public function getBaseUri(): string
     {
         return $this->config[Sdk::BASE_URI][Sdk::BASE_URI_LICENSE];
@@ -36,15 +37,16 @@ class LicenseClient extends Client
      *
      * @return array<String, String>
      */
+    #[\Override]
     public function getCommandMap(): array
     {
         return [
-            'GetProducts'       => '\\Serato\\SwsSdk\\License\\Command\\ProductList',
-            'GetProduct'        => '\\Serato\\SwsSdk\\License\\Command\\ProductGet',
-            'CreateProduct'     => '\\Serato\\SwsSdk\\License\\Command\\ProductCreate',
-            'UpdateProduct'     => '\\Serato\\SwsSdk\\License\\Command\\ProductUpdate',
-            'DeleteProduct'     => '\\Serato\\SwsSdk\\License\\Command\\ProductDelete',
-            'GetLicenses'       => '\\Serato\\SwsSdk\\License\\Command\\LicenseList'
+            'GetProducts'       => \Serato\SwsSdk\License\Command\ProductList::class,
+            'GetProduct'        => \Serato\SwsSdk\License\Command\ProductGet::class,
+            'CreateProduct'     => \Serato\SwsSdk\License\Command\ProductCreate::class,
+            'UpdateProduct'     => \Serato\SwsSdk\License\Command\ProductUpdate::class,
+            'DeleteProduct'     => \Serato\SwsSdk\License\Command\ProductDelete::class,
+            'GetLicenses'       => \Serato\SwsSdk\License\Command\LicenseList::class
         ];
     }
 }

@@ -10,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class EcomClientTest extends AbstractTestCase
 {
-    private const ECOM_SERVER_BASE_URI = 'http://ecom.server.com';
+    private const string ECOM_SERVER_BASE_URI = 'http://ecom.server.com';
 
     public function testGetBaseUri(): void
     {

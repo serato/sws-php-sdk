@@ -21,6 +21,7 @@ class SubscriptionList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'GET';
@@ -29,6 +30,7 @@ class SubscriptionList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return
@@ -40,6 +42,7 @@ class SubscriptionList extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

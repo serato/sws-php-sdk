@@ -25,6 +25,7 @@ class IdentityClient extends Client
      *
      * @return string
      */
+    #[\Override]
     public function getBaseUri(): string
     {
         return $this->config[Sdk::BASE_URI][Sdk::BASE_URI_ID];
@@ -37,16 +38,17 @@ class IdentityClient extends Client
      *
      * @return array<String, String>
      */
+    #[\Override]
     public function getCommandMap(): array
     {
         return [
-            'GetUser'           => '\\Serato\\SwsSdk\\Identity\\Command\\UserGet',
-            'GetUsers'          => '\\Serato\\SwsSdk\\Identity\\Command\\UserList',
-            'UserAddGaClientId' => '\\Serato\\SwsSdk\\Identity\\Command\\UserAddGaClientId',
-            'TokenExchange'     => '\\Serato\\SwsSdk\\Identity\\Command\\TokenExchange',
-            'TokenRefresh'      => '\\Serato\\SwsSdk\\Identity\\Command\\TokenRefresh',
-            'AddUserGroup'      => '\\Serato\\SwsSdk\\Identity\\Command\\UserGroupAdd',
-            'RemoveUserGroup'   => '\\Serato\\SwsSdk\\Identity\\Command\\UserGroupRemove'
+            'GetUser'           => \Serato\SwsSdk\Identity\Command\UserGet::class,
+            'GetUsers'          => \Serato\SwsSdk\Identity\Command\UserList::class,
+            'UserAddGaClientId' => \Serato\SwsSdk\Identity\Command\UserAddGaClientId::class,
+            'TokenExchange'     => \Serato\SwsSdk\Identity\Command\TokenExchange::class,
+            'TokenRefresh'      => \Serato\SwsSdk\Identity\Command\TokenRefresh::class,
+            'AddUserGroup'      => \Serato\SwsSdk\Identity\Command\UserGroupAdd::class,
+            'RemoveUserGroup'   => \Serato\SwsSdk\Identity\Command\UserGroupRemove::class
         ];
     }
 }

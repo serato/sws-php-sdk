@@ -49,35 +49,6 @@ class Sdk
     public const BASE_URI_PRODUCTION_NOTIFICATIONS = 'https://notifications.serato.com';
     public const BASE_URI_PRODUCTION_REWARDS = 'https://rewards.serato.com';
 
-
-    /**
-     * Client application ID
-     *
-     * @var string
-     */
-    private $appId;
-
-    /**
-     * Client application password
-     *
-     * @var string
-     */
-    private $appPassword;
-
-    /**
-     * Client identifier used to identify the application to test stack CDNs via a custom header
-     *
-     * @var string
-     */
-    private $cdnAuthId;
-
-    /**
-     * Secret used to authenticate with test stack CDNs via a custom header
-     *
-     * @var string
-     */
-    private $cdnAuthSecret;
-
     /**
      * Client configuration data
      *
@@ -119,16 +90,23 @@ class Sdk
      */
     final public function __construct(
         array $args,
-        string $appId = '',
-        string $appPassword = '',
-        string $cdnAuthId = '',
-        string $cdnAuthSecret = ''
+        /**
+         * Client application ID
+         */
+        private string $appId = '',
+        /**
+         * Client application password
+         */
+        private string $appPassword = '',
+        /**
+         * Client identifier used to identify the application to test stack CDNs via a custom header
+         */
+        private string $cdnAuthId = '',
+        /**
+         * Secret used to authenticate with test stack CDNs via a custom header
+         */
+        private string $cdnAuthSecret = ''
     ) {
-        $this->appId = $appId;
-        $this->appPassword = $appPassword;
-        $this->cdnAuthId = $cdnAuthId;
-        $this->cdnAuthSecret = $cdnAuthSecret;
-
         if (isset($args['timeout'])) {
             if (!is_float($args['timeout'])) {
                 throw new InvalidArgumentException(
@@ -210,8 +188,8 @@ class Sdk
                 foreach ($services as $name => $defaultUri) {
                     if (isset($args[self::BASE_URI][$name])) {
                         if (
-                            strpos($args[self::BASE_URI][$name], 'http://') !== 0 &&
-                            strpos($args[self::BASE_URI][$name], 'https://') !== 0
+                            !str_starts_with((string) $args[self::BASE_URI][$name], 'http://') &&
+                            !str_starts_with((string) $args[self::BASE_URI][$name], 'https://')
                         ) {
                             throw new InvalidArgumentException(
                                 'The `' . self::BASE_URI . '` `' . $name .
@@ -363,7 +341,6 @@ class Sdk
     /**
      * Creates a Client
      *
-     * @param string $className
      * @return mixed
      */
     private function createClient(string $className)

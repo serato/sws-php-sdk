@@ -48,7 +48,7 @@ class CommandBasicAuthTest extends AbstractTestCase
         $request = $this->commandMock->getRequest();
 
         $cdnAuthHeader = $request->getHeaderLine(Command::CUSTOM_CDN_AUTH_HEADER);
-        $decodedHeader = base64_decode($cdnAuthHeader);
+        $decodedHeader = base64_decode((string) $cdnAuthHeader);
         $this->assertNotFalse($decodedHeader, 'x-serato-cdn-auth header should be a base-64-encoded string');
         $this->assertEquals('my_cdn_client_id:my_cdn_secret', $decodedHeader);
     }

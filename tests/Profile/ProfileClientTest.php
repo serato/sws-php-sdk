@@ -10,7 +10,7 @@ use Serato\SwsSdk\Sdk;
 
 class ProfileClientTest extends AbstractTestCase
 {
-    private const PROFILE_SERVER_BASE_URI = 'http://profile.server.com';
+    private const string PROFILE_SERVER_BASE_URI = 'http://profile.server.com';
 
     public function testGetBaseUri(): void
     {

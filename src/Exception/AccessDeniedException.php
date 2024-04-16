@@ -12,6 +12,7 @@ use Serato\SwsSdk\Exception\ErrorCodeResponseException;
  */
 class AccessDeniedException extends ErrorCodeResponseException
 {
+    #[\Override]
     protected function getHttpResponseName(): string
     {
         return '403 Access Denied';

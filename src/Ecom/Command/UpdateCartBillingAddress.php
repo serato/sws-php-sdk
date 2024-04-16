@@ -16,6 +16,7 @@ class UpdateCartBillingAddress extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody()
     {
         $args = $this->commandArgs;
@@ -26,6 +27,7 @@ class UpdateCartBillingAddress extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'PUT';
@@ -34,6 +36,7 @@ class UpdateCartBillingAddress extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         # A bit of defensive programming to keep phpstan happy :-)
@@ -49,6 +52,7 @@ class UpdateCartBillingAddress extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -57,6 +61,7 @@ class UpdateCartBillingAddress extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

@@ -21,6 +21,7 @@ class UserGetBetaProgram extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'GET';
@@ -29,6 +30,7 @@ class UserGetBetaProgram extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/users/' . self::toString($this->commandArgs['user_id']) . '/betaprograms';
@@ -37,6 +39,7 @@ class UserGetBetaProgram extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriQuery(): string
     {
         return http_build_query($this->commandArgs);
@@ -45,6 +48,7 @@ class UserGetBetaProgram extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

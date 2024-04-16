@@ -17,6 +17,7 @@ class InvoiceCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody()
     {
         $args = $this->commandArgs;
@@ -27,6 +28,7 @@ class InvoiceCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'POST';
@@ -35,6 +37,7 @@ class InvoiceCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/orders/' . self::toString($this->commandArgs['order_id']) . '/invoice';
@@ -43,6 +46,7 @@ class InvoiceCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -51,6 +55,7 @@ class InvoiceCreate extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

@@ -68,7 +68,6 @@ abstract class AbstractTestCase extends TestCase
      * Returns a PSR-7 Response object from a `Serato\SwsSdk\Result` object
      * and throws an exception of the response object is not present in the result
      *
-     * @param Result $result
      * @return ResponseInterface
      * @throws Exception
      */

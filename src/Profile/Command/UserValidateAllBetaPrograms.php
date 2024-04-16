@@ -21,6 +21,7 @@ class UserValidateAllBetaPrograms extends CommandBasicAuth
      /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody(): string
     {
         $args = $this->commandArgs;
@@ -31,6 +32,7 @@ class UserValidateAllBetaPrograms extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'POST';
@@ -39,6 +41,7 @@ class UserValidateAllBetaPrograms extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/users/' . self::toString($this->commandArgs['user_id']) . '/betaprograms/validateall';
@@ -47,6 +50,7 @@ class UserValidateAllBetaPrograms extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriQuery(): string
     {
         return http_build_query($this->commandArgs);
@@ -55,6 +59,7 @@ class UserValidateAllBetaPrograms extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

@@ -21,6 +21,7 @@ class ProductDelete extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'DELETE';
@@ -29,6 +30,7 @@ class ProductDelete extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/products/products/' . self::toString($this->commandArgs['product_id']);
@@ -37,6 +39,7 @@ class ProductDelete extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [

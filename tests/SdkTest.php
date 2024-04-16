@@ -14,8 +14,6 @@ class SdkTest extends AbstractTestCase
 {
     /**
      * @param array<mixed> $args
-     * @param int $exceptionCode
-     * @param string $assertText
      * @return void
      *
      * @dataProvider invalidConstructorOptionsProvider
@@ -93,16 +91,6 @@ class SdkTest extends AbstractTestCase
 
     /**
      * @param array<mixed> $args
-     * @param string $idServiceUri
-     * @param string $licenseServiceUri
-     * @param string $profileServiceUri
-     * @param string $ecomServiceUri
-     * @param string $daServiceUri
-     * @param string $notificationsServiceUri
-     * @param string $rewardsServiceUri
-     * @param float|null $timeout
-     * @param callable|null $handler
-     * @param string $assertText
      * @dataProvider validConstructorOptionsProvider
      */
     public function testValidConstructorOptions(
@@ -114,9 +102,9 @@ class SdkTest extends AbstractTestCase
         string $daServiceUri,
         string $notificationsServiceUri,
         string $rewardsServiceUri,
+        string $assertText,
         ?float $timeout = null,
-        ?callable $handler = null,
-        string $assertText
+        ?callable $handler = null
     ): void {
         $sdk = new Sdk($args, 'app_id', 'app_password');
         $config = $sdk->getConfig();
@@ -287,8 +275,6 @@ class SdkTest extends AbstractTestCase
     }
 
     /**
-     * @param string $envName
-     * @param integer $envNumber
      * @return void
      *
      * @dataProvider hostNameArgumentsProvider

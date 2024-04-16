@@ -12,6 +12,7 @@ use Serato\SwsSdk\Exception\ErrorMessageResponseException;
  */
 class ServiceUnavailableException extends ErrorMessageResponseException
 {
+    #[\Override]
     protected function getHttpResponseName(): string
     {
         return '503 Service Unavailable';

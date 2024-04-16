@@ -22,6 +22,7 @@ class UserAddGaClientId extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getBody()
     {
         $args = $this->commandArgs;
@@ -32,6 +33,7 @@ class UserAddGaClientId extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getHttpMethod(): string
     {
         return 'POST';
@@ -40,6 +42,7 @@ class UserAddGaClientId extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function getUriPath(): string
     {
         return '/api/v1/users/' . self::toString($this->commandArgs['user_id']) . '/gaclientid';
@@ -48,6 +51,7 @@ class UserAddGaClientId extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function setCommandRequestHeaders(): void
     {
         $this->setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -56,6 +60,7 @@ class UserAddGaClientId extends CommandBasicAuth
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     protected function getArgsDefinition(): array
     {
         return [
