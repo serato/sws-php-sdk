@@ -32,10 +32,11 @@ class UpdateCartBillingAddressTest extends AbstractTestCase
      * @return void
      *
      * @dataProvider missingRequiredArgProvider
-     * @expectedException \InvalidArgumentException
+     *
      */
     public function testMissingRequiredArg(array $args): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new UpdateCartBillingAddress(
             'app_id',
             'app_password',

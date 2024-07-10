@@ -31,11 +31,9 @@ class ProductCreateTest extends AbstractTestCase
         $this->assertEquals('Canceled', $bodyParams['subscription_status']);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testMissingRequiredArg(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new ProductCreate(
             'app_id',
             'app_password',

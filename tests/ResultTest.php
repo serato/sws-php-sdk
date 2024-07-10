@@ -109,11 +109,9 @@ class ResultTest extends AbstractTestCase
     }
 
 
-    /**
-     * @expectedException \Exception
-     */
     public function testInvalidContentType(): void
     {
+        $this->expectException(\Exception::class);
         $response = new Response(
             200,
             ['Content-Type' => 'text/html'],

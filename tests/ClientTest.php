@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace Serato\SwsSdk\Test;
 
 use Serato\SwsSdk\Command;
-use Serato\SwsSdk\Test\AbstractTestCase;
+use Serato\SwsSdk\Exception\AccessDeniedException;
+use Serato\SwsSdk\Exception\BadRequestException;
+use Serato\SwsSdk\Exception\ResourceNotFoundException;
+use Serato\SwsSdk\Exception\ServerApplicationErrorException;
+use Serato\SwsSdk\Exception\ServiceUnavailableException;
 use Serato\SwsSdk\Client;
 use Serato\SwsSdk\Sdk;
-use Serato\SwsSdk\Result;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\ConnectException;
-use InvalidArgumentException;
 
 class ClientTest extends AbstractTestCase
 {
@@ -37,11 +39,9 @@ class ClientTest extends AbstractTestCase
         $this->assertTrue(is_a($command, self::BEARER_TOKEN_AUTH_COMMAND_CLASS));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testGetInvalidCommand(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->getCommand('NoSuchCommand', $this->getCommandArgs());
     }
@@ -74,11 +74,9 @@ class ClientTest extends AbstractTestCase
         );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testExecuteInvalidCommand(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->execute('NoSuchCommand', $this->getCommandArgs());
     }
@@ -98,11 +96,9 @@ class ClientTest extends AbstractTestCase
         );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testExecuteAsyncInvalidCommand(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->executeAsync('NoSuchCommand', $this->getCommandArgs());
     }
@@ -135,11 +131,9 @@ class ClientTest extends AbstractTestCase
         );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testExecuteMagicMethodInvalidCommand(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->noSuchMethod($this->getCommandArgs());
     }
@@ -159,20 +153,16 @@ class ClientTest extends AbstractTestCase
         );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testExecuteAsyncMagicMethodInvalidCommand(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $clientMock = $this->getMockClient([$this->getMock200Response()]);
         $clientMock->noSuchMethodAsync($this->getCommandArgs());
     }
 
-    /**
-     * @expectedException \Serato\SwsSdk\Exception\BadRequestException
-     */
     public function test400ClientError(): void
     {
+        $this->expectException(BadRequestException::class);
         $response = new Response(
             400,
             ['Content-Type' => 'application/json'],
@@ -182,11 +172,9 @@ class ClientTest extends AbstractTestCase
         $clientMock->getProduct($this->getCommandArgs());
     }
 
-    /**
-     * @expectedException \Serato\SwsSdk\Exception\AccessDeniedException
-     */
     public function test403Response(): void
     {
+        $this->expectException(AccessDeniedException::class);
         $response = new Response(
             403,
             ['Content-Type' => 'application/json'],
@@ -197,11 +185,9 @@ class ClientTest extends AbstractTestCase
         $clientMock->getProduct($this->getCommandArgs());
     }
 
-    /**
-     * @expectedException \Serato\SwsSdk\Exception\ResourceNotFoundException
-     */
     public function test404Response(): void
     {
+        $this->expectException(ResourceNotFoundException::class);
         $response = new Response(
             404,
             ['Content-Type' => 'application/json'],
@@ -212,11 +198,9 @@ class ClientTest extends AbstractTestCase
         $clientMock->getProduct($this->getCommandArgs());
     }
 
-    /**
-     * @expectedException \Serato\SwsSdk\Exception\ServerApplicationErrorException
-     */
     public function test500Response(): void
     {
+        $this->expectException(ServerApplicationErrorException::class);
         $response = new Response(
             500,
             ['Content-Type' => 'application/json'],
@@ -227,11 +211,9 @@ class ClientTest extends AbstractTestCase
         $clientMock->getProduct($this->getCommandArgs());
     }
 
-    /**
-     * @expectedException \Serato\SwsSdk\Exception\ServiceUnavailableException
-     */
     public function test503Response(): void
     {
+        $this->expectException(ServiceUnavailableException::class);
         $response = new Response(
             503,
             ['Content-Type' => 'application/json'],
@@ -242,11 +224,9 @@ class ClientTest extends AbstractTestCase
         $clientMock->getProduct($this->getCommandArgs());
     }
 
-    /**
-     * @expectedException GuzzleHttp\Exception\ConnectException
-     */
     public function testRequestTimeout(): void
     {
+        $this->expectException(ConnectException::class);
         $exception = new ConnectException(
             "Error Communicating with Server",
             new Request('GET', 'test')
@@ -294,7 +274,7 @@ class ClientTest extends AbstractTestCase
     /**
      * Undocumented function
      *
-     * @param array<mixed> $mockResponses
+     * @param array<mixed, mixed> $mockResponses
      * @return mixed
      */
     protected function getMockClient(array $mockResponses)
@@ -304,6 +284,7 @@ class ClientTest extends AbstractTestCase
                 Sdk::BASE_URI_ID        => 'https://id.server.com',
                 Sdk::BASE_URI_LICENSE   => 'https://license.server.com',
             ],
+            'timeout' => 10,
             'handler' => HandlerStack::create(
                 new MockHandler($mockResponses)
             )

@@ -9,11 +9,9 @@ use Serato\SwsSdk\Profile\Command\UserGet;
 
 class UserGetTest extends AbstractTestCase
 {
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testMissingRequiredArg(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new UserGet(
             'app_id',
             'app_password',

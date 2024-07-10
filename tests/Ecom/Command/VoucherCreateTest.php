@@ -27,10 +27,11 @@ class VoucherCreateTest extends AbstractTestCase
      * @param array<string, DateTime|int|string> $args
      *
      * @dataProvider missingRequiredArgProvider
-     * @expectedException \InvalidArgumentException
-     */
+     *
+      */
     public function testMissingRequiredArg(array $args): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new VoucherCreate(
             'app_id',
             'app_password',
