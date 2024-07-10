@@ -1,5 +1,8 @@
 # This workflow is triggered every time a PR is opened and master/release branches have a commit.
 # The workflow installs dependencies, runs static code analyzers, and runs the test suite.
+# todo: Enable Phpstan when all apps are updated to 8.2 and we no more support PHP 7.1.
+#  Currently it is impossible to fix Phpstan errors reported on PHP8.2 platform because of deprecations etc.
+#  ./vendor/bin/phpstan analyse -c phpstan.neon
 name: Code checking and unit tests
 on:
   pull_request:
@@ -41,9 +44,6 @@ jobs:
 
       - name: Run static code analyzers & security checker
         run: |
-# todo: Enable when all apps are updated to 8.2 and we no more support PHP 7.1.
-#  Currently it is impossible to fix Phpstan errors reported on PHP8.2 platform because of deprecations etc.
-#          ./vendor/bin/phpstan analyse -c phpstan.neon
           ./vendor/bin/phpcs
       - name: Run test suite
         run: |
