@@ -6,7 +6,7 @@
 	"require": {
 		"php": "^7.1 || ^8.0",
 		"guzzlehttp/guzzle": "^6.0.0",
-		"serato/sws-discovery": "dev-TDO-789"
+		"serato/sws-discovery": "^3.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^7 || ^8",
