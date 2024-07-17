@@ -15,10 +15,11 @@ class PartnerPromotionAddUserTest extends AbstractTestCase
      *
      * @dataProvider missingRequiredArgProvider
      *
-     * @expectedException \InvalidArgumentException
+     *
      */
     public function testMissingRequiredArg(array $args): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new PartnerPromotionAddUser(
             'app_id',
             'app_password',

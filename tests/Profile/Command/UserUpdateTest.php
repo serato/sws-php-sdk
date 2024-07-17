@@ -9,11 +9,9 @@ use Serato\SwsSdk\Profile\Command\UserUpdate;
 
 class UserUpdateTest extends AbstractTestCase
 {
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testMissingRequiredArg(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new UserUpdate(
             'app_id',
             'app_password',

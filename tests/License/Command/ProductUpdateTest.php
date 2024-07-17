@@ -38,11 +38,9 @@ class ProductUpdateTest extends AbstractTestCase
         $this->assertEquals('Past Due', $bodyParams['subscription_status']);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testMissingRequiredArg(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new ProductUpdate(
             'app_id',
             'app_password',

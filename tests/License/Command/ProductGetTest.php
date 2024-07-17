@@ -26,11 +26,9 @@ class ProductGetTest extends AbstractTestCase
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testMissingRequiredArg(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new ProductGet(
             'app_id',
             'app_password',

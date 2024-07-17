@@ -27,11 +27,9 @@ class ProductDeleteTest extends AbstractTestCase
         $this->assertRegExp('/^Basic [[:alnum:]=]+$/', $request->getHeaderLine('Authorization'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testMissingRequiredArg(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new ProductDelete(
             'app_id',
             'app_password',

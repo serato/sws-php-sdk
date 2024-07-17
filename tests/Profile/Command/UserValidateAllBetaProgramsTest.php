@@ -9,11 +9,9 @@ use Serato\SwsSdk\Profile\Command\UserValidateAllBetaPrograms;
 
 class UserValidateAllBetaProgramsTest extends AbstractTestCase
 {
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testMissingRequiredArg(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new UserValidateAllBetaPrograms(
             'app_id',
             'app_password',

@@ -21,16 +21,14 @@ class VoucherAssignTest extends AbstractTestCase
         ];
     }
 
-     /**
+    /**
      * Tests that an exception is thrown if required parameters are missing.
-     *
      * @param array<string, DateTime|int|string> $args
-     *
      * @dataProvider missingRequiredArgProvider
-     * @expectedException \InvalidArgumentException
      */
     public function testMissingRequiredArg(array $args): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $command = new VoucherAssign(
             'app_id',
             'app_password',
