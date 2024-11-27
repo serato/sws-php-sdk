@@ -6,7 +6,6 @@ namespace Serato\SwsSdk\Test\Identity\Command;
 
 use Serato\SwsSdk\Test\AbstractTestCase;
 use Serato\SwsSdk\Identity\Command\TokenRefresh;
-use GuzzleHttp\Psr7\Uri;
 
 class TokenRefreshTest extends AbstractTestCase
 {
@@ -15,8 +14,6 @@ class TokenRefreshTest extends AbstractTestCase
      * @return void
      *
      * @dataProvider missingRequiredArgProvider
-     *
-     *
      */
     public function testMissingRequiredArg(array $args): void
     {
