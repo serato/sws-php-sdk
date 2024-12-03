@@ -19,6 +19,7 @@ abstract class Command
     public const ARG_TYPE_STRING   = 'string';
     public const ARG_TYPE_INTEGER  = 'integer';
     public const ARG_TYPE_DATETIME = 'datetime';
+    public const ARG_TYPE_BOOLEAN = 'boolean';
 
     /**
      * The custom header that identifies requests from the SDK to the application firewall
@@ -69,7 +70,7 @@ abstract class Command
     /**
      * Command arguments (specified as name/value pairs)
      *
-     * @var array<String, String|Integer|DateTime>
+     * @var array<String, String|Integer|DateTime|Boolean>
      */
     protected $commandArgs = [];
 
@@ -88,7 +89,7 @@ abstract class Command
      * @param string    $baseUri        Base request URI
      * @param string    $cdnAuthId      Client identifier used to identify the application to test stack CDNs
      * @param string    $cdnAuthSecret  Secret used to authenticate requests to test stack CDNs
-     * @param array<String, String|Integer|DateTime>     $args           Command arguments
+     * @param array<String, String|Integer|DateTime|Boolean>     $args           Command arguments
      */
     public function __construct(
         string $appId,
@@ -108,9 +109,9 @@ abstract class Command
 
     /**
      * Casts values to a string. Supports any of the allowable command paramter types.
-     * ie. String, Integer, DateTime
+     * ie. String, Integer, DateTime, Boolean
      *
-     * @param String|Integer|DateTime $value
+     * @param String|Integer|DateTime|Boolean $value
      * @return string
      * @throws InvalidArgumentException
      */
@@ -122,9 +123,11 @@ abstract class Command
             return (string)$value;
         } elseif (is_a($value, DateTime::class)) {
             return $value->format(DateTime::ATOM);
+        } elseif (is_bool($value)) {
+            return (string)$value;
         }
         throw new InvalidArgumentException(
-            'Invalid argment type. Only string, integer and DateTime types are supported'
+            'Invalid argment type. Only string, integer, boolean and DateTime types are supported'
         );
     }
 
@@ -174,6 +177,11 @@ abstract class Command
                     case self::ARG_TYPE_DATETIME:
                         if (is_int($value) || !is_a($value, '\DateTime')) {
                             throw new InvalidArgumentException("Command arg `$name` must be of type DateTime");
+                        }
+                        break;
+                    case self::ARG_TYPE_BOOLEAN:
+                        if (!is_bool($value)) {
+                            throw new InvalidArgumentException("Command arg `$name` must be of type boolean");
                         }
                         break;
                 }

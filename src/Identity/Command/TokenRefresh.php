@@ -12,6 +12,7 @@ use Serato\SwsSdk\CommandBasicAuth;
  * Valid keys for the `$args` array provided to the constructor are:
  *
  * - `refresh_token`: (string) Required. A valid refresh token.
+ * - `use_rotation`: (boolean) When true, rotates the refresh token on every call. Default it is true.
  *
  * This command can be executed on a `Serato\SwsSdk\Identity\IdentityClient` instance
  * using the `IdentityClient::tokenRefresh` magic method.
@@ -39,7 +40,12 @@ class TokenRefresh extends CommandBasicAuth
      */
     public function getUriPath(): string
     {
-        return '/api/v1/tokens/refresh';
+        // By default we use token rotation if it is not set
+        $useRotation = true;
+        if (isset($this->commandArgs['use_rotation'])) {
+            $useRotation = $this->commandArgs['use_rotation'];
+        }
+        return $useRotation ? '/api/v2/tokens/refresh' : '/api/v1/tokens/refresh';
     }
 
     /**
@@ -56,7 +62,8 @@ class TokenRefresh extends CommandBasicAuth
     protected function getArgsDefinition(): array
     {
         return [
-            'refresh_token' => ['type' => self::ARG_TYPE_STRING, 'required' => true]
+            'refresh_token' => ['type' => self::ARG_TYPE_STRING, 'required' => true],
+            'use_rotation'  => ['type' => self::ARG_TYPE_BOOLEAN, 'required' => false]
         ];
     }
 }
